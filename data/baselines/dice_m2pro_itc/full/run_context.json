@@ -1,0 +1,72 @@
+{
+  "feature_profile": "full",
+  "tier_files": {
+    "tier0": "tier0_full_5hz.csv",
+    "tier1_alt": "tier1_alt_full_5hz.csv",
+    "tier2": "tier2_full_5hz.csv"
+  },
+  "protocol": "global",
+  "source_hz": 5,
+  "fit_ratio": 0.6,
+  "block_B": 90,
+  "alpha": 0.05,
+  "persist_k": 2,
+  "gain": 0.35,
+  "ridge_lambda": 0.001,
+  "workloads_discovered": [
+    "BROWSER",
+    "VIDEO_SW",
+    "PY_AI",
+    "PY_STATS"
+  ],
+  "stressors_discovered": [
+    "NOMINAL",
+    "CACHE",
+    "TLB",
+    "BRANCH",
+    "MEMBW",
+    "ATOMIC"
+  ],
+  "anomalies_discovered": [
+    "CACHE",
+    "TLB",
+    "BRANCH",
+    "MEMBW",
+    "ATOMIC"
+  ],
+  "n_cases_discovered": 24,
+  "n_base_cases_discovered": 24,
+  "config_runtime_seconds": {
+    "tier0": 2.1143672090256587,
+    "tier0_tier1": 2.8757187500596046,
+    "tier0_tier1_tier2": 3.3533612081082538
+  },
+  "diagnosis_monotonic_tokens": [
+    "uptime",
+    "syscall",
+    "ctx_switch",
+    "soft_interrupt",
+    "hard_interrupt"
+  ],
+  "diagnosis_generic_memory_state_tokens": [
+    "mem_free_bytes",
+    "mem_inactive_bytes",
+    "mem_available_bytes",
+    "mem_percent",
+    "swap_percent",
+    "swap_free_bytes",
+    "swap_used_bytes"
+  ],
+  "diagnosis_generic_memory_state_factor": 0.35,
+  "diagnosis_window_blocks": 5,
+  "supervised_diagnosis": "auto",
+  "supervised_min_class_samples": 8,
+  "supervised_group_key": "base_case_id",
+  "supervised_include_workload": true,
+  "phase_guard_workloads": [
+    "VIDEO_SW"
+  ],
+  "phase_guard_smooth_window": 31,
+  "phase_guard_tolerance_quantile": 0.995,
+  "phase_guard_tolerance_floor_frac": 0.05
+}

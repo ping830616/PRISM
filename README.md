@@ -6,7 +6,7 @@ PRISM is the proposed journal extension of the DICE host-side monitoring study. 
 
 > Can a behavioral micro-twin provide reliable, statistically calibrated in-field monitoring across heterogeneous host platforms without requiring identical telemetry channels?
 
-The repository is intentionally private-ready while the work is unpublished. It contains the research plan, experiment contract, paper outline, and implementation scaffolding, but no raw telemetry.
+The repository is intentionally private-ready while the work is unpublished. It contains the research plan, experiment contract, paper outline, and implementation scaffolding. Raw telemetry may be imported locally but is not tracked in Git.
 
 ## Journal Thesis
 
@@ -46,6 +46,7 @@ Safe online micro-twin updates and adaptive telemetry escalation are secondary c
 ## Repository Map
 
 - `docs/research-plan.md`: schedule, owners, gates, and fallback rules.
+- `docs/data-collection.md`: DICE reuse policy and the new PRISM collection protocol.
 - `docs/novelty-boundary.md`: claim matrix and separation from DICE/CITADEL.
 - `configs/experiment-matrix.toml`: machine-readable experiment design.
 - `data/README.md`: immutable data layout and provenance rules.
@@ -57,10 +58,16 @@ Safe online micro-twin updates and adaptive telemetry escalation are secondary c
 ## Quick Start
 
 ```bash
-python -m pip install -e .
-python scripts/preflight.py configs/experiment-matrix.toml
-python -m unittest discover -s tests -v
+python3 -m pip install -e .
+python3 scripts/preflight.py configs/experiment-matrix.toml
+python3 scripts/import_dice_baseline.py --dice-root ../DICE
+python3 scripts/make_collection_plan.py
+python3 -m unittest discover -s tests -v
 ```
+
+The DICE import keeps the 124 MB raw Apple M2 baseline in an ignored local
+payload directory. It tracks the source revision, SHA-256 inventory, and compact
+result summaries without duplicating gigabytes of tuning artifacts in Git.
 
 ## Reproducibility Rules
 

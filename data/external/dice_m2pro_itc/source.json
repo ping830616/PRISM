@@ -1,0 +1,35 @@
+{
+  "dataset_id": "dice_m2pro_itc",
+  "role": "historical_baseline_only",
+  "source_remote": "https://github.com/ping830616/DICE.git",
+  "source_commit": "ffdf84e9122dcf60079bf6a49095f27e47593212",
+  "source_path": "data generation/dataset/ITC_M2Pro_DATA",
+  "import_date": "2026-07-27",
+  "payload_file_count": 121,
+  "payload_bytes": 130155869,
+  "payload_sha256_manifest": "local-files.sha256",
+  "copied_summary_files": [
+    "mixed/RESULTS_SUMMARY.md",
+    "mixed/case_inventory.csv",
+    "mixed/case_predictions.csv",
+    "mixed/config_runtime_summary.csv",
+    "mixed/overall_metrics.csv",
+    "mixed/run_context.json",
+    "mixed/sequential_metrics.csv",
+    "mixed/holdout_robustness_summary.csv",
+    "full/RESULTS_SUMMARY.md",
+    "full/case_inventory.csv",
+    "full/case_predictions.csv",
+    "full/config_runtime_summary.csv",
+    "full/overall_metrics.csv",
+    "full/run_context.json",
+    "full/sequential_metrics.csv",
+    "full/holdout_robustness_summary.csv"
+  ],
+  "limitations": [
+    "Apple M2 Pro/macOS only",
+    "24 workload-scenario cases",
+    "one recorded execution per case",
+    "not independent PRISM replication"
+  ]
+}

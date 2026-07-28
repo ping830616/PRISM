@@ -1,6 +1,41 @@
 # Data Contract
 
-Raw telemetry is not stored in this scaffold.
+Raw telemetry is not tracked in Git. It remains machine-local or in a
+versioned external data store, with provenance and checksums committed here.
+
+## DICE Baseline
+
+The original Apple M2 Pro DICE telemetry is useful for baseline reproduction
+and retrospective method comparison, but it is not new PRISM evidence. Import
+it with:
+
+```bash
+python3 scripts/import_dice_baseline.py --dice-root ../DICE
+```
+
+The importer creates:
+
+```text
+data/
+  external/
+    dice_m2pro_itc/
+      README.md
+      source.json
+      local-files.sha256
+      payload/                  # ignored by Git
+        tier0/
+        tier1_alt/
+        tier2/
+        no_nan_report.json
+  baselines/
+    dice_m2pro_itc/             # compact tracked result summaries
+      mixed/
+      full/
+```
+
+Do not treat DICE's 24 single-execution cases as independent PRISM
+replications. New M2 and EPYC traces must follow the repeated-run protocol in
+`docs/data-collection.md`.
 
 ## Required Layout
 

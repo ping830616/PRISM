@@ -10,6 +10,8 @@ build/
 
 data/raw/
 data/processed/
+# Imported raw baselines stay local. Their source revision and checksums are tracked.
+data/external/**/payload/
 results/
 artifacts/
 paper/build/
