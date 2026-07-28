@@ -1,0 +1,111 @@
+[study]
+name = "prism_slm_dual_platform"
+version = "0.1.0"
+target_submission_date = "2026-08-30"
+random_seed = 123
+
+[[platforms]]
+id = "M2_MACOS"
+required = true
+architecture = "arm64"
+operating_system = "macOS"
+observability = "host"
+expected_device = "Apple M2 Pro"
+
+[[platforms]]
+id = "EPYC_LINUX"
+required = true
+architecture = "x86_64"
+operating_system = "Ubuntu"
+observability = "host"
+expected_device = "AMD EPYC 9354"
+
+[[platforms]]
+id = "L40S_OPTIONAL"
+required = false
+architecture = "gpu"
+operating_system = "Ubuntu"
+observability = "accelerator"
+expected_device = "NVIDIA L40S"
+
+[matrix]
+semantic_groups = [
+  "compute",
+  "memory",
+  "io",
+  "thermal_power",
+  "accelerator",
+  "availability",
+]
+
+workloads = ["PY_STATS", "PY_AI", "BROWSER", "VIDEO_SW"]
+
+required_scenarios = [
+  "NOMINAL",
+  "ATOMIC",
+  "BRANCH",
+  "CACHE",
+  "MEMBW",
+  "TLB",
+  "CONTROLLED_CRASH",
+  "TELEMETRY_INTERRUPTION",
+]
+
+optional_scenarios = [
+  "THERMAL_POLICY_SHIFT",
+  "POWER_POLICY_SHIFT",
+  "DEGRADATION_PROXY",
+]
+
+[collection]
+minimum_independent_repetitions = 3
+preferred_independent_repetitions = 5
+target_run_duration_seconds = 720
+target_benign_hours_per_required_platform = 12
+immutable_raw_data = true
+hash_algorithm = "sha256"
+
+[splits]
+unit = "run_id"
+calibration_fraction = 0.20
+development_fraction = 0.30
+locked_test_fraction = 0.50
+forbid_window_level_split = true
+
+[matrix.methods]
+baselines = [
+  "DICE_RIDGE_SPLIT_CONFORMAL_PERSISTENCE",
+  "STATIC_VAR_PERSISTENCE",
+  "STATIC_VAR_EWMA",
+  "STATIC_VAR_CUSUM",
+  "STATIC_VAR_SEQUENTIAL_CONFORMAL",
+]
+
+[matrix.metrics]
+primary_metrics = [
+  "anomaly_run_detection_rate",
+  "false_alerts_per_monitored_hour",
+  "average_run_length_to_false_alarm",
+  "median_time_to_detect_seconds",
+  "few_shot_calibration_minutes",
+  "telemetry_bytes_per_second",
+  "collector_cpu_seconds",
+]
+
+secondary_metrics = [
+  "diagnosis_macro_f1",
+  "diagnosis_balanced_accuracy",
+  "selective_coverage",
+  "selective_top1_accuracy",
+  "active_channel_count",
+  "escalation_duty_cycle",
+]
+
+[gates]
+dual_platform_smoke_test = "2026-08-02"
+primary_data_complete = "2026-08-09"
+core_method_selected = "2026-08-15"
+optional_claims_frozen = "2026-08-20"
+results_frozen = "2026-08-24"
+advisor_full_draft = "2026-08-27"
+submission = "2026-08-30"

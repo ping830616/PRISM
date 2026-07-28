@@ -1,0 +1,26 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.env
+dist/
+build/
+*.egg-info/
+.DS_Store
+
+data/raw/
+data/processed/
+results/
+artifacts/
+paper/build/
+*.pdf
+*.aux
+*.bbl
+*.blg
+*.log
+
+# Credentials and machine-local settings
+*.pem
+*.key
+*token*
+.secrets/
