@@ -51,19 +51,33 @@ required_scenarios = [
   "TELEMETRY_INTERRUPTION",
 ]
 
-optional_scenarios = [
-  "THERMAL_POLICY_SHIFT",
-  "POWER_POLICY_SHIFT",
+targeted_scenarios = [
+  "THERMAL_SHIFT",
+  "POWER_SHIFT",
   "DEGRADATION_PROXY",
 ]
+
+targeted_scenario_workloads = ["PY_STATS", "PY_AI"]
+
+optional_scenarios = []
 
 [collection]
 minimum_independent_repetitions = 3
 preferred_independent_repetitions = 5
 target_run_duration_seconds = 720
+sampling_hz = 5.0
+anomaly_warmup_seconds = 120
+telemetry_interruption_seconds = 60
 target_benign_hours_per_required_platform = 12
 immutable_raw_data = true
 hash_algorithm = "sha256"
+
+[long_benign]
+required = true
+workloads = ["PY_STATS", "PY_AI", "BROWSER", "VIDEO_SW"]
+sessions_per_workload = 3
+session_duration_seconds = 2880
+sampling_hz = 5.0
 
 [splits]
 unit = "run_id"

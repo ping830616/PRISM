@@ -90,9 +90,10 @@ data/raw/M2_MACOS/<UTC-date>/<run_id>/
 It contains:
 
 - `telemetry.jsonl`: synchronized host and enriched telemetry;
+- `macmon-raw.jsonl`: unmodified native JSON used to audit sanitized values;
 - `events.jsonl`: collector, workload, and known stressor-onset events;
 - `platform.json`: sanitized machine and tool metadata;
-- `collection.json`: experiment identity and runtime status;
+- `collection.json`: experiment identity, runtime status, and collection cost;
 - `channels.json`: units, semantic groups, sources, and missingness rules;
 - `validation.json`: sample, cadence, event, and checksum validation;
 - `checksums.sha256`: immutable content hashes;
@@ -108,6 +109,13 @@ python3 scripts/validate_run.py 'data/raw/M2_MACOS/<date>/<run_id>'
 Do not proceed to production unless both smoke runs report `"valid": true`,
 150 samples, usable enriched telemetry, and a stressor-onset event in the
 atomic run.
+
+After committing the collector, require smoke evidence from that exact clean
+revision:
+
+```bash
+python3 scripts/check_collection_readiness.py --platform-id M2_MACOS
+```
 
 Compare the pair:
 
@@ -137,38 +145,43 @@ python3 scripts/collect_run.py \
   --enable-xctrace
 ```
 
-## 6. Production run example
+## 6. Preview and execute production runs
 
 Commit and push the collector before production; production mode refuses to run
-from a dirty checkout. Use a run ID from `data/collection-plan.csv`. For example:
+from a dirty checkout. Preview the next eligible Apple row:
 
 ```bash
-python3 scripts/collect_run.py \
-  --platform-id M2_MACOS \
-  --workload PY_STATS \
-  --scenario NOMINAL \
-  --repetition 1 \
-  --split calibration \
-  --purpose production \
-  --run-id m2_macos__py_stats__nominal__r01 \
-  --profile enriched \
-  --duration-seconds 720 \
-  --sampling-hz 5
+python3 scripts/collect_next.py --platform-id M2_MACOS
 ```
 
-For an anomalous production run, use `--warmup-seconds 120`. Never reuse a
-production run ID. If a run fails validation, preserve it, record the exclusion,
-and create a replacement ID.
+After checking the displayed run ID, scenario, split, and duration:
+
+```bash
+python3 scripts/collect_next.py --platform-id M2_MACOS --execute
+```
+
+Filter when needed, for example:
+
+```bash
+python3 scripts/collect_next.py \
+  --platform-id M2_MACOS \
+  --run-kind required_matrix \
+  --workload PY_STATS \
+  --scenario NOMINAL
+```
+
+The runner reads the immutable plan and updates only the Git-ignored local
+progress tracker. It hides locked-test rows until the method is frozen.
 
 ## 7. Collection order
 
 1. Complete the smoke pair.
-2. Collect all M2 repetition-1 nominal cells.
-3. Collect repetition-1 development stressors.
-4. Collect repetition-2 development runs.
-5. Freeze the method before touching repetition-3 locked-test results.
-6. Schedule separate long-benign sessions until total valid benign monitoring
-   reaches 12 hours.
+2. Complete the EPYC smoke pair and freeze the shared schema.
+3. Collect all M2 calibration and development rows.
+4. Collect the targeted thermal, power, and degradation-proxy rows.
+5. Complete the long-benign development sessions.
+6. Freeze the method before adding `--unlock-locked-test`.
+7. Continue until `scripts/collection_status.py` reports 12 valid benign hours.
 
 Raw data are intentionally ignored by Git. Back them up to an access-controlled,
 versioned data location before deleting any local copy.

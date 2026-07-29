@@ -21,7 +21,19 @@ import numpy as np
 
 SEED = 830616
 WORKLOADS = ("PY_STATS", "PY_AI", "BROWSER", "VIDEO_SW")
-STRESSORS = ("NOMINAL", "ATOMIC", "BRANCH", "CACHE", "MEMBW", "TLB")
+STRESSORS = (
+    "NOMINAL",
+    "ATOMIC",
+    "BRANCH",
+    "CACHE",
+    "MEMBW",
+    "TLB",
+    "THERMAL_SHIFT",
+    "POWER_SHIFT",
+    "DEGRADATION_PROXY",
+)
+CONTROL_SCENARIOS = ("CONTROLLED_CRASH", "TELEMETRY_INTERRUPTION")
+SCENARIOS = STRESSORS + CONTROL_SCENARIOS
 
 
 def _stop_event() -> threading.Event:
@@ -164,6 +176,57 @@ def stress_tlb(stop: threading.Event) -> None:
             values[block] = values[block] + np.uint8(1)
 
 
+def _matrix_burst(
+    stop: threading.Event,
+    *,
+    active_seconds: float,
+    idle_seconds: float,
+) -> None:
+    rng = np.random.default_rng(SEED)
+    left = rng.standard_normal((512, 512), dtype=np.float32)
+    right = rng.standard_normal((512, 512), dtype=np.float32)
+    while not stop.is_set():
+        deadline = time.monotonic() + active_seconds
+        while time.monotonic() < deadline and not stop.is_set():
+            result = left @ right
+            left, right = right, np.tanh(result).astype(np.float32, copy=False)
+        if idle_seconds > 0:
+            stop.wait(idle_seconds)
+
+
+def stress_thermal_shift(stop: threading.Event) -> None:
+    """Sustained compute-load change used as a portable thermal-condition proxy."""
+
+    _matrix_burst(stop, active_seconds=2.0, idle_seconds=0.02)
+
+
+def stress_power_shift(stop: threading.Event) -> None:
+    """Repeatable duty-cycled compute used as a portable power-demand shift."""
+
+    _matrix_burst(stop, active_seconds=0.35, idle_seconds=0.15)
+
+
+def stress_degradation_proxy(stop: threading.Event) -> None:
+    """Progressively increase compute duty cycle without claiming physical aging."""
+
+    rng = np.random.default_rng(SEED)
+    left = rng.standard_normal((512, 512), dtype=np.float32)
+    right = rng.standard_normal((512, 512), dtype=np.float32)
+    stage = 0
+    stage_started = time.monotonic()
+    while not stop.is_set():
+        active_seconds = min(0.10 + 0.08 * stage, 0.90)
+        idle_seconds = max(1.0 - active_seconds, 0.10)
+        deadline = time.monotonic() + active_seconds
+        while time.monotonic() < deadline and not stop.is_set():
+            result = left @ right
+            left, right = right, np.tanh(result).astype(np.float32, copy=False)
+        stop.wait(idle_seconds)
+        if time.monotonic() - stage_started >= 30:
+            stage = min(stage + 1, 10)
+            stage_started = time.monotonic()
+
+
 WORKLOAD_FUNCTIONS = {
     "PY_STATS": workload_py_stats,
     "PY_AI": workload_py_ai,
@@ -177,6 +240,9 @@ STRESSOR_FUNCTIONS = {
     "CACHE": stress_cache,
     "MEMBW": stress_membw,
     "TLB": stress_tlb,
+    "THERMAL_SHIFT": stress_thermal_shift,
+    "POWER_SHIFT": stress_power_shift,
+    "DEGRADATION_PROXY": stress_degradation_proxy,
 }
 
 

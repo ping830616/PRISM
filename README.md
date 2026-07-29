@@ -47,6 +47,7 @@ Safe online micro-twin updates and adaptive telemetry escalation are secondary c
 
 - `docs/research-plan.md`: schedule, owners, gates, and fallback rules.
 - `docs/data-collection.md`: DICE reuse policy and the new PRISM collection protocol.
+- `docs/extension-collection-contract.md`: executable acceptance mapping from the extension memo to required evidence.
 - `docs/apple-collection.md`: executable Apple M2 setup, smoke test, and production commands.
 - `docs/linux-asu-collection.md`: detailed ASU EPYC preparation, collection, validation, and transfer.
 - `docs/novelty-boundary.md`: claim matrix and separation from DICE/CITADEL.
@@ -63,14 +64,21 @@ Safe online micro-twin updates and adaptive telemetry escalation are secondary c
 python3 -m pip install -e .
 python3 scripts/preflight.py configs/experiment-matrix.toml
 python3 scripts/import_dice_baseline.py --dice-root ../DICE
-python3 scripts/make_collection_plan.py
 python3 scripts/probe_collection.py
+python3 scripts/check_collection_readiness.py --platform-id M2_MACOS
+python3 scripts/collect_next.py
 python3 -m unittest discover -s tests -v
 ```
 
 Start with the Apple smoke workflow in `docs/apple-collection.md`. Every PRISM
 run writes synchronized telemetry, events, sanitized platform metadata, channel
 metadata, validation, and checksums into the Git-ignored `data/raw/` tree.
+
+`scripts/collect_next.py` previews the next predeclared production row and
+requires `--execute` before starting it. Locked-test rows remain unavailable
+until explicitly unlocked after the method freeze. Use
+`scripts/collection_status.py` and `scripts/data_quality_report.py` for the
+daily completion and channel-quality gates.
 
 The DICE import keeps the 124 MB raw Apple M2 baseline in an ignored local
 payload directory. It tracks the source revision, SHA-256 inventory, and compact

@@ -24,6 +24,12 @@ def main() -> int:
     parser.add_argument("--duration-seconds", type=int, default=30)
     parser.add_argument("--sampling-hz", type=float, default=5.0)
     parser.add_argument("--warmup-seconds", type=float, default=5.0)
+    parser.add_argument(
+        "--interruption-seconds",
+        type=float,
+        default=10.0,
+        help="Masked enriched-telemetry interval for TELEMETRY_INTERRUPTION",
+    )
     parser.add_argument("--purpose", choices=("smoke", "production"), default="smoke")
     parser.add_argument("--profile", choices=("portable", "enriched"), default="enriched")
     parser.add_argument("--run-id")
@@ -43,6 +49,7 @@ def main() -> int:
             duration_seconds=args.duration_seconds,
             sampling_hz=args.sampling_hz,
             warmup_seconds=args.warmup_seconds,
+            interruption_seconds=args.interruption_seconds,
             purpose=args.purpose,
             profile=args.profile,
             output_root=args.output_root,

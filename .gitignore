@@ -13,6 +13,7 @@ data/processed/
 # Imported raw baselines stay local. Their source revision and checksums are tracked.
 data/external/**/payload/
 data/collection-probes/
+data/collection-progress.csv
 results/
 artifacts/
 paper/build/

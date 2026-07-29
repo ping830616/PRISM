@@ -63,6 +63,10 @@ data/
 
 Every independent execution receives a unique `run_id`. Windows from the same run inherit that ID and must never appear in multiple train/calibration/development/test partitions.
 
+`data/collection-plan.csv` is the tracked, immutable declaration.
+`data/collection-progress.csv` is the Git-ignored machine-local execution
+tracker. Do not regenerate or overwrite either file after production starts.
+
 ## Required Run Metadata
 
 - platform ID, architecture, operating system, kernel/version;
@@ -72,6 +76,7 @@ Every independent execution receives a unique `run_id`. Windows from the same ru
 - anomaly or crash onset when controlled and known;
 - telemetry interruption interval when injected;
 - raw file hashes;
+- collector CPU seconds, telemetry bytes, and telemetry bytes per second;
 - collection failure and exclusion reason, if any.
 
 ## Channel Metadata

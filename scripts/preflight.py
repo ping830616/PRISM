@@ -16,6 +16,23 @@ REQUIRED_TOP_LEVEL = {
     "collection",
     "splits",
     "gates",
+    "long_benign",
+}
+
+EXTENSION_REQUIRED_SCENARIOS = {
+    "NOMINAL",
+    "ATOMIC",
+    "BRANCH",
+    "CACHE",
+    "MEMBW",
+    "TLB",
+    "CONTROLLED_CRASH",
+    "TELEMETRY_INTERRUPTION",
+}
+EXTENSION_TARGETED_SCENARIOS = {
+    "THERMAL_SHIFT",
+    "POWER_SHIFT",
+    "DEGRADATION_PROXY",
 }
 
 
@@ -40,6 +57,51 @@ def validate(config: dict) -> list[str]:
     )
     if repetitions < 3:
         errors.append("minimum independent repetitions must be at least 3")
+
+    matrix = config.get("matrix", {})
+    required_scenarios = set(matrix.get("required_scenarios", []))
+    missing_required = sorted(EXTENSION_REQUIRED_SCENARIOS - required_scenarios)
+    if missing_required:
+        errors.append(
+            "required scenarios do not cover the extension: "
+            + ", ".join(missing_required)
+        )
+    targeted_scenarios = set(matrix.get("targeted_scenarios", []))
+    missing_targeted = sorted(EXTENSION_TARGETED_SCENARIOS - targeted_scenarios)
+    if missing_targeted:
+        errors.append(
+            "targeted scenarios do not cover the extension: "
+            + ", ".join(missing_targeted)
+        )
+    if len(matrix.get("targeted_scenario_workloads", [])) < 2:
+        errors.append("targeted extension scenarios require at least two workloads")
+
+    collection = config.get("collection", {})
+    if collection.get("target_run_duration_seconds", 0) < 720:
+        errors.append("production matrix runs must be at least 720 seconds")
+    if collection.get("target_benign_hours_per_required_platform", 0) < 12:
+        errors.append("benign target must be at least 12 hours per platform")
+
+    long_benign = config.get("long_benign", {})
+    if not long_benign.get("required"):
+        errors.append("long-benign collection must be required")
+    long_workloads = long_benign.get("workloads", [])
+    sessions = long_benign.get("sessions_per_workload", 0)
+    session_seconds = long_benign.get("session_duration_seconds", 0)
+    matrix_benign_hours = (
+        len(matrix.get("workloads", []))
+        * repetitions
+        * collection.get("target_run_duration_seconds", 0)
+        / 3600
+    )
+    supplement_hours = len(long_workloads) * sessions * session_seconds / 3600
+    if matrix_benign_hours + supplement_hours < collection.get(
+        "target_benign_hours_per_required_platform", 0
+    ):
+        errors.append(
+            "matrix nominal runs plus long-benign sessions do not meet the "
+            "per-platform benign-hour target"
+        )
 
     if config.get("splits", {}).get("unit") != "run_id":
         errors.append("split unit must be run_id")
@@ -87,6 +149,30 @@ def main() -> int:
     print(
         "minimum repetitions: "
         f"{config['collection']['minimum_independent_repetitions']}"
+    )
+    print(
+        "extension scenarios: "
+        f"{len(config['matrix']['required_scenarios'])} required + "
+        f"{len(config['matrix']['targeted_scenarios'])} targeted"
+    )
+    matrix_benign_hours = (
+        len(config["matrix"]["workloads"])
+        * config["collection"]["minimum_independent_repetitions"]
+        * config["collection"]["target_run_duration_seconds"]
+        / 3600
+    )
+    long_benign = config["long_benign"]
+    supplement_hours = (
+        len(long_benign["workloads"])
+        * long_benign["sessions_per_workload"]
+        * long_benign["session_duration_seconds"]
+        / 3600
+    )
+    print(
+        "benign coverage per platform: "
+        f"{matrix_benign_hours:.1f} h matrix + "
+        f"{supplement_hours:.1f} h supplement = "
+        f"{matrix_benign_hours + supplement_hours:.1f} h"
     )
     print(f"submission gate: {config['gates']['submission']}")
     return 0

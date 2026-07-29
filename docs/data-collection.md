@@ -32,7 +32,7 @@ Compact mixed/full result summaries are tracked as frozen baseline evidence.
 
 ## Required New Collection
 
-The minimum complete matrix contains:
+The required full-cross-product matrix contains:
 
 - 2 platforms: Apple M2 Pro/macOS and AMD EPYC 9354/Ubuntu;
 - 4 workload families: `PY_STATS`, `PY_AI`, `BROWSER`, and `VIDEO_SW`;
@@ -41,9 +41,14 @@ The minimum complete matrix contains:
 - 3 independent executions per platform/workload/scenario cell.
 
 This is 192 planned executions. At 720 seconds per execution it represents 38.4
-machine-hours before setup, cooldown, invalid reruns, and the additional
-long-benign target. Running the two platforms in parallel reduces the minimum
-wall-clock collection time.
+machine-hours. To fulfill the extension memo without inflating every
+workload/scenario combination, PRISM additionally requires thermal shift, power
+shift, and progressive degradation-proxy runs on `PY_STATS` and `PY_AI`. Those
+36 targeted runs add 7.2 machine-hours.
+
+The 24 long-benign supplement sessions add 19.2 machine-hours. The frozen plan
+therefore contains 252 rows and 64.8 machine-hours before setup, cooldown, and
+invalid reruns. Running the two platforms in parallel reduces wall-clock time.
 
 Five repetitions are preferred, but scenario breadth must be reduced before
 replication falls below three. If collection pressure is severe, retain all
@@ -107,10 +112,10 @@ semantics, and transformation. An unavailable signal is missing—not zero.
 
 ## Long-Benign Collection
 
-Collect at least 12 aggregate benign hours per required platform. Spread the
-hours across workloads, system restarts or sessions, and time periods. The
-12-minute nominal matrix runs contribute only part of this target; schedule
-separate long-benign sessions.
+Collect at least 12 aggregate benign hours per required platform. The
+predeclared plan supplies 2.4 hours through the 12-minute nominal matrix runs
+and 9.6 hours through three 48-minute sessions for each workload. Spread the
+sessions across system restarts or allocations and time periods.
 
 Report:
 

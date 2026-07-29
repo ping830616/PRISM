@@ -143,6 +143,12 @@ Run `scripts/validate_run.py` on both outputs. A Linux run may be valid with no
 enriched channels, but that absence must remain explicit and becomes part of
 the telemetry-availability analysis.
 
+Require both smoke runs to come from the exact clean server revision:
+
+```bash
+python3 scripts/check_collection_readiness.py --platform-id EPYC_LINUX
+```
+
 ## 8. Transfer raw EPYC runs to the Mac
 
 Raw data are ignored by Git, so `git push` will not transfer them. From the Mac:
@@ -168,7 +174,22 @@ partial or modified transfers.
 - Preserve failed runs and create replacement IDs.
 - Never use locked-test runs to choose thresholds, channels, or methods.
 - Record maintenance, other-user interference, scheduler preemption, and
-  telemetry permission changes.
+telemetry permission changes.
+
+Preview the next eligible server run:
+
+```bash
+python3 scripts/collect_next.py --platform-id EPYC_LINUX
+```
+
+Execute it only after reviewing the selection:
+
+```bash
+python3 scripts/collect_next.py --platform-id EPYC_LINUX --execute
+```
+
+The machine-local `data/collection-progress.csv` is ignored by Git. Back it up
+with the raw EPYC directory when transferring data to the Mac.
 
 After the probe, add `perf` events only if the same event definitions remain
 available throughout the study. Platform-specific events belong in the enriched

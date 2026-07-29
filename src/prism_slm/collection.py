@@ -24,7 +24,16 @@ from typing import Any, Iterable
 import psutil
 
 from .contracts import SemanticGroup
-from .workload_harness import STRESSORS, WORKLOADS
+from .workload_harness import SCENARIOS, STRESSORS, WORKLOADS
+
+
+QUALITY_CONTRACT = {
+    "primary_channel_minimum_fraction": 0.95,
+    "apple_temperature_minimum_fraction": 0.70,
+    "apple_temperature_min_celsius": 15.0,
+    "apple_temperature_max_celsius": 125.0,
+    "maximum_quality_flag_fraction": 0.25,
+}
 
 
 def utc_now() -> str:
@@ -259,10 +268,17 @@ class HostSampler:
 
 
 class MacmonStream:
-    def __init__(self, executable: str, interval_ms: int, log_path: Path) -> None:
+    def __init__(
+        self,
+        executable: str,
+        interval_ms: int,
+        log_path: Path,
+        raw_path: Path,
+    ) -> None:
         self.executable = executable
         self.interval_ms = interval_ms
         self.log_handle = log_path.open("w", encoding="utf-8")
+        self.raw_handle = raw_path.open("w", encoding="utf-8")
         self.process: subprocess.Popen[str] | None = None
         self.thread: threading.Thread | None = None
         self.lock = threading.Lock()
@@ -281,6 +297,8 @@ class MacmonStream:
         def read() -> None:
             assert self.process is not None and self.process.stdout is not None
             for line in self.process.stdout:
+                self.raw_handle.write(line)
+                self.raw_handle.flush()
                 try:
                     sample = json.loads(line)
                 except json.JSONDecodeError:
@@ -315,7 +333,12 @@ class MacmonStream:
             except subprocess.TimeoutExpired:
                 self.process.kill()
                 self.process.wait(timeout=5)
-        self.log_handle.close()
+        if self.thread is not None:
+            self.thread.join(timeout=2)
+        if not self.log_handle.closed:
+            self.log_handle.close()
+        if not self.raw_handle.closed:
+            self.raw_handle.close()
 
 
 @dataclass(frozen=True)
@@ -341,6 +364,22 @@ class LinuxSysfsSampler:
     def _discover() -> list[SysfsChannel]:
         result: list[SysfsChannel] = []
         seen: set[str] = set()
+
+        def add_channel(
+            *,
+            base: str,
+            path: Path,
+            unit: str,
+            divisor: float,
+        ) -> None:
+            key = base
+            suffix = 2
+            while key in seen:
+                key = f"{base}_{suffix}"
+                suffix += 1
+            seen.add(key)
+            result.append(SysfsChannel(key, path, unit, divisor))
+
         specifications = (
             ("temp", "celsius", 1000.0),
             ("power", "watts", 1_000_000.0),
@@ -360,14 +399,36 @@ class LinuxSysfsSampler:
                         label = label_path.read_text().strip()
                     except OSError:
                         label = stem
-                    base = f"hwmon.{_slug(chip)}.{_slug(label)}"
-                    key = base
-                    suffix = 2
-                    while key in seen:
-                        key = f"{base}_{suffix}"
-                        suffix += 1
-                    seen.add(key)
-                    result.append(SysfsChannel(key, path, unit, divisor))
+                    add_channel(
+                        base=f"hwmon.{_slug(chip)}.{_slug(label)}",
+                        path=path,
+                        unit=unit,
+                        divisor=divisor,
+                    )
+        powercap = Path("/sys/class/powercap")
+        if powercap.is_dir():
+            for path in sorted(powercap.rglob("energy_uj")):
+                try:
+                    zone = (path.parent / "name").read_text().strip()
+                except OSError:
+                    zone = path.parent.name
+                add_channel(
+                    base=f"powercap.{_slug(zone)}.energy",
+                    path=path,
+                    unit="joules",
+                    divisor=1_000_000.0,
+                )
+            for path in sorted(powercap.rglob("power_uw")):
+                try:
+                    zone = (path.parent / "name").read_text().strip()
+                except OSError:
+                    zone = path.parent.name
+                add_channel(
+                    base=f"powercap.{_slug(zone)}.power",
+                    path=path,
+                    unit="watts",
+                    divisor=1_000_000.0,
+                )
         return result
 
     def sample(self) -> dict[str, Any]:
@@ -522,6 +583,53 @@ def flatten_leaves(value: Any, prefix: str = "") -> dict[str, Any]:
     return output
 
 
+def sanitize_enriched_sample(
+    platform_id: str,
+    value: dict[str, Any] | None,
+) -> tuple[dict[str, Any] | None, list[str]]:
+    """Preserve raw collector output separately and null impossible derived values."""
+
+    if value is None:
+        return None, []
+    sample = safe_json(value)
+    flags: list[str] = []
+    if platform_id == "M2_MACOS":
+        temperatures = sample.get("temp")
+        if isinstance(temperatures, dict):
+            for name, raw in list(temperatures.items()):
+                if isinstance(raw, (int, float)) and not (
+                    QUALITY_CONTRACT["apple_temperature_min_celsius"]
+                    <= float(raw)
+                    <= QUALITY_CONTRACT["apple_temperature_max_celsius"]
+                ):
+                    temperatures[name] = None
+                    flags.append(f"out_of_range:enriched.temp.{name}")
+        for name in (
+            "all_power",
+            "ane_power",
+            "cpu_power",
+            "gpu_power",
+            "gpu_ram_power",
+            "ram_power",
+            "sys_power",
+        ):
+            raw = sample.get(name)
+            if isinstance(raw, (int, float)) and float(raw) < 0:
+                sample[name] = None
+                flags.append(f"out_of_range:enriched.{name}")
+        for name in ("pcpu_usage", "ecpu_usage", "gpu_usage"):
+            raw = sample.get(name)
+            if (
+                isinstance(raw, list)
+                and len(raw) > 1
+                and isinstance(raw[1], (int, float))
+                and not (0.0 <= float(raw[1]) <= 1.0)
+            ):
+                raw[1] = None
+                flags.append(f"out_of_range:enriched.{name}.1")
+    return sample, flags
+
+
 def channel_group(name: str) -> SemanticGroup:
     lower = name.lower()
     if any(token in lower for token in ("gpu", "ane", "accelerator")):
@@ -606,6 +714,105 @@ def file_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _nested_value(value: Any, dotted_name: str) -> Any:
+    current = value
+    for part in dotted_name.split("."):
+        if isinstance(current, dict):
+            current = current.get(part)
+        elif isinstance(current, list) and part.isdigit():
+            index = int(part)
+            current = current[index] if index < len(current) else None
+        else:
+            return None
+    return current
+
+
+def telemetry_quality_summary(
+    samples: list[dict[str, Any]],
+    platform_id: str,
+    profile: str = "enriched",
+) -> dict[str, Any]:
+    usable_samples = [
+        sample
+        for sample in samples
+        if not sample.get("availability", {}).get("interruption_injected", False)
+    ]
+    critical = (
+        (
+            "enriched.cpu_power",
+            "enriched.sys_power",
+            "enriched.pcpu_usage.1",
+            "enriched.temp.cpu_temp_avg",
+        )
+        if platform_id == "M2_MACOS" and profile == "enriched"
+        else (
+            "host.cpu_percent",
+            "host.memory.percent",
+            "host.load_average.0",
+        )
+    )
+    channels: dict[str, Any] = {}
+    denominator = len(usable_samples)
+    for name in critical:
+        values = [_nested_value(sample, name) for sample in usable_samples]
+        if name == "enriched.temp.cpu_temp_avg":
+            valid = [
+                isinstance(value, (int, float))
+                and QUALITY_CONTRACT["apple_temperature_min_celsius"]
+                <= float(value)
+                <= QUALITY_CONTRACT["apple_temperature_max_celsius"]
+                for value in values
+            ]
+        elif name in {"enriched.cpu_power", "enriched.sys_power"}:
+            valid = [
+                isinstance(value, (int, float)) and float(value) >= 0
+                for value in values
+            ]
+        elif name == "enriched.pcpu_usage.1":
+            valid = [
+                isinstance(value, (int, float)) and 0.0 <= float(value) <= 1.0
+                for value in values
+            ]
+        else:
+            valid = [value is not None for value in values]
+        count = sum(valid)
+        channels[name] = {
+            "non_null_samples": count,
+            "eligible_samples": denominator,
+            "non_null_fraction": count / denominator if denominator else 0.0,
+        }
+    flag_counts: dict[str, int] = {}
+    for sample in samples:
+        for flag in sample.get("availability", {}).get("quality_flags", []):
+            flag_counts[str(flag)] = flag_counts.get(str(flag), 0) + 1
+    if platform_id == "M2_MACOS":
+        recorded_temperature_flags = flag_counts.get(
+            "out_of_range:enriched.temp.cpu_temp_avg",
+            0,
+        )
+        observed_temperature_flags = sum(
+            isinstance(value, (int, float))
+            and not (
+                QUALITY_CONTRACT["apple_temperature_min_celsius"]
+                <= float(value)
+                <= QUALITY_CONTRACT["apple_temperature_max_celsius"]
+            )
+            for value in (
+                _nested_value(sample, "enriched.temp.cpu_temp_avg")
+                for sample in usable_samples
+            )
+        )
+        if observed_temperature_flags > recorded_temperature_flags:
+            flag_counts["out_of_range:enriched.temp.cpu_temp_avg"] = (
+                observed_temperature_flags
+            )
+    return {
+        "critical_channels": channels,
+        "quality_flag_counts": flag_counts,
+        "interruption_masked_samples": len(samples) - len(usable_samples),
+    }
+
+
 def verify_checksums(run_dir: Path) -> list[str]:
     failures: list[str] = []
     manifest = run_dir / "checksums.sha256"
@@ -625,6 +832,7 @@ def verify_checksums(run_dir: Path) -> list[str]:
 
 def validate_run(run_dir: Path, verify_hashes: bool = True) -> dict[str, Any]:
     failures: list[str] = []
+    warnings: list[str] = []
     required = (
         "platform.json",
         "collection.json",
@@ -678,21 +886,90 @@ def validate_run(run_dir: Path, verify_hashes: bool = True) -> dict[str, Any]:
     event_names = {event.get("event") for event in events}
     if "workload_started" not in event_names:
         failures.append("workload_started event is missing")
-    if collection["scenario"] != "NOMINAL" and "stressor_started" not in event_names:
+    scenario = collection["scenario"]
+    if scenario == "CONTROLLED_CRASH":
+        if "controlled_crash_injected" not in event_names:
+            failures.append("controlled_crash_injected event is missing")
+    elif scenario == "TELEMETRY_INTERRUPTION":
+        for required_event in (
+            "telemetry_interruption_started",
+            "telemetry_interruption_ended",
+        ):
+            if required_event not in event_names:
+                failures.append(f"{required_event} event is missing")
+        interrupted = [
+            sample
+            for sample in samples
+            if sample.get("availability", {}).get("interruption_injected", False)
+        ]
+        if not interrupted:
+            failures.append("telemetry interruption produced no masked samples")
+        if interrupted and len(interrupted) == len(samples):
+            failures.append("telemetry interruption never recovered before run end")
+    elif scenario != "NOMINAL" and "stressor_started" not in event_names:
         failures.append("stressor_started event is missing")
     if collection.get("status") != "complete":
         failures.append(f"collection status is {collection.get('status')!r}, not 'complete'")
     if verify_hashes:
         failures.extend(verify_checksums(run_dir))
     null_enriched = sum(sample.get("enriched") is None for sample in samples)
+    platform_id = str(collection.get("platform_id", ""))
+    quality = (
+        telemetry_quality_summary(
+            samples,
+            platform_id,
+            str(collection.get("profile", "enriched")),
+        )
+        if platform_id in {"M2_MACOS", "EPYC_LINUX"}
+        else {
+            "critical_channels": {},
+            "quality_flag_counts": {},
+            "interruption_masked_samples": 0,
+        }
+    )
+    for name, metrics in quality["critical_channels"].items():
+        fraction = float(metrics["non_null_fraction"])
+        if name == "enriched.temp.cpu_temp_avg":
+            minimum_fraction = QUALITY_CONTRACT[
+                "apple_temperature_minimum_fraction"
+            ]
+        else:
+            minimum_fraction = (
+                QUALITY_CONTRACT["primary_channel_minimum_fraction"]
+                if collection.get("purpose") == "production"
+                else 0.70
+            )
+        if fraction < minimum_fraction:
+            failures.append(
+                f"critical channel {name} non-null fraction {fraction:.3f} "
+                f"is below {minimum_fraction:.2f}"
+            )
+        elif fraction < 0.95:
+            warnings.append(
+                f"critical channel {name} non-null fraction is {fraction:.3f}"
+            )
+    flagged = sum(quality["quality_flag_counts"].values())
+    flagged_fraction = flagged / len(samples) if samples else 0.0
+    if flagged_fraction > QUALITY_CONTRACT["maximum_quality_flag_fraction"]:
+        failures.append(
+            f"quality flags affect {flagged_fraction:.3f} of samples, above "
+            f"{QUALITY_CONTRACT['maximum_quality_flag_fraction']:.2f}"
+        )
+    elif flagged:
+        warnings.append(
+            f"detected {flagged} impossible enriched values; they are excluded "
+            "from critical-channel quality coverage"
+        )
     return {
         "valid": not failures,
         "failures": failures,
+        "warnings": warnings,
         "validated_utc": utc_now(),
         "sample_count": len(samples),
         "expected_samples": expected,
         "duration_observed_seconds": relative[-1] - relative[0] if len(relative) > 1 else 0,
         "enriched_missing_samples": null_enriched,
+        "quality": quality,
         "checksums_verified": verify_hashes,
     }
 
@@ -766,6 +1043,7 @@ class CollectionRequest:
     duration_seconds: int
     sampling_hz: float
     warmup_seconds: float
+    interruption_seconds: float
     purpose: str
     profile: str
     output_root: Path
@@ -793,16 +1071,23 @@ def collect(request: CollectionRequest) -> Path:
         raise ValueError(f"unsupported collection purpose: {request.purpose}")
     if workload not in WORKLOADS:
         raise ValueError(f"unsupported workload: {workload}")
-    if scenario not in STRESSORS:
-        raise ValueError(
-            f"unsupported executable scenario: {scenario}; crash/interruption cases use a later controlled harness"
-        )
+    if scenario not in SCENARIOS:
+        raise ValueError(f"unsupported executable scenario: {scenario}")
     if request.duration_seconds < 5:
         raise ValueError("duration_seconds must be at least 5")
     if request.sampling_hz <= 0 or request.sampling_hz > 20:
         raise ValueError("sampling_hz must be in (0, 20]")
     if scenario != "NOMINAL" and not (0 <= request.warmup_seconds < request.duration_seconds):
         raise ValueError("warmup_seconds must be within the run for anomalous scenarios")
+    if scenario == "TELEMETRY_INTERRUPTION" and not (
+        0 < request.interruption_seconds
+        < request.duration_seconds - request.warmup_seconds
+    ):
+        raise ValueError(
+            "interruption_seconds must be positive and leave time for recovery"
+        )
+    if scenario == "TELEMETRY_INTERRUPTION" and request.profile != "enriched":
+        raise ValueError("TELEMETRY_INTERRUPTION requires the enriched profile")
     software_state = repository_state()
     if request.purpose == "production" and software_state.get("git_dirty") is not False:
         raise RuntimeError(
@@ -821,6 +1106,8 @@ def collect(request: CollectionRequest) -> Path:
 
     period = 1.0 / request.sampling_hz
     expected_samples = int(round(request.duration_seconds * request.sampling_hz))
+    collector_process = psutil.Process(os.getpid())
+    collector_cpu_start = collector_process.cpu_times()
     collection_record: dict[str, Any] = {
         "run_id": run_id,
         "platform_id": request.platform_id,
@@ -833,6 +1120,7 @@ def collect(request: CollectionRequest) -> Path:
         "duration_seconds": request.duration_seconds,
         "sampling_hz": request.sampling_hz,
         "warmup_seconds": request.warmup_seconds,
+        "interruption_seconds": request.interruption_seconds,
         "expected_samples": expected_samples,
         "start_utc": utc_now(),
         "status": "collecting",
@@ -842,6 +1130,7 @@ def collect(request: CollectionRequest) -> Path:
             "num_threads": int(os.environ.get("PRISM_NUM_THREADS", "1")),
             "stress_memory_mb": int(os.environ.get("PRISM_STRESS_MB", "128")),
         },
+        "quality_contract": QUALITY_CONTRACT,
     }
     dump_json(run_dir / "platform.json", sanitized_platform_snapshot(request.platform_id))
     dump_json(run_dir / "collection.json", collection_record)
@@ -859,6 +1148,9 @@ def collect(request: CollectionRequest) -> Path:
     setup_start = time.monotonic()
     start = setup_start
     collection_error: str | None = None
+    controlled_crash_injected = False
+    telemetry_interruption_started = False
+    telemetry_interruption_ended = False
 
     with (run_dir / "events.jsonl").open("w", encoding="utf-8") as events, (
         run_dir / "telemetry.jsonl"
@@ -869,7 +1161,12 @@ def collect(request: CollectionRequest) -> Path:
                 executable = shutil.which(request.macmon_executable)
                 if executable is None:
                     raise RuntimeError(f"macmon not found: {request.macmon_executable}")
-                macmon = MacmonStream(executable, int(round(period * 1000)), run_dir / "macmon.log")
+                macmon = MacmonStream(
+                    executable,
+                    int(round(period * 1000)),
+                    run_dir / "macmon.log",
+                    run_dir / "macmon-raw.jsonl",
+                )
                 macmon.start()
                 enriched_event = {"source": "macmon"}
             elif platform.system() == "Linux" and request.profile == "enriched":
@@ -925,14 +1222,71 @@ def collect(request: CollectionRequest) -> Path:
             next_sample = start
             for sequence in range(expected_samples):
                 now = time.monotonic()
-                if scenario != "NOMINAL" and stressor_process is None:
-                    if now - start >= request.warmup_seconds:
+                elapsed = now - start
+                if (
+                    scenario == "CONTROLLED_CRASH"
+                    and not controlled_crash_injected
+                    and elapsed >= request.warmup_seconds
+                ):
+                    assert workload_process is not None
+                    workload_process.kill()
+                    workload_process.wait(timeout=10)
+                    controlled_crash_injected = True
+                    _event(
+                        events,
+                        start,
+                        "controlled_crash_injected",
+                        target="workload_child",
+                        signal="SIGKILL",
+                        exit_code=workload_process.returncode,
+                    )
+                elif (
+                    scenario == "TELEMETRY_INTERRUPTION"
+                    and not telemetry_interruption_started
+                    and elapsed >= request.warmup_seconds
+                ):
+                    telemetry_interruption_started = True
+                    _event(
+                        events,
+                        start,
+                        "telemetry_interruption_started",
+                        source=(
+                            "macmon"
+                            if macmon is not None
+                            else "linux_sysfs"
+                            if linux_sysfs is not None
+                            else "enriched"
+                        ),
+                        planned_duration_seconds=request.interruption_seconds,
+                    )
+                elif (
+                    scenario == "TELEMETRY_INTERRUPTION"
+                    and telemetry_interruption_started
+                    and not telemetry_interruption_ended
+                    and elapsed
+                    >= request.warmup_seconds + request.interruption_seconds
+                ):
+                    telemetry_interruption_ended = True
+                    _event(
+                        events,
+                        start,
+                        "telemetry_interruption_ended",
+                        planned_duration_seconds=request.interruption_seconds,
+                    )
+                elif (
+                    scenario in STRESSORS
+                    and scenario != "NOMINAL"
+                    and stressor_process is None
+                ):
+                    if elapsed >= request.warmup_seconds:
                         stressor_process, stressor_log = _start_harness(
                             "stressor", scenario, run_dir / "stressor.log"
                         )
                         _event(events, start, "stressor_started", scenario=scenario)
 
-                if workload_process.poll() is not None:
+                if workload_process.poll() is not None and not (
+                    scenario == "CONTROLLED_CRASH" and controlled_crash_injected
+                ):
                     raise RuntimeError(
                         f"workload exited before collection ended with code {workload_process.returncode}"
                     )
@@ -941,14 +1295,25 @@ def collect(request: CollectionRequest) -> Path:
                         f"stressor exited before collection ended with code {stressor_process.returncode}"
                     )
 
-                enriched: dict[str, Any] | None = None
+                enriched_raw: dict[str, Any] | None = None
                 source = None
                 if macmon is not None:
-                    enriched = macmon.latest()
+                    enriched_raw = macmon.latest()
                     source = "macmon"
                 elif linux_sysfs is not None:
-                    enriched = linux_sysfs.sample()
+                    enriched_raw = linux_sysfs.sample()
                     source = "linux_sysfs"
+                enriched, quality_flags = sanitize_enriched_sample(
+                    request.platform_id,
+                    enriched_raw,
+                )
+                interruption_active = (
+                    scenario == "TELEMETRY_INTERRUPTION"
+                    and telemetry_interruption_started
+                    and not telemetry_interruption_ended
+                )
+                if interruption_active:
+                    enriched = None
 
                 sample = {
                     "sequence": sequence,
@@ -959,7 +1324,10 @@ def collect(request: CollectionRequest) -> Path:
                     "availability": {
                         "host_available": True,
                         "enriched_available": enriched is not None,
+                        "enriched_raw_available": enriched_raw is not None,
                         "enriched_source": source,
+                        "interruption_injected": interruption_active,
+                        "quality_flags": quality_flags,
                     },
                 }
                 append_jsonl(telemetry, sample)
@@ -1001,15 +1369,38 @@ def collect(request: CollectionRequest) -> Path:
                 trace_exit_code=trace_code,
             )
 
+    elapsed_seconds = time.monotonic() - start
+    collector_cpu_end = collector_process.cpu_times()
+    telemetry_bytes = (run_dir / "telemetry.jsonl").stat().st_size
+    events_bytes = (run_dir / "events.jsonl").stat().st_size
+    native_bytes = sum(
+        path.stat().st_size
+        for path in run_dir.glob("*-raw.jsonl")
+        if path.is_file()
+    )
     collection_record.update(
         {
             "end_utc": utc_now(),
-            "elapsed_seconds": time.monotonic() - start,
+            "elapsed_seconds": elapsed_seconds,
             "setup_elapsed_seconds": start - setup_start,
             "status": "failed" if collection_error else "complete",
             "error": collection_error,
             "xctrace_enabled": request.enable_xctrace,
             "xctrace_template": request.xctrace_template if request.enable_xctrace else None,
+            "collection_cost": {
+                "collector_cpu_seconds": (
+                    collector_cpu_end.user
+                    + collector_cpu_end.system
+                    - collector_cpu_start.user
+                    - collector_cpu_start.system
+                ),
+                "telemetry_bytes": telemetry_bytes,
+                "events_bytes": events_bytes,
+                "native_raw_bytes": native_bytes,
+                "telemetry_bytes_per_second": (
+                    telemetry_bytes / elapsed_seconds if elapsed_seconds > 0 else None
+                ),
+            },
         }
     )
     dump_json(run_dir / "collection.json", collection_record)
@@ -1048,7 +1439,15 @@ def update_collection_plan(plan_path: Path, run_dir: Path) -> None:
             row["start_utc"] = collection["start_utc"]
             row["end_utc"] = collection["end_utc"]
             row["valid_rows"] = str(validation["sample_count"])
+            if collection["scenario"] == "NOMINAL" and validation["valid"]:
+                row["benign_hours"] = (
+                    f"{float(validation['duration_observed_seconds']) / 3600:.6f}"
+                )
             row["exclusion_reason"] = "; ".join(validation["failures"])
+            warnings = validation.get("warnings", [])
+            if warnings:
+                prefix = f"{row['notes']}; " if row.get("notes") else ""
+                row["notes"] = prefix + "validation warnings: " + "; ".join(warnings)
             matched = True
             break
     if not matched:
