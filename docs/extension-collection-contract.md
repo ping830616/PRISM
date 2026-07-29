@@ -2,7 +2,7 @@
 
 This file turns the data promises in the DICE journal-extension memo into
 executable PRISM acceptance criteria. The repository is collection-ready only
-when `scripts/preflight.py` passes. The journal extension is empirically
+when notebook section 5 passes. The journal extension is empirically
 fulfilled only after the tracker shows that all required and targeted rows are
 valid and both platforms meet the benign-hour target.
 
@@ -47,28 +47,27 @@ clean Git revision.
 Run from a clean checkout:
 
 ```bash
-python3 -m pip install -e .
-python3 scripts/preflight.py configs/experiment-matrix.toml
-python3 scripts/probe_collection.py
-python3 scripts/check_collection_readiness.py --platform-id M2_MACOS
-python3 scripts/collect_next.py --platform-id M2_MACOS
+python3 -m pip install -e ".[notebook]"
+jupyter lab notebooks/PRISM_Complete_Experiment.ipynb
 ```
 
-The last command previews the next eligible run. It does not collect anything
-until `--execute` is supplied:
+Run notebook sections 1–5, probe the target platform, and pass its smoke gate.
+Section 11 previews the next eligible run when configured as follows:
 
-```bash
-python3 scripts/collect_next.py --platform-id M2_MACOS --execute
+```python
+PLATFORM_ID = "M2_MACOS"
+PREVIEW_NEXT_RUN = True
 ```
 
-Locked-test rows are hidden until the method is frozen. After the documented
-freeze, they require the explicit `--unlock-locked-test` flag.
+Section 12 does not collect until `EXECUTE_PRODUCTION=True`. Locked-test rows
+are hidden until the method is frozen; after the documented freeze they
+additionally require `UNLOCK_LOCKED_TEST=True`.
 
 Check progress at any time:
 
-```bash
-python3 scripts/collection_status.py
-python3 scripts/data_quality_report.py --platform-id M2_MACOS
+```python
+PLATFORM_ID = "M2_MACOS"
+RUN_DAILY_REPORT = True
 ```
 
 ## Per-Run Acceptance

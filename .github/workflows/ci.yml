@@ -12,6 +12,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m pip install -e .
-      - run: python scripts/preflight.py configs/experiment-matrix.toml
-      - run: python -m unittest discover -s tests -v
+      - run: python -m pip install -e ".[notebook]"
+      - run: >-
+          jupyter nbconvert
+          --to notebook
+          --execute notebooks/PRISM_Complete_Experiment.ipynb
+          --output /tmp/PRISM_Complete_Experiment.executed.ipynb
+          --ExecutePreprocessor.timeout=300

@@ -1,6 +1,8 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.ipynb_checkpoints/
+.prism_runtime/
 .venv/
 .env
 dist/

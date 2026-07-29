@@ -11,7 +11,8 @@ cd '/path/to/PRISM'
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install --upgrade pip
-python3 -m pip install -e .
+python3 -m pip install -e ".[notebook]"
+jupyter lab notebooks/PRISM_Complete_Experiment.ipynb
 ```
 
 Required:
@@ -26,11 +27,11 @@ hardware UUID, and provisioning identifiers from `platform.json`.
 
 ## 2. Capability probe
 
-Run this in a normal Terminal—not through an IDE sandbox:
+Launch Jupyter from a normal Terminal—not through an IDE sandbox. Run notebook
+sections 1–5 once, then change and run the capability-probe cell:
 
-```bash
-source .venv/bin/activate
-python3 scripts/probe_collection.py
+```python
+RUN_CAPABILITY_PROBE = True
 ```
 
 Confirm that:
@@ -43,36 +44,11 @@ The probe is local and Git-ignored under `data/collection-probes/`.
 
 ## 3. Required smoke pair
 
-Collect a 30-second nominal run:
+Notebook section 8 collects a 30-second nominal run followed by a matched
+30-second atomic-pressure run with a 10-second pre-onset window. Change and run:
 
-```bash
-python3 scripts/collect_run.py \
-  --platform-id M2_MACOS \
-  --workload PY_STATS \
-  --scenario NOMINAL \
-  --repetition 0 \
-  --split smoke \
-  --purpose smoke \
-  --profile enriched \
-  --duration-seconds 30 \
-  --sampling-hz 5
-```
-
-Collect a matched 30-second atomic-pressure run with a 10-second pre-onset
-window:
-
-```bash
-python3 scripts/collect_run.py \
-  --platform-id M2_MACOS \
-  --workload PY_STATS \
-  --scenario ATOMIC \
-  --repetition 0 \
-  --split smoke \
-  --purpose smoke \
-  --profile enriched \
-  --duration-seconds 30 \
-  --warmup-seconds 10 \
-  --sampling-hz 5
+```python
+RUN_APPLE_SMOKE_PAIR = True
 ```
 
 The pressure harness is bounded and terminates with the collector. Monitor the
@@ -102,8 +78,9 @@ It contains:
 
 Validate again at any time:
 
-```bash
-python3 scripts/validate_run.py 'data/raw/M2_MACOS/<date>/<run_id>'
+```python
+RUN_DIRECTORY = REPO_ROOT / "data/raw/M2_MACOS/<date>/<run_id>"
+VALIDATE_RUN = True
 ```
 
 Do not proceed to production unless both smoke runs report `"valid": true`,
@@ -113,16 +90,16 @@ atomic run.
 After committing the collector, require smoke evidence from that exact clean
 revision:
 
-```bash
-python3 scripts/check_collection_readiness.py --platform-id M2_MACOS
+```python
+run_script("check_collection_readiness.py", "--platform-id", "M2_MACOS")
 ```
 
 Compare the pair:
 
-```bash
-python3 scripts/summarize_smoke.py \
-  'data/raw/M2_MACOS/<date>/<nominal-run-id>' \
-  'data/raw/M2_MACOS/<date>/<atomic-run-id>'
+```python
+NOMINAL_RUN = REPO_ROOT / "data/raw/M2_MACOS/<date>/<nominal-run-id>"
+ANOMALOUS_RUN = REPO_ROOT / "data/raw/M2_MACOS/<date>/<atomic-run-id>"
+COMPARE_SMOKE_PAIR = True
 ```
 
 ## 5. Optional trace capability run
@@ -131,18 +108,20 @@ An all-process Time Profiler trace is much larger than the synchronized
 telemetry. A 30-second trace can exceed 100 MB, so do not enable it on every
 production run. Use it for a declared representative subset:
 
-```bash
-python3 scripts/collect_run.py \
-  --platform-id M2_MACOS \
-  --workload PY_STATS \
-  --scenario NOMINAL \
-  --repetition 0 \
-  --split smoke \
-  --purpose smoke \
-  --profile enriched \
-  --duration-seconds 30 \
-  --sampling-hz 5 \
-  --enable-xctrace
+```python
+run_script(
+    "collect_run.py",
+    "--platform-id", "M2_MACOS",
+    "--workload", "PY_STATS",
+    "--scenario", "NOMINAL",
+    "--repetition", 0,
+    "--split", "smoke",
+    "--purpose", "smoke",
+    "--profile", "enriched",
+    "--duration-seconds", 30,
+    "--sampling-hz", 5,
+    "--enable-xctrace",
+)
 ```
 
 ## 6. Preview and execute production runs
@@ -150,24 +129,25 @@ python3 scripts/collect_run.py \
 Commit and push the collector before production; production mode refuses to run
 from a dirty checkout. Preview the next eligible Apple row:
 
-```bash
-python3 scripts/collect_next.py --platform-id M2_MACOS
+```python
+PLATFORM_ID = "M2_MACOS"
+PREVIEW_NEXT_RUN = True
 ```
 
-After checking the displayed run ID, scenario, split, and duration:
+Run notebook section 11 and check the displayed run ID, scenario, split, and
+duration. Then change and run section 12:
 
-```bash
-python3 scripts/collect_next.py --platform-id M2_MACOS --execute
+```python
+EXECUTE_PRODUCTION = True
 ```
 
 Filter when needed, for example:
 
-```bash
-python3 scripts/collect_next.py \
-  --platform-id M2_MACOS \
-  --run-kind required_matrix \
-  --workload PY_STATS \
-  --scenario NOMINAL
+```python
+RUN_KIND = "required_matrix"
+WORKLOAD = "PY_STATS"
+SCENARIO = "NOMINAL"
+PREVIEW_NEXT_RUN = True
 ```
 
 The runner reads the immutable plan and updates only the Git-ignored local
@@ -181,7 +161,7 @@ progress tracker. It hides locked-test rows until the method is frozen.
 4. Collect the targeted thermal, power, and degradation-proxy rows.
 5. Complete the long-benign development sessions.
 6. Freeze the method before adding `--unlock-locked-test`.
-7. Continue until `scripts/collection_status.py` reports 12 valid benign hours.
+7. Continue until notebook section 13 reports 12 valid benign hours.
 
 Raw data are intentionally ignored by Git. Back them up to an access-controlled,
 versioned data location before deleting any local copy.

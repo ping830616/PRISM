@@ -1,10 +1,12 @@
 # Local DICE M2 Pro Baseline
 
 `payload/` is a local, Git-ignored copy of the original DICE Apple M2 Pro
-telemetry. Recreate it with:
+telemetry. Recreate it with section 6 of
+`notebooks/PRISM_Complete_Experiment.ipynb`:
 
-```bash
-python3 scripts/import_dice_baseline.py --dice-root ../DICE
+```python
+DICE_ROOT = REPO_ROOT.parent / "DICE"
+RUN_DICE_IMPORT = True
 ```
 
 Tracked provenance:
