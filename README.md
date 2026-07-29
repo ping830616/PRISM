@@ -1,4 +1,4 @@
-# PRISM-SLM
+# PRISM
 
 **PRISM: Platform-Robust In-Field Sequential Monitoring for Silicon Lifecycle Management**
 
