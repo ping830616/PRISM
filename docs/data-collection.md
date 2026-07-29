@@ -20,10 +20,11 @@ collection date, software version, protocol implementation, and environment.
 
 ## Local DICE Import
 
-Run from the PRISM repository:
+Open `notebooks/PRISM_Complete_Experiment.ipynb`, run sections 1–5, then use:
 
-```bash
-python3 scripts/import_dice_baseline.py --dice-root ../DICE
+```python
+DICE_ROOT = REPO_ROOT.parent / "DICE"
+RUN_DICE_IMPORT = True
 ```
 
 The raw payload remains outside Git history. `source.json` records the DICE
@@ -62,11 +63,9 @@ An independent repetition must restart the workload and collector and receive a
 new `run_id`. Re-windowing one trace or changing a random seed during analysis
 does not create an independent experimental run.
 
-Use the generated plan:
-
-```bash
-python3 scripts/make_collection_plan.py
-```
+Use the tracked generated plan in `data/collection-plan.csv`. Its generator is
+embedded in the canonical notebook for provenance, but do not regenerate or
+overwrite the plan after production starts.
 
 The plan assigns:
 

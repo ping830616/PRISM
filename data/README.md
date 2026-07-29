@@ -9,8 +9,11 @@ The original Apple M2 Pro DICE telemetry is useful for baseline reproduction
 and retrospective method comparison, but it is not new PRISM evidence. Import
 it with:
 
-```bash
-python3 scripts/import_dice_baseline.py --dice-root ../DICE
+Run sections 1–6 of `notebooks/PRISM_Complete_Experiment.ipynb` with:
+
+```python
+DICE_ROOT = REPO_ROOT.parent / "DICE"
+RUN_DICE_IMPORT = True
 ```
 
 The importer creates:

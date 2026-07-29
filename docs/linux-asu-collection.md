@@ -44,7 +44,8 @@ with `rsync` rather than embedding a token in a URL.
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install --upgrade pip
-python3 -m pip install -e .
+python3 -m pip install -e ".[notebook]"
+jupyter lab notebooks/PRISM_Complete_Experiment.ipynb
 ```
 
 If `venv` is missing and you have administrator permission:
@@ -74,9 +75,10 @@ platform-availability result.
 
 ## 5. Run the PRISM capability probe
 
-```bash
-source .venv/bin/activate
-python3 scripts/probe_collection.py
+Run notebook sections 1–5, then change and run the capability-probe cell:
+
+```python
+RUN_CAPABILITY_PROBE = True
 ```
 
 Review:
@@ -108,45 +110,21 @@ node.
 
 ## 7. Required EPYC smoke pair
 
-Nominal:
+Notebook section 9 runs both the nominal and matched atomic-pressure smoke
+executions:
 
-```bash
-python3 scripts/collect_run.py \
-  --platform-id EPYC_LINUX \
-  --workload PY_STATS \
-  --scenario NOMINAL \
-  --repetition 0 \
-  --split smoke \
-  --purpose smoke \
-  --profile enriched \
-  --duration-seconds 30 \
-  --sampling-hz 5
+```python
+RUN_LINUX_SMOKE_PAIR = True
 ```
 
-Atomic pressure:
-
-```bash
-python3 scripts/collect_run.py \
-  --platform-id EPYC_LINUX \
-  --workload PY_STATS \
-  --scenario ATOMIC \
-  --repetition 0 \
-  --split smoke \
-  --purpose smoke \
-  --profile enriched \
-  --duration-seconds 30 \
-  --warmup-seconds 10 \
-  --sampling-hz 5
-```
-
-Run `scripts/validate_run.py` on both outputs. A Linux run may be valid with no
-enriched channels, but that absence must remain explicit and becomes part of
-the telemetry-availability analysis.
+Use notebook section 10 to validate both outputs. A Linux run may be valid with
+no enriched channels, but that absence must remain explicit and becomes part
+of the telemetry-availability analysis.
 
 Require both smoke runs to come from the exact clean server revision:
 
-```bash
-python3 scripts/check_collection_readiness.py --platform-id EPYC_LINUX
+```python
+run_script("check_collection_readiness.py", "--platform-id", "EPYC_LINUX")
 ```
 
 ## 8. Transfer raw EPYC runs to the Mac
@@ -178,14 +156,15 @@ telemetry permission changes.
 
 Preview the next eligible server run:
 
-```bash
-python3 scripts/collect_next.py --platform-id EPYC_LINUX
+```python
+PLATFORM_ID = "EPYC_LINUX"
+PREVIEW_NEXT_RUN = True
 ```
 
 Execute it only after reviewing the selection:
 
-```bash
-python3 scripts/collect_next.py --platform-id EPYC_LINUX --execute
+```python
+EXECUTE_PRODUCTION = True
 ```
 
 The machine-local `data/collection-progress.csv` is ignored by Git. Back it up
