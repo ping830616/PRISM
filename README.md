@@ -98,19 +98,34 @@ The DICE import keeps the 124 MB raw Apple M2 baseline in an ignored local
 payload directory. It tracks the source revision, SHA-256 inventory, and compact
 result summaries without duplicating gigabytes of tuning artifacts in Git.
 
-## Data Collection in Brief
+## Data Collection at a Glance
 
-PRISM records the same planned workloads on an Apple M2 Pro and an authorized
-AMD EPYC Linux server. First, run the notebook's smoke and readiness checks on
-each physical machine. During an official run, keep that machine plugged in,
-awake, and otherwise unused so unrelated activity does not contaminate its
-telemetry. Preview each predeclared run before execution, then validate and
-record progress after every run or bounded batch. Collect calibration and
-development data first; keep final test runs locked until the monitoring method
-is frozen. Preserve failures, transfer Linux data with checksum verification,
-and keep raw telemetry out of Git. See the
-[end-to-end collection roadmap](docs/data-collection-roadmap.md) for the full
-phase-by-phase procedure.
+### Dataset comparison
+
+| | Legacy DICE Apple data | New PRISM Apple data | New PRISM AMD data |
+| --- | --- | --- | --- |
+| Machine | Apple M2 Pro, ARM64/macOS | Apple M2 Pro, ARM64/macOS | AMD EPYC 9354, x86-64/Ubuntu |
+| Role | Historical conference baseline | New same-protocol Apple evidence | New cross-platform Linux evidence |
+| Scale | 24 cases; one execution per workload/condition | 126 planned runs; 32.4 machine-hours | 126 planned runs; 32.4 machine-hours |
+| Workloads and conditions | Four workloads; nominal plus five pressure conditions | Four workloads; eight required and three targeted scenarios | Same PRISM workload/scenario plan as Apple |
+| Repetition | No independent replication within each case | Three independent runs per required/targeted cell | Three independent runs per required/targeted cell |
+| Benign monitoring | Limited | 12 planned hours | 12 planned hours |
+| Telemetry | Apple-specific mixed/full tiers | Portable and Apple-native host channels | Portable and Linux-native host channels; unavailable sensors stay missing |
+
+### Procedure, method, and settings
+
+| Step | Procedure | Main method or setting |
+| ---: | --- | --- |
+| 1 | Prepare each physical machine and run notebook preflight | Use one approved, clean Git revision |
+| 2 | Run nominal and anomalous smoke traces, then compare platforms | 30 seconds at 5 Hz; readiness must pass |
+| 3 | Collect calibration and development runs while the host is idle | 12-minute runs at 5 Hz; 120-second anomaly warm-up; locked tests remain closed |
+| 4 | Collect benign monitoring across different times/restarts | Three 48-minute sessions per workload; 12 benign hours per platform overall |
+| 5 | Validate every run and back up raw evidence | Check cadence, coverage, events, manifests, and SHA-256 checksums |
+| 6 | Freeze models, features, thresholds, and analysis choices | Never tune with locked-test runs |
+| 7 | Collect and evaluate the locked test once | Unlock only after method freeze; report all outcomes |
+
+See the [end-to-end collection roadmap](docs/data-collection-roadmap.md) for
+the complete operator procedure.
 
 ## Reproducibility Rules
 
