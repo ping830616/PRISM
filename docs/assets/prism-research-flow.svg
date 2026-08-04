@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 860" role="img" aria-labelledby="title desc">
+  <title id="title">PRISM cross-platform reliability-monitoring research flow</title>
+  <desc id="desc">Historical DICE Apple data and new PRISM Apple and AMD data are translated into common telemetry semantics. Benign behavioral micro-twins feed sequential monitoring, cross-platform testing, reliability evaluation, and a frozen locked-test decision. Guarded updates and adaptive telemetry are optional extensions.</desc>
+
+  <style>
+    .canvas { fill: #f8fafc; }
+    .title { fill: #0f172a; font: 700 34px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .subtitle { fill: #475569; font: 400 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .section { fill: #64748b; font: 700 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 2px; }
+    .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; }
+    .card-title { fill: #0f172a; font: 700 20px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .card-copy { fill: #475569; font: 400 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .card-note { fill: #64748b; font: 600 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .source-dice { fill: #f5f3ff; stroke: #8b5cf6; }
+    .source-apple { fill: #eff6ff; stroke: #3b82f6; }
+    .source-amd { fill: #fff7ed; stroke: #f97316; }
+    .semantic { fill: #ecfeff; stroke: #0891b2; stroke-width: 2.5; }
+    .optional { fill: #f8fafc; stroke: #94a3b8; stroke-dasharray: 8 7; }
+    .gate { fill: #ecfdf5; stroke: #059669; stroke-width: 2.5; }
+    .icon-purple { color: #7c3aed; }
+    .icon-blue { color: #2563eb; }
+    .icon-orange { color: #ea580c; }
+    .icon-cyan { color: #0891b2; }
+    .icon-indigo { color: #4f46e5; }
+    .icon-rose { color: #e11d48; }
+    .icon-amber { color: #d97706; }
+    .icon-green { color: #059669; }
+    .icon-muted { color: #64748b; }
+    .icon-bg-purple { fill: #ede9fe; }
+    .icon-bg-blue { fill: #dbeafe; }
+    .icon-bg-orange { fill: #ffedd5; }
+    .icon-bg-cyan { fill: #cffafe; }
+    .icon-bg-indigo { fill: #e0e7ff; }
+    .icon-bg-rose { fill: #ffe4e6; }
+    .icon-bg-amber { fill: #fef3c7; }
+    .icon-bg-green { fill: #d1fae5; }
+    .icon-bg-muted { fill: #e2e8f0; }
+    .arrow { fill: none; stroke: #64748b; stroke-width: 2.5; marker-end: url(#arrow); }
+    .optional-arrow { fill: none; stroke: #94a3b8; stroke-width: 2.5; stroke-dasharray: 8 7; marker-end: url(#arrow-muted); }
+    .metric-dot { fill: #0891b2; }
+
+    @media (prefers-color-scheme: dark) {
+      .canvas { fill: #0d1117; }
+      .title, .card-title { fill: #f0f6fc; }
+      .subtitle, .card-copy { fill: #b1bac4; }
+      .section, .card-note { fill: #8c959f; }
+      .card { fill: #161b22; stroke: #30363d; }
+      .source-dice { fill: #211a36; stroke: #a78bfa; }
+      .source-apple { fill: #10243e; stroke: #60a5fa; }
+      .source-amd { fill: #352012; stroke: #fb923c; }
+      .semantic { fill: #0e2f36; stroke: #22d3ee; }
+      .optional { fill: #161b22; stroke: #6e7681; }
+      .gate { fill: #0d2d22; stroke: #34d399; }
+      .icon-bg-purple { fill: #33255b; }
+      .icon-bg-blue { fill: #18355d; }
+      .icon-bg-orange { fill: #4a2a16; }
+      .icon-bg-cyan { fill: #164e63; }
+      .icon-bg-indigo { fill: #27265e; }
+      .icon-bg-rose { fill: #4c1d2d; }
+      .icon-bg-amber { fill: #493314; }
+      .icon-bg-green { fill: #124231; }
+      .icon-bg-muted { fill: #30363d; }
+      .arrow { stroke: #8c959f; }
+      .optional-arrow { stroke: #6e7681; }
+    }
+  </style>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect class="canvas" width="1400" height="860" rx="28"/>
+
+  <text class="title" x="60" y="58">PRISM research pipeline</text>
+  <text class="subtitle" x="60" y="88">Different machines, one telemetry language, statistically calibrated reliability decisions</text>
+
+  <text class="section" x="60" y="126">DATA EVIDENCE</text>
+
+  <g aria-label="Legacy DICE Apple baseline, 24 historical cases">
+    <rect class="card source-dice" x="60" y="145" width="360" height="130" rx="18"/>
+    <circle class="icon-bg-purple" cx="112" cy="201" r="30"/>
+    <g class="icon-purple" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="112" cy="187" rx="17" ry="7"/>
+      <path d="M95 187v13c0 4 8 7 17 7s17-3 17-7v-13"/>
+      <path d="M95 200v13c0 4 8 7 17 7s17-3 17-7v-13"/>
+    </g>
+    <text class="card-title" x="158" y="185">Legacy DICE baseline</text>
+    <text class="card-copy" x="158" y="214">Apple M2 Pro · historical</text>
+    <text class="card-note" x="158" y="241">24 cases for baseline comparison</text>
+  </g>
+
+  <g aria-label="New PRISM Apple M2 Pro data, 126 planned runs">
+    <rect class="card source-apple" x="520" y="145" width="360" height="130" rx="18"/>
+    <circle class="icon-bg-blue" cx="572" cy="201" r="30"/>
+    <g class="icon-blue" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="555" y="183" width="34" height="24" rx="3"/>
+      <path d="M550 214h44l-4 6h-36z"/>
+    </g>
+    <text class="card-title" x="618" y="185">New PRISM Apple</text>
+    <text class="card-copy" x="618" y="214">M2 Pro · macOS</text>
+    <text class="card-note" x="618" y="241">126 planned runs · 32.4 hours</text>
+  </g>
+
+  <g aria-label="New PRISM AMD EPYC data, 126 planned runs">
+    <rect class="card source-amd" x="980" y="145" width="360" height="130" rx="18"/>
+    <circle class="icon-bg-orange" cx="1032" cy="201" r="30"/>
+    <g class="icon-orange" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="1015" y="180" width="34" height="16" rx="3"/>
+      <rect x="1015" y="204" width="34" height="16" rx="3"/>
+      <path d="M1021 188h1m0 24h1m8-24h12m-12 24h12"/>
+    </g>
+    <text class="card-title" x="1078" y="185">New PRISM AMD</text>
+    <text class="card-copy" x="1078" y="214">EPYC · Linux</text>
+    <text class="card-note" x="1078" y="241">126 planned runs · 32.4 hours</text>
+  </g>
+
+  <path class="arrow" d="M240 275 C240 312 450 291 510 326"/>
+  <path class="arrow" d="M700 275 V310"/>
+  <path class="arrow" d="M1160 275 C1160 312 950 291 890 326"/>
+
+  <g aria-label="Translate telemetry into a common functional language">
+    <rect class="semantic" x="420" y="310" width="560" height="125" rx="20"/>
+    <circle class="icon-bg-cyan" cx="480" cy="372" r="34"/>
+    <g class="icon-cyan" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M460 372h8l5-15 10 31 7-21 5 5h5"/>
+      <circle cx="480" cy="372" r="24"/>
+    </g>
+    <text class="card-title" x="535" y="351">1 · Translate telemetry into a common language</text>
+    <text class="card-copy" x="535" y="382">Compute · memory · I/O · thermal/power · availability</text>
+    <text class="card-note" x="535" y="408">Unavailable sensors stay explicit—never replaced with invented zeros.</text>
+  </g>
+
+  <text class="section" x="60" y="477">ANALYSIS AND EVALUATION</text>
+
+  <path class="arrow" d="M540 435 C475 469 376 463 255 500"/>
+  <path class="arrow" d="M420 390 H45 Q25 390 25 410 V725 Q25 745 45 745 H80"/>
+  <path class="arrow" d="M430 565 H525"/>
+  <path class="arrow" d="M700 630 V680"/>
+  <path class="arrow" d="M430 745 H525"/>
+  <path class="arrow" d="M875 745 H970"/>
+  <path class="optional-arrow" d="M875 565 H970"/>
+
+  <g aria-label="Learn normal behavior with benign-only micro-twins">
+    <rect class="card" x="80" y="500" width="350" height="130" rx="18"/>
+    <circle class="icon-bg-indigo" cx="132" cy="565" r="30"/>
+    <g class="icon-indigo" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="115" y="548" width="22" height="22" rx="4"/>
+      <rect x="127" y="560" width="22" height="22" rx="4"/>
+      <path d="M113 579c8-8 14 8 23 0s13-1 17-8"/>
+    </g>
+    <text class="card-title" x="178" y="548">2 · Learn normal behavior</text>
+    <text class="card-copy" x="178" y="577">Benign-only micro-twins</text>
+    <text class="card-note" x="178" y="604">Ridge and VAR models</text>
+  </g>
+
+  <g aria-label="Watch behavior over time with sequential monitoring">
+    <rect class="card" x="525" y="500" width="350" height="130" rx="18"/>
+    <circle class="icon-bg-rose" cx="577" cy="565" r="30"/>
+    <g class="icon-rose" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="577" cy="565" r="21"/>
+      <circle cx="577" cy="565" r="10"/>
+      <path d="M577 565l16-12M577 541v4M553 565h4"/>
+      <circle cx="593" cy="553" r="3" fill="currentColor" stroke="none"/>
+    </g>
+    <text class="card-title" x="623" y="548">3 · Watch behavior over time</text>
+    <text class="card-copy" x="623" y="577">Sequential monitoring</text>
+    <text class="card-note" x="623" y="604">Conformal · EWMA · CUSUM</text>
+  </g>
+
+  <g aria-label="Optional guarded updates and adaptive telemetry">
+    <rect class="card optional" x="970" y="500" width="350" height="130" rx="18"/>
+    <circle class="icon-bg-muted" cx="1022" cy="565" r="30"/>
+    <g class="icon-muted" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M1008 565h28M1022 551v28"/>
+      <circle cx="1022" cy="565" r="20"/>
+    </g>
+    <text class="card-title" x="1068" y="548">Optional P1 extensions</text>
+    <text class="card-copy" x="1068" y="577">Guarded model updates</text>
+    <text class="card-note" x="1068" y="604">Adaptive telemetry · gated</text>
+  </g>
+
+  <g aria-label="Test portability across Apple and AMD platforms">
+    <rect class="card" x="80" y="680" width="350" height="130" rx="18"/>
+    <circle class="icon-bg-amber" cx="132" cy="745" r="30"/>
+    <g class="icon-amber" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M110 737h38l-8-8M148 753h-38l8 8"/>
+    </g>
+    <text class="card-title" x="178" y="728">4 · Test portability</text>
+    <text class="card-copy" x="178" y="757">Apple ↔ AMD transfer</text>
+    <text class="card-note" x="178" y="784">Calibration effort · missing sensors</text>
+  </g>
+
+  <g aria-label="Measure detection, diagnosis, false alerts, and delay">
+    <rect class="card" x="525" y="680" width="350" height="130" rx="18"/>
+    <circle class="icon-bg-blue" cx="577" cy="745" r="30"/>
+    <g class="icon-blue" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M557 760v-18M568 760v-30M579 760v-12M590 760v-24"/>
+      <path d="M554 764h42"/>
+    </g>
+    <text class="card-title" x="623" y="718">5 · Measure reliability</text>
+    <text class="card-copy" x="623" y="747">Detection · diagnosis · delay</text>
+    <text class="card-note" x="623" y="774">False alerts per monitored hour</text>
+  </g>
+
+  <g aria-label="Freeze the method, then conduct locked-test evaluation">
+    <rect class="gate" x="970" y="680" width="350" height="130" rx="18"/>
+    <circle class="icon-bg-green" cx="1022" cy="745" r="30"/>
+    <g class="icon-green" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="1007" y="741" width="30" height="22" rx="4"/>
+      <path d="M1013 741v-7a9 9 0 0 1 18 0v7M1014 752l6 6 11-13"/>
+    </g>
+    <text class="card-title" x="1068" y="718">6 · Freeze, then test once</text>
+    <text class="card-copy" x="1068" y="747">Locked-test evaluation</text>
+    <text class="card-note" x="1068" y="774">Rows open only after method freeze</text>
+  </g>
+
+</svg>
