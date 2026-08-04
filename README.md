@@ -81,8 +81,9 @@ run writes synchronized telemetry, events, sanitized platform metadata, channel
 metadata, validation, and checksums into the Git-ignored `data/raw/` tree. Use
 the notebook's operator-facing controls only: section 7 probes the current
 platform, section 8 detects the platform and runs the complete smoke pair plus
-readiness gate, section 9 inspects smoke evidence, sections 10–11 preview and
-execute production rows, and section 12 reports collection quality. Do not run
+readiness gate, section 9 automatically compares matched Apple/Linux smoke
+evidence from one collection commit, sections 10–11 preview and execute
+production rows, and section 12 reports collection quality. Do not run
 files under `.prism_runtime/` manually. Locked-test rows remain unavailable
 until explicitly unlocked after the method freeze.
 

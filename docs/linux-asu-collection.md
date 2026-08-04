@@ -146,9 +146,12 @@ matched atomic-pressure smoke executions, followed by the readiness gate:
 RUN_SMOKE_PAIR = True
 ```
 
-Use notebook section 9 to inspect or compare both outputs. A Linux run may be
-valid with no enriched channels, but that absence must remain explicit and
-becomes part of the telemetry-availability analysis.
+After transferring the EPYC directory to the Mac, set
+`COMPARE_SMOKE_PAIR=True` in notebook section 9. It automatically selects the
+newest valid Apple/Linux pairs from one clean collection commit and reports
+cadence, availability, semantic coverage, and portable CPU response. A Linux
+run may be valid with no enriched channels, but that absence must remain
+explicit and becomes part of the telemetry-availability analysis.
 
 The cell is successful only when it prints both valid run paths and ends with:
 

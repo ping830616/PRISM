@@ -100,10 +100,12 @@ atomic run.
 Compare the pair:
 
 ```python
-NOMINAL_RUN = REPO_ROOT / "data/raw/M2_MACOS/<date>/<nominal-run-id>"
-ANOMALOUS_RUN = REPO_ROOT / "data/raw/M2_MACOS/<date>/<atomic-run-id>"
 COMPARE_SMOKE_PAIR = True
 ```
+
+Run section 9 on the Mac after copying the EPYC smoke directory into the same
+repository. It automatically selects the newest valid Apple/Linux pairs from
+one clean collection commit and writes the schema-review report.
 
 ## 5. Optional trace capability run
 
