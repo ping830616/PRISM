@@ -89,10 +89,13 @@ Review:
 - `perf` availability and `perf_event_paranoid`;
 - missing sensors.
 
-The current enriched Linux collector reads available hwmon channels and CPU
-frequency directly from sysfs. It does not require `sudo`. `perf` is probed but
-is not enabled in the smoke pair until the server's allowed events and
-permissions are confirmed.
+The current enriched Linux collector reads available hwmon channels and a
+bounded, evenly distributed subset of at most four per-CPU frequency paths
+directly from sysfs. It records both the discovered and sampled path counts;
+this avoids serially reading every core on high-core-count hosts and preserves
+the declared 5 Hz cadence. It does not require `sudo`. `perf` is probed but is
+not enabled in the smoke pair until the server's allowed events and permissions
+are confirmed.
 
 ## 6. Protect a long SSH collection
 
