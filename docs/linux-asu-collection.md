@@ -153,11 +153,20 @@ cadence, availability, semantic coverage, and portable CPU response. A Linux
 run may be valid with no enriched channels, but that absence must remain
 explicit and becomes part of the telemetry-availability analysis.
 
+Section 9 reports CPU temperature, CPU power, and peripheral temperature
+availability separately. Do not treat an NVMe or network-controller hwmon
+temperature as CPU-package temperature, and do not interpret a larger flattened
+channel count as richer system observability.
+
 The cell is successful only when it prints both valid run paths and ends with:
 
 ```text
 EPYC_LINUX is ready for predeclared production collection
 ```
+
+After both final platform pairs have been copied to the Mac, section 9 must also
+confirm that the smoke collection commit matches the current notebook revision
+before calibration/development collection begins.
 
 Return `RUN_SMOKE_PAIR` to `False` and save the notebook after collection to
 prevent an accidental repeat. Do not run `.prism_runtime` files manually.

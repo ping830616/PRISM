@@ -105,7 +105,9 @@ COMPARE_SMOKE_PAIR = True
 
 Run section 9 on the Mac after copying the EPYC smoke directory into the same
 repository. It automatically selects the newest valid Apple/Linux pairs from
-one clean collection commit and writes the schema-review report.
+one clean collection commit and writes the schema-review report. Production may
+begin only when section 9 also confirms that this collection commit matches the
+current notebook revision.
 
 ## 5. Optional trace capability run
 

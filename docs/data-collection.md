@@ -109,6 +109,14 @@ Do not force platform-specific channels to appear equivalent. Every mapped
 channel must retain its native name, units, collector, cadence, missingness
 semantics, and transformation. An unavailable signal is missing—not zero.
 
+The canonical portable CPU-utilization channel is the arithmetic mean of the
+simultaneously sampled logical-CPU percentages. The direct aggregate returned
+by `psutil.cpu_percent(interval=None)` is retained only as an audit channel
+because it can collapse to repeated zeroes on macOS at 5 Hz. Linux sysfs units
+come from discovery metadata rather than sensor labels: a generic `composite`
+name may still be a temperature. CPU-package temperature/power and peripheral
+NVMe or network-controller temperatures remain distinct capabilities.
+
 ## Long-Benign Collection
 
 Collect at least 12 aggregate benign hours per required platform. The
