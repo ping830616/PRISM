@@ -35,8 +35,11 @@ git clone git@github.com:ping830616/PRISM.git
 cd PRISM
 ```
 
-If SSH access to GitHub is unavailable, transfer the repository from the Mac
-with `rsync` rather than embedding a token in a URL.
+For HTTPS access to the private repository, enter a fine-grained GitHub personal
+access token—not a GitHub or ASU password—at the password prompt. Limit the
+token to read-only access to PRISM, give it an expiration, and never put it in a
+command, notebook, chat, or remote URL. If server authentication is undesirable,
+transfer the repository from the Mac without copying credentials.
 
 ## 3. Create the environment
 
@@ -45,8 +48,29 @@ python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install --upgrade pip
 python3 -m pip install -e ".[notebook]"
-jupyter lab notebooks/PRISM_Complete_Experiment.ipynb
 ```
+
+Open a secure local tunnel from a Mac terminal:
+
+```bash
+ssh -L 8892:127.0.0.1:8892 <ASURITE-or-user>@<ASU-hostname>
+```
+
+In that SSH session, launch Jupyter on the loopback interface:
+
+```bash
+cd ~/PRISM
+source .venv/bin/activate
+python -m jupyter lab \
+  --no-browser \
+  --ip=127.0.0.1 \
+  --port=8892 \
+  --ServerApp.port_retries=0 \
+  notebooks/PRISM_Complete_Experiment.ipynb
+```
+
+Keep the terminal open and paste the complete printed
+`http://127.0.0.1:8892/lab?token=...` URL into the Mac browser.
 
 If `venv` is missing and you have administrator permission:
 
@@ -75,7 +99,9 @@ platform-availability result.
 
 ## 5. Run the PRISM capability probe
 
-Run notebook sections 1–5, then change and run the capability-probe cell:
+Restart the kernel and run the notebook once from the top with every guarded
+switch left `False`. Confirm that preflight and all unit tests pass. Then change
+and run the section 7 capability-probe cell:
 
 ```python
 RUN_CAPABILITY_PROBE = True
@@ -124,11 +150,14 @@ Use notebook section 9 to inspect or compare both outputs. A Linux run may be
 valid with no enriched channels, but that absence must remain explicit and
 becomes part of the telemetry-availability analysis.
 
-Require both smoke runs to come from the exact clean server revision:
+The cell is successful only when it prints both valid run paths and ends with:
 
-```python
-run_script("check_collection_readiness.py", "--platform-id", "EPYC_LINUX")
+```text
+EPYC_LINUX is ready for predeclared production collection
 ```
+
+Return `RUN_SMOKE_PAIR` to `False` and save the notebook after collection to
+prevent an accidental repeat. Do not run `.prism_runtime` files manually.
 
 ## 8. Transfer raw EPYC runs to the Mac
 
@@ -169,6 +198,9 @@ Execute it only after reviewing the selection:
 ```python
 EXECUTE_PRODUCTION = True
 ```
+
+Use notebook section 10 for preview, section 11 for one guarded production row,
+and section 12 for the daily progress and quality report.
 
 The machine-local `data/collection-progress.csv` is ignored by Git. Back it up
 with the raw EPYC directory when transferring data to the Mac.

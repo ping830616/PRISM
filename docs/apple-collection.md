@@ -56,6 +56,15 @@ The pressure harness is bounded and terminates with the collector. Monitor the
 machine during the smoke pair. Stop with `Ctrl-C` if the machine becomes
 unresponsive; the partial run is preserved and marked invalid.
 
+The cell is successful only when it prints both valid run paths and ends with:
+
+```text
+M2_MACOS is ready for predeclared production collection
+```
+
+Return `RUN_SMOKE_PAIR` to `False` and save the notebook after collection to
+prevent an accidental repeat. Do not run `.prism_runtime` files manually.
+
 ## 4. Inspect and validate
 
 Each run appears at:
@@ -88,13 +97,6 @@ Do not proceed to production unless both smoke runs report `"valid": true`,
 150 samples, usable enriched telemetry, and a stressor-onset event in the
 atomic run.
 
-After committing the collector, require smoke evidence from that exact clean
-revision:
-
-```python
-run_script("check_collection_readiness.py", "--platform-id", "M2_MACOS")
-```
-
 Compare the pair:
 
 ```python
@@ -107,7 +109,8 @@ COMPARE_SMOKE_PAIR = True
 
 An all-process Time Profiler trace is much larger than the synchronized
 telemetry. A 30-second trace can exceed 100 MB, so do not enable it on every
-production run. Use it for a declared representative subset:
+production run. Use it for a declared representative subset by running this
+code inside the notebook:
 
 ```python
 run_script(
@@ -135,8 +138,8 @@ PLATFORM_ID = "M2_MACOS"
 PREVIEW_NEXT_RUN = True
 ```
 
-Run notebook section 11 and check the displayed run ID, scenario, split, and
-duration. Then change and run section 12:
+Run notebook section 10 and check the displayed run ID, scenario, split, and
+duration. Then change and run section 11:
 
 ```python
 EXECUTE_PRODUCTION = True
@@ -162,7 +165,7 @@ progress tracker. It hides locked-test rows until the method is frozen.
 4. Collect the targeted thermal, power, and degradation-proxy rows.
 5. Complete the long-benign development sessions.
 6. Freeze the method before adding `--unlock-locked-test`.
-7. Continue until notebook section 13 reports 12 valid benign hours.
+7. Continue until notebook section 12 reports 12 valid benign hours.
 
 Raw data are intentionally ignored by Git. Back them up to an access-controlled,
 versioned data location before deleting any local copy.

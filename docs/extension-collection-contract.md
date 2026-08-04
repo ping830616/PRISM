@@ -51,15 +51,16 @@ python3 -m pip install -e ".[notebook]"
 jupyter lab notebooks/PRISM_Complete_Experiment.ipynb
 ```
 
-Run notebook sections 1–5, probe the target platform, and pass its smoke gate.
-Section 11 previews the next eligible run when configured as follows:
+Run notebook sections 1–5, probe the target platform in section 7, and pass the
+platform-aware smoke gate in section 8. Section 10 previews the next eligible
+run when configured as follows:
 
 ```python
 PLATFORM_ID = "M2_MACOS"
 PREVIEW_NEXT_RUN = True
 ```
 
-Section 12 does not collect until `EXECUTE_PRODUCTION=True`. Locked-test rows
+Section 11 does not collect until `EXECUTE_PRODUCTION=True`. Locked-test rows
 are hidden until the method is frozen; after the documented freeze they
 additionally require `UNLOCK_LOCKED_TEST=True`.
 
@@ -69,6 +70,9 @@ Check progress at any time:
 PLATFORM_ID = "M2_MACOS"
 RUN_DAILY_REPORT = True
 ```
+
+Run the daily progress and channel-quality report in section 12. Operators use
+the notebook controls only and do not invoke `.prism_runtime` files manually.
 
 ## Per-Run Acceptance
 
