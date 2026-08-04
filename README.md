@@ -102,12 +102,17 @@ result summaries without duplicating gigabytes of tuning artifacts in Git.
 
 ### Dataset comparison
 
+A **case** is one workload/condition combination; a **run** is one independent
+execution of that combination.
+
 | | Legacy DICE Apple data | New PRISM Apple data | New PRISM AMD data |
 | --- | --- | --- | --- |
 | Machine | Apple M2 Pro, ARM64/macOS | Apple M2 Pro, ARM64/macOS | AMD EPYC 9354, x86-64/Ubuntu |
 | Role | Historical conference baseline | New same-protocol Apple evidence | New cross-platform Linux evidence |
-| Scale | 24 cases; one execution per workload/condition | 126 planned runs; 32.4 machine-hours | 126 planned runs; 32.4 machine-hours |
-| Workloads and conditions | Four workloads; nominal plus five pressure conditions | Four workloads; eight required and three targeted scenarios | Same PRISM workload/scenario plan as Apple |
+| Count | `4 workloads × 6 conditions × 1 execution = 24` | `4×8×3 = 96` required; `2×3×3 = 18` targeted; `4×3 = 12` long-benign; total 126 runs (32.4 h) | Same PRISM design: 126 runs (32.4 h) |
+| Workloads | Four original DICE workloads | `PY_STATS`, `PY_AI`, `BROWSER`, `VIDEO_SW` | Same four PRISM workload families |
+| Required scenarios | `NOMINAL`, `ATOMIC`, `BRANCH`, `CACHE`, `MEMBW`, `TLB` | DICE scenarios plus `CONTROLLED_CRASH` and `TELEMETRY_INTERRUPTION` | Same eight required scenarios as PRISM Apple |
+| Targeted scenarios | None | `THERMAL_SHIFT`, `POWER_SHIFT`, `DEGRADATION_PROXY` on two representative workloads | Same three targeted scenarios as PRISM Apple |
 | Repetition | No independent replication within each case | Three independent runs per required/targeted cell | Three independent runs per required/targeted cell |
 | Benign monitoring | Limited | 12 planned hours | 12 planned hours |
 | Telemetry | Apple-specific mixed/full tiers | Portable and Apple-native host channels | Portable and Linux-native host channels; unavailable sensors stay missing |
