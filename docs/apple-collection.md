@@ -44,11 +44,12 @@ The probe is local and Git-ignored under `data/collection-probes/`.
 
 ## 3. Required smoke pair
 
-Notebook section 8 collects a 30-second nominal run followed by a matched
-30-second atomic-pressure run with a 10-second pre-onset window. Change and run:
+Notebook section 8 automatically detects macOS and collects a 30-second nominal
+run followed by a matched 30-second atomic-pressure run with a 10-second
+pre-onset window. Change and run the single notebook cell:
 
 ```python
-RUN_APPLE_SMOKE_PAIR = True
+RUN_SMOKE_PAIR = True
 ```
 
 The pressure harness is bounded and terminates with the collector. Monitor the

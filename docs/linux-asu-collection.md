@@ -113,16 +113,16 @@ node.
 
 ## 7. Required EPYC smoke pair
 
-Notebook section 9 runs both the nominal and matched atomic-pressure smoke
-executions:
+Notebook section 8 automatically detects Linux and runs both the nominal and
+matched atomic-pressure smoke executions, followed by the readiness gate:
 
 ```python
-RUN_LINUX_SMOKE_PAIR = True
+RUN_SMOKE_PAIR = True
 ```
 
-Use notebook section 10 to validate both outputs. A Linux run may be valid with
-no enriched channels, but that absence must remain explicit and becomes part
-of the telemetry-availability analysis.
+Use notebook section 9 to inspect or compare both outputs. A Linux run may be
+valid with no enriched channels, but that absence must remain explicit and
+becomes part of the telemetry-availability analysis.
 
 Require both smoke runs to come from the exact clean server revision:
 
