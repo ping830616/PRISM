@@ -98,6 +98,20 @@ The DICE import keeps the 124 MB raw Apple M2 baseline in an ignored local
 payload directory. It tracks the source revision, SHA-256 inventory, and compact
 result summaries without duplicating gigabytes of tuning artifacts in Git.
 
+## Data Collection in Brief
+
+PRISM records the same planned workloads on an Apple M2 Pro and an authorized
+AMD EPYC Linux server. First, run the notebook's smoke and readiness checks on
+each physical machine. During an official run, keep that machine plugged in,
+awake, and otherwise unused so unrelated activity does not contaminate its
+telemetry. Preview each predeclared run before execution, then validate and
+record progress after every run or bounded batch. Collect calibration and
+development data first; keep final test runs locked until the monitoring method
+is frozen. Preserve failures, transfer Linux data with checksum verification,
+and keep raw telemetry out of Git. See the
+[end-to-end collection roadmap](docs/data-collection-roadmap.md) for the full
+phase-by-phase procedure.
+
 ## Reproducibility Rules
 
 - Split by independent run, never by windows from the same run.
