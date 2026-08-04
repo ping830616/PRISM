@@ -23,6 +23,24 @@ PRISM maps platform-specific host telemetry into a common functional representat
 
 The proposed primary venue is **IEEE Transactions on Reliability**. The paper should be written as a reliability-monitoring contribution, not as a new conformal-inference theory paper.
 
+## PRISM Research Flow
+
+```mermaid
+flowchart TD
+    A["Legacy DICE Apple baseline<br/>24 historical cases"] --> D["Platform-semantic telemetry<br/>compute · memory · I/O · thermal/power · availability"]
+    B["New PRISM Apple M2 Pro<br/>126 planned runs"] --> D
+    C["New PRISM AMD EPYC<br/>126 planned runs"] --> D
+    D --> E["Benign-only behavioral micro-twins<br/>Ridge and VAR"]
+    E --> F["Sequential monitoring<br/>conformal evidence · EWMA · CUSUM"]
+    D --> G["Cross-platform study<br/>transfer · calibration · missing sensors"]
+    F --> H["Reliability evaluation<br/>detection · diagnosis · false alerts/hour · delay"]
+    G --> I["Method freeze and locked-test evaluation"]
+    H --> I
+    F -.-> J["Optional extensions<br/>guarded updates · adaptive telemetry"]
+```
+
+The historical DICE data provides a baseline; the new Apple and AMD runs test whether the same monitoring method remains reliable across different platforms and sensor capabilities.
+
 ## Relationship to Existing Projects
 
 - **DICE (ITC):** conference baseline—host-side behavioral micro-twin, residual block scoring, split-conformal thresholds, and fixed persistence on Apple M2 Pro.
