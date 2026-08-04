@@ -50,6 +50,8 @@ Safe online micro-twin updates and adaptive telemetry escalation are secondary c
 
 - `docs/research-plan.md`: schedule, owners, gates, and fallback rules.
 - `docs/data-collection.md`: DICE reuse policy and the new PRISM collection protocol.
+- `docs/data-collection-roadmap.md`: ordered Apple/Linux operator handbook from
+  environment freeze through locked-test completion.
 - `docs/extension-collection-contract.md`: executable acceptance mapping from the extension memo to required evidence.
 - `docs/apple-collection.md`: notebook-only Apple M2 setup, smoke test, and production workflow.
 - `docs/linux-asu-collection.md`: detailed ASU EPYC preparation, collection, validation, and transfer.
