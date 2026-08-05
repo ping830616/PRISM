@@ -92,5 +92,14 @@ A valid run must have:
    Apple temperature channel);
 8. an explicit valid, replacement-required, or excluded tracker state.
 
+For `CONTROLLED_CRASH`, Apple CPU-temperature completeness is evaluated over
+the pre-injection window. `macmon` can emit physically impossible CPU
+temperatures after the workload child is intentionally killed and the CPU
+enters a low-power state. Those raw values remain in `macmon-raw.jsonl`; the
+sanitized channel remains null and its post-crash flags remain explicit
+control-effect evidence. They do not invalidate an otherwise complete run.
+Portable host channels and the other primary enriched channels must still meet
+their full-run thresholds.
+
 Passing this contract makes the repository ready to collect extension evidence.
 It does not by itself mean that the journal extension has been completed.
