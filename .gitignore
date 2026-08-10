@@ -19,6 +19,11 @@ data/external/**/payload/
 data/collection-probes/
 data/collection-progress.csv
 results/
+# Small, fingerprinted development summaries are bundled for portable notebook
+# reporting. Raw telemetry and data/processed artifacts remain ignored.
+!paper/results/
+!paper/results/development/
+!paper/results/development/*
 artifacts/
 paper/build/
 *.pdf

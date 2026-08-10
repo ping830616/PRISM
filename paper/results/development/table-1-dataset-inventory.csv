@@ -1,0 +1,3 @@
+Platform,Calibration runs,Development runs,Admitted runs,Workloads,Scenarios,Valid benign hours,Locked rows still planned
+M2_MACOS,4,76,80,4,11,4.799325,46
+EPYC_LINUX,4,76,80,4,11,4.799226000000001,46

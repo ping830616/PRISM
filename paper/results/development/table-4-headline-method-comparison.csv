@@ -1,0 +1,3 @@
+Method,Candidates evaluated,False alerts,Benign hours,False alerts/hour,Detected anomaly runs,Detection (%),Median TTD (s),Telemetry-fault ID (%),G3
+Static VAR,57,311,12.533333333333333,24.81382978723404,117/120,97.5,92.49687841394916,100.0,FAIL
+Guarded adaptive VAR,88,9,10.0,0.9,53/120,44.166666666666664,172.48673183401115,100.0,FAIL

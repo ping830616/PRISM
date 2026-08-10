@@ -1,0 +1,29 @@
+{
+  "analysis_revision": "prism-analysis-v1",
+  "candidate_count": 57,
+  "dataset_fingerprint": "2d83c66675a3c4e31c7b85b67b39db5a44ad7862af9f56bc4a4c80c74e0eaf2f",
+  "false_alert_budget_per_hour": 0.25,
+  "gate_passed": false,
+  "lowest_false_alert_detecting_candidate": {
+    "anomaly_run_detection_rate": 0.975,
+    "anomaly_runs": 120,
+    "benign_hours": 12.533333333333333,
+    "detected_runs": 117,
+    "detector": "eprocess",
+    "false_alerts": 311,
+    "false_alerts_per_hour": 24.81382978723404,
+    "family": "var",
+    "interruption_runs": 16,
+    "median_time_to_detect_seconds": 92.49687841394916,
+    "method": "STATIC_VAR_SEQUENTIAL_CONFORMAL",
+    "parameters": {
+      "cooldown_blocks": 6,
+      "eta": 0.9,
+      "log_threshold": 6.214608098422191
+    },
+    "telemetry_fault_identification_rate": 1.0
+  },
+  "minimum_development_detection_rate": 0.5,
+  "selected": null,
+  "selection_partition": "development"
+}
