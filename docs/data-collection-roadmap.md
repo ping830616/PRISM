@@ -274,7 +274,10 @@ remain zero). Preserve the platform snapshot in the run metadata.
 ### 8.2 Open the notebook on the Linux host
 
 Use an SSH tunnel only to display the remote Jupyter interface. The kernel and
-collection code must run under `/home/<user>/PRISM` on the EPYC host.
+collection code must run from the same PRISM checkout on the EPYC host; the
+checkout may live anywhere writable (for example, `/home/<user>/PRISM`). Set
+`PRISM_REPO_ROOT` only if Jupyter is launched outside that checkout, and set
+`PRISM_DATA_ROOT` when telemetry must reside on a separate approved volume.
 
 Confirm:
 
