@@ -3,6 +3,7 @@ __pycache__/
 .pytest_cache/
 .ipynb_checkpoints/
 notebooks/.virtual_documents/
+.mplconfig/
 .prism_runtime/
 .venv/
 .env

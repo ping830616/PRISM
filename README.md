@@ -83,8 +83,25 @@ cd PRISM
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install -e ".[notebook]"
+
+# Portable paths
 export PRISM_REPO_ROOT="$PWD"
-export PRISM_DATA_ROOT="$PWD/data"
+export PRISM_DATA_ROOT="${PRISM_DATA_ROOT:-$PWD/data}"
+
+# Reproducible PRISM protocol
+export PYTHONHASHSEED=0
+export PRISM_NUM_THREADS=1
+export PRISM_STRESS_MB=128
+export MPLCONFIGDIR="$PWD/.mplconfig"
+export OMP_NUM_THREADS="$PRISM_NUM_THREADS"
+export OPENBLAS_NUM_THREADS="$PRISM_NUM_THREADS"
+export MKL_NUM_THREADS="$PRISM_NUM_THREADS"
+export VECLIB_MAXIMUM_THREADS="$PRISM_NUM_THREADS"
+export NUMEXPR_NUM_THREADS="$PRISM_NUM_THREADS"
+export BLIS_NUM_THREADS="$PRISM_NUM_THREADS"
+mkdir -p "$MPLCONFIGDIR" "$PRISM_DATA_ROOT"
+
+# Open the one canonical experiment notebook
 python -m jupyter lab notebooks/PRISM_Complete_Experiment.ipynb
 ```
 
@@ -96,6 +113,7 @@ To keep large telemetry on a separate local or server volume, add
 
 ```bash
 export PRISM_DATA_ROOT="/absolute/path/to/prism-data"  # optional
+mkdir -p "$PRISM_DATA_ROOT"
 python -m jupyter lab \
   "$PRISM_REPO_ROOT/notebooks/PRISM_Complete_Experiment.ipynb"
 ```
@@ -103,9 +121,12 @@ python -m jupyter lab \
 `PRISM_DATA_ROOT` defaults to `<repository>/data`. The setup cells link the
 disposable runtime to that selected data location, while collection and
 analysis continue to use the same notebook controls. Python 3.10 or newer is
-required. The automatic integrity section rejects embedded Mac/ASU paths and
-checks that the runtime, repository, and selected data root are writable and
-connected correctly.
+required. `PRISM_NUM_THREADS=1` and `PRISM_STRESS_MB=128` are recorded workload
+settings and must stay fixed across Apple and Linux collection. The remaining
+exports make hashing, numerical-library threading, and figure configuration
+reproducible. The automatic integrity section rejects embedded Mac/ASU paths
+and checks that the runtime, repository, and selected data root are writable
+and connected correctly.
 
 ## Run PRISM: seven simple steps
 
