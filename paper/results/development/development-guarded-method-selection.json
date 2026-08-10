@@ -1,0 +1,54 @@
+{
+  "analysis_revision": "prism-analysis-v1",
+  "candidate_count": 88,
+  "dataset_fingerprint": "2d83c66675a3c4e31c7b85b67b39db5a44ad7862af9f56bc4a4c80c74e0eaf2f",
+  "false_alert_budget_per_hour": 0.25,
+  "freeze_blocker": "Gate G3 has no feasible guarded candidate.",
+  "gate_passed": false,
+  "guarded_update_audit_totals": {
+    "accepted_updates": 17767,
+    "fault_freezes": 192,
+    "promotions": 1402,
+    "rejected_updates": 6929,
+    "rollbacks": 9
+  },
+  "guarded_update_policy": {
+    "learning_rate": 0.05,
+    "max_relative_coefficient_drift": 0.15,
+    "promotion_interval_updates": 12,
+    "promotion_loss_tolerance": 0.02,
+    "reference_window_blocks": 144,
+    "reference_winsor_z": 3.0,
+    "rollback_consecutive": 3,
+    "rollback_watch_blocks": 12,
+    "rollback_z": 8.0,
+    "startup_calibration_seconds": 60.0,
+    "update_p_min": 0.05,
+    "update_z_max": 2.5,
+    "validation_window_blocks": 24
+  },
+  "lowest_false_alert_detecting_candidate": {
+    "anomaly_run_detection_rate": 0.44166666666666665,
+    "anomaly_runs": 120,
+    "benign_hours": 10.0,
+    "detected_runs": 53,
+    "detector": "eprocess",
+    "false_alerts": 9,
+    "false_alerts_per_hour": 0.9,
+    "family": "guarded_var",
+    "interruption_runs": 16,
+    "median_time_to_detect_seconds": 172.48673183401115,
+    "method": "GUARDED_VAR_SEQUENTIAL_CONFORMAL",
+    "parameters": {
+      "cooldown_blocks": 12,
+      "eta": 0.9,
+      "log_threshold": 13.815510557964274
+    },
+    "telemetry_fault_identification_rate": 1.0
+  },
+  "method_scope": "guarded_drift_aware_var",
+  "minimum_development_detection_rate": 0.5,
+  "ready_for_method_freeze": false,
+  "selected": null,
+  "selection_partition": "development"
+}
