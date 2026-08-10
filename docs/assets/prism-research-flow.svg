@@ -1,231 +1,110 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1470" role="img" aria-labelledby="title desc">
-  <title id="title">PRISM cross-platform reliability-monitoring research flow</title>
-  <desc id="desc">Historical DICE Apple data and new PRISM Apple and AMD data are translated into common telemetry semantics. Benign behavioral micro-twins feed sequential monitoring, cross-platform testing, reliability evaluation, and a frozen locked-test decision. Guarded updates and adaptive telemetry are optional extensions.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1160" role="img" aria-labelledby="title desc">
+  <title id="title">Simplified PRISM research pipeline</title>
+  <desc id="desc">Historical DICE data and new Apple and AMD evidence are standardized, modeled with static and guarded adaptive micro-twins, checked against a development reliability gate, and only then admitted to a one-time locked test.</desc>
 
   <style>
     .canvas { fill: #f8fafc; }
-    .title { fill: #0f172a; font: 700 44px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    .section { fill: #64748b; font: 700 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 2.4px; }
-    .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2.5; }
-    .source-title { fill: #0f172a; font: 700 25px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    .stage-title { fill: #0f172a; font: 700 26px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    .central-title { fill: #0f172a; font: 700 30px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    .card-copy { fill: #475569; font: 400 22px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    .card-note { fill: #64748b; font: 600 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    .central-note { fill: #64748b; font: 600 19px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    .source-dice { fill: #f5f3ff; stroke: #8b5cf6; }
-    .source-apple { fill: #eff6ff; stroke: #3b82f6; }
-    .source-amd { fill: #fff7ed; stroke: #f97316; }
-    .semantic { fill: #ecfeff; stroke: #0891b2; stroke-width: 3; }
-    .optional { fill: #f8fafc; stroke: #94a3b8; stroke-dasharray: 9 8; }
-    .gate { fill: #ecfdf5; stroke: #059669; stroke-width: 3; }
-    .icon-purple { color: #7c3aed; }
-    .icon-blue { color: #2563eb; }
-    .icon-orange { color: #ea580c; }
-    .icon-cyan { color: #0891b2; }
-    .icon-indigo { color: #4f46e5; }
-    .icon-rose { color: #e11d48; }
-    .icon-amber { color: #d97706; }
-    .icon-green { color: #059669; }
-    .icon-muted { color: #64748b; }
-    .icon-bg-purple { fill: #ede9fe; }
-    .icon-bg-blue { fill: #dbeafe; }
-    .icon-bg-orange { fill: #ffedd5; }
-    .icon-bg-cyan { fill: #cffafe; }
-    .icon-bg-indigo { fill: #e0e7ff; }
-    .icon-bg-rose { fill: #ffe4e6; }
-    .icon-bg-amber { fill: #fef3c7; }
-    .icon-bg-green { fill: #d1fae5; }
-    .icon-bg-muted { fill: #e2e8f0; }
-    .arrow { fill: none; stroke: #64748b; stroke-width: 3; marker-end: url(#arrow); }
-    .optional-arrow { fill: none; stroke: #94a3b8; stroke-width: 3; stroke-dasharray: 9 8; marker-end: url(#arrow-muted); }
+    .title { fill: #0f172a; font: 700 50px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .subtitle { fill: #475569; font: 400 25px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 3; }
+    .dice { fill: #f5f3ff; stroke: #8b5cf6; }
+    .apple { fill: #eff6ff; stroke: #3b82f6; }
+    .amd { fill: #fff7ed; stroke: #f97316; }
+    .semantic { fill: #ecfeff; stroke: #0891b2; stroke-width: 4; }
+    .model { fill: #eef2ff; stroke: #4f46e5; stroke-width: 4; }
+    .gate { fill: #fff7ed; stroke: #ea580c; stroke-width: 4; }
+    .locked { fill: #f1f5f9; stroke: #64748b; stroke-width: 4; stroke-dasharray: 12 8; }
+    .source-title { fill: #0f172a; font: 700 30px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .source-copy { fill: #475569; font: 500 23px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .stage-title { fill: #0f172a; font: 700 36px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .stage-copy { fill: #334155; font: 500 25px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .note { fill: #64748b; font: 600 21px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .status { fill: #c2410c; font: 700 23px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .arrow { fill: none; stroke: #64748b; stroke-width: 5; marker-end: url(#arrow); }
 
     @media (prefers-color-scheme: dark) {
       .canvas { fill: #0d1117; }
-      .title, .source-title, .stage-title, .central-title { fill: #f0f6fc; }
-      .card-copy { fill: #b1bac4; }
-      .section, .card-note, .central-note { fill: #8c959f; }
+      .title, .source-title, .stage-title { fill: #f0f6fc; }
+      .subtitle, .source-copy, .stage-copy { fill: #b1bac4; }
+      .note { fill: #8c959f; }
       .card { fill: #161b22; stroke: #30363d; }
-      .source-dice { fill: #211a36; stroke: #a78bfa; }
-      .source-apple { fill: #10243e; stroke: #60a5fa; }
-      .source-amd { fill: #352012; stroke: #fb923c; }
+      .dice { fill: #211a36; stroke: #a78bfa; }
+      .apple { fill: #10243e; stroke: #60a5fa; }
+      .amd { fill: #352012; stroke: #fb923c; }
       .semantic { fill: #0e2f36; stroke: #22d3ee; }
-      .optional { fill: #161b22; stroke: #6e7681; }
-      .gate { fill: #0d2d22; stroke: #34d399; }
-      .icon-bg-purple { fill: #33255b; }
-      .icon-bg-blue { fill: #18355d; }
-      .icon-bg-orange { fill: #4a2a16; }
-      .icon-bg-cyan { fill: #164e63; }
-      .icon-bg-indigo { fill: #27265e; }
-      .icon-bg-rose { fill: #4c1d2d; }
-      .icon-bg-amber { fill: #493314; }
-      .icon-bg-green { fill: #124231; }
-      .icon-bg-muted { fill: #30363d; }
+      .model { fill: #1e1b4b; stroke: #818cf8; }
+      .gate { fill: #431f0c; stroke: #fb923c; }
+      .locked { fill: #161b22; stroke: #8c959f; }
+      .status { fill: #fdba74; }
       .arrow { stroke: #8c959f; }
-      .optional-arrow { stroke: #6e7681; }
     }
   </style>
 
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
       <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
-    </marker>
-    <marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
     </marker>
   </defs>
 
-  <rect class="canvas" width="1200" height="1470" rx="30"/>
-  <text class="title" x="40" y="70">PRISM research pipeline</text>
-  <text class="section" x="40" y="120">DATA EVIDENCE</text>
+  <rect class="canvas" width="1200" height="1160" rx="28"/>
+  <text class="title" x="60" y="72">PRISM research pipeline</text>
+  <text class="subtitle" x="60" y="112">Three evidence sources → one portable method → one honest final test</text>
 
-  <g aria-label="Legacy DICE Apple baseline, 24 historical cases">
-    <rect class="card source-dice" x="40" y="145" width="350" height="170" rx="20"/>
-    <circle class="icon-bg-purple" cx="100" cy="230" r="39"/>
-    <g class="icon-purple" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <ellipse cx="100" cy="211" rx="21" ry="8"/>
-      <path d="M79 211v17c0 5 9 8 21 8s21-3 21-8v-17"/>
-      <path d="M79 228v17c0 5 9 8 21 8s21-3 21-8v-17"/>
-    </g>
-    <text class="source-title" x="155" y="183">
-      <tspan x="155" dy="0">Legacy DICE</tspan>
-      <tspan x="155" dy="29">baseline</tspan>
-    </text>
-    <text class="card-copy" x="155" y="250">Apple M2 Pro</text>
-    <text class="card-note" x="155" y="283">Historical · 24 cases</text>
+  <g aria-label="Historical DICE baseline">
+    <rect class="card dice" x="60" y="155" width="330" height="135" rx="18"/>
+    <text class="source-title" x="225" y="205" text-anchor="middle">DICE baseline</text>
+    <text class="source-copy" x="225" y="248" text-anchor="middle">Historical Apple data</text>
+    <text class="note" x="225" y="276" text-anchor="middle">comparison only</text>
   </g>
 
-  <g aria-label="New PRISM Apple M2 Pro data, 126 planned runs">
-    <rect class="card source-apple" x="425" y="145" width="350" height="170" rx="20"/>
-    <circle class="icon-bg-blue" cx="485" cy="230" r="39"/>
-    <g class="icon-blue" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="464" y="207" width="42" height="30" rx="4"/>
-      <path d="M458 246h54l-5 8h-44z"/>
-    </g>
-    <text class="source-title" x="540" y="183">
-      <tspan x="540" dy="0">New PRISM</tspan>
-      <tspan x="540" dy="29">Apple</tspan>
-    </text>
-    <text class="card-copy" x="540" y="250">M2 Pro · macOS</text>
-    <text class="card-note" x="540" y="283">126 runs · 32.4 hours</text>
+  <g aria-label="New Apple evidence">
+    <rect class="card apple" x="435" y="155" width="330" height="135" rx="18"/>
+    <text class="source-title" x="600" y="205" text-anchor="middle">Apple M2 Pro</text>
+    <text class="source-copy" x="600" y="248" text-anchor="middle">New PRISM evidence</text>
+    <text class="note" x="600" y="276" text-anchor="middle">macOS</text>
   </g>
 
-  <g aria-label="New PRISM AMD EPYC data, 126 planned runs">
-    <rect class="card source-amd" x="810" y="145" width="350" height="170" rx="20"/>
-    <circle class="icon-bg-orange" cx="870" cy="230" r="39"/>
-    <g class="icon-orange" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="849" y="204" width="42" height="20" rx="4"/>
-      <rect x="849" y="236" width="42" height="20" rx="4"/>
-      <path d="M857 214h2m0 32h2m10-32h13m-13 32h13"/>
-    </g>
-    <text class="source-title" x="925" y="183">
-      <tspan x="925" dy="0">New PRISM</tspan>
-      <tspan x="925" dy="29">AMD</tspan>
-    </text>
-    <text class="card-copy" x="925" y="250">EPYC · Linux</text>
-    <text class="card-note" x="925" y="283">126 runs · 32.4 hours</text>
+  <g aria-label="New AMD evidence">
+    <rect class="card amd" x="810" y="155" width="330" height="135" rx="18"/>
+    <text class="source-title" x="975" y="205" text-anchor="middle">AMD EPYC</text>
+    <text class="source-copy" x="975" y="248" text-anchor="middle">New PRISM evidence</text>
+    <text class="note" x="975" y="276" text-anchor="middle">Linux</text>
   </g>
 
-  <path class="arrow" d="M215 315 C215 355 405 340 490 375"/>
-  <path class="arrow" d="M600 315 V370"/>
-  <path class="arrow" d="M985 315 C985 355 795 340 710 375"/>
+  <path class="arrow" d="M225 290 C225 325 420 315 520 345"/>
+  <path class="arrow" d="M600 290 V340"/>
+  <path class="arrow" d="M975 290 C975 325 780 315 680 345"/>
 
-  <g aria-label="Translate telemetry into a common functional language">
-    <rect class="semantic" x="110" y="370" width="980" height="175" rx="22"/>
-    <circle class="icon-bg-cyan" cx="185" cy="457" r="47"/>
-    <g class="icon-cyan" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M159 457h10l7-20 12 40 9-27 7 7h8"/>
-      <circle cx="185" cy="457" r="31"/>
-    </g>
-    <text class="central-title" x="260" y="420">1 · Translate telemetry into a common language</text>
-    <text class="card-copy" x="260" y="466">Compute · memory · I/O · thermal/power · availability</text>
-    <text class="central-note" x="260" y="507">Missing sensors remain explicit—never replaced with invented zeros.</text>
+  <g aria-label="Stage 1 standardize telemetry">
+    <rect class="semantic" x="120" y="345" width="960" height="145" rx="20"/>
+    <text class="stage-title" x="600" y="397" text-anchor="middle">1 · Standardize telemetry</text>
+    <text class="stage-copy" x="600" y="442" text-anchor="middle">Compute · memory · I/O · thermal/power · availability</text>
+    <text class="note" x="600" y="475" text-anchor="middle">Unavailable sensors stay missing; values are never invented.</text>
   </g>
 
-  <text class="section" x="40" y="625">ANALYSIS AND EVALUATION</text>
+  <path class="arrow" d="M600 490 V540"/>
 
-  <path class="arrow" d="M390 545 C370 590 335 610 310 650"/>
-  <path class="arrow" d="M110 455 H26 V955 H50"/>
-  <path class="arrow" d="M570 735 H630"/>
-  <path class="optional-arrow" d="M890 820 V870"/>
-  <path class="arrow" d="M890 820 V845 H600 V1090"/>
-  <path class="arrow" d="M310 1040 C310 1075 430 1060 500 1090"/>
-  <path class="arrow" d="M600 1260 V1290"/>
-
-  <g aria-label="Learn normal behavior with benign-only micro-twins">
-    <rect class="card" x="50" y="650" width="520" height="170" rx="20"/>
-    <circle class="icon-bg-indigo" cx="120" cy="735" r="39"/>
-    <g class="icon-indigo" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="98" y="713" width="28" height="28" rx="5"/>
-      <rect x="114" y="729" width="28" height="28" rx="5"/>
-      <path d="M96 765c10-10 18 10 30 0s17-2 22-10"/>
-    </g>
-    <text class="stage-title" x="185" y="695">2 · Learn normal behavior</text>
-    <text class="card-copy" x="185" y="744">Benign-only behavioral micro-twins</text>
-    <text class="card-note" x="185" y="785">Ridge and VAR models</text>
+  <g aria-label="Stage 2 learn and monitor">
+    <rect class="model" x="120" y="545" width="960" height="165" rx="20"/>
+    <text class="stage-title" x="600" y="600" text-anchor="middle">2 · Learn normal behavior and monitor change</text>
+    <text class="stage-copy" x="600" y="648" text-anchor="middle">Static control + robust guarded adaptive VAR</text>
+    <text class="note" x="600" y="686" text-anchor="middle">Sequential evidence reports false alerts, detection, and delay.</text>
   </g>
 
-  <g aria-label="Watch behavior over time with sequential monitoring">
-    <rect class="card" x="630" y="650" width="520" height="170" rx="20"/>
-    <circle class="icon-bg-rose" cx="700" cy="735" r="39"/>
-    <g class="icon-rose" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="700" cy="735" r="27"/>
-      <circle cx="700" cy="735" r="13"/>
-      <path d="M700 735l20-15M700 704v6M669 735h6"/>
-      <circle cx="720" cy="720" r="4" fill="currentColor" stroke="none"/>
-    </g>
-    <text class="stage-title" x="765" y="686">
-      <tspan x="765" dy="0">3 · Watch behavior</tspan>
-      <tspan x="765" dy="32">over time</tspan>
-    </text>
-    <text class="card-copy" x="765" y="757">Sequential monitoring</text>
-    <text class="card-note" x="765" y="792">Conformal · EWMA · CUSUM</text>
+  <path class="arrow" d="M600 710 V760"/>
+
+  <g aria-label="Stage 3 development reliability gate">
+    <rect class="gate" x="120" y="765" width="960" height="165" rx="20"/>
+    <text class="stage-title" x="600" y="820" text-anchor="middle">3 · Pass the development reliability gate</text>
+    <text class="stage-copy" x="600" y="868" text-anchor="middle">≤ 0.25 false alerts/hour AND ≥ 50% detection</text>
+    <text class="status" x="600" y="906" text-anchor="middle">Current status: CLOSED — continue development only</text>
   </g>
 
-  <g aria-label="Test portability across Apple and AMD platforms">
-    <rect class="card" x="50" y="870" width="520" height="170" rx="20"/>
-    <circle class="icon-bg-amber" cx="120" cy="955" r="39"/>
-    <g class="icon-amber" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M92 945h56l-11-11M148 965H92l11 11"/>
-    </g>
-    <text class="stage-title" x="185" y="915">4 · Test portability</text>
-    <text class="card-copy" x="185" y="964">Apple ↔ AMD transfer</text>
-    <text class="card-note" x="185" y="1005">Calibration effort · missing sensors</text>
-  </g>
+  <path class="arrow" d="M600 930 V980"/>
 
-  <g aria-label="Optional guarded updates and adaptive telemetry">
-    <rect class="card optional" x="630" y="870" width="520" height="170" rx="20"/>
-    <circle class="icon-bg-muted" cx="700" cy="955" r="39"/>
-    <g class="icon-muted" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M682 955h36M700 937v36"/>
-      <circle cx="700" cy="955" r="27"/>
-    </g>
-    <text class="stage-title" x="765" y="915">Optional P1 extensions</text>
-    <text class="card-copy" x="765" y="964">Guarded model updates</text>
-    <text class="card-note" x="765" y="1005">Adaptive telemetry · gated</text>
-  </g>
-
-  <g aria-label="Measure detection, diagnosis, false alerts, and delay">
-    <rect class="card" x="340" y="1090" width="520" height="170" rx="20"/>
-    <circle class="icon-bg-blue" cx="410" cy="1175" r="39"/>
-    <g class="icon-blue" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M385 1194v-24M399 1194v-40M413 1194v-16M427 1194v-32"/>
-      <path d="M380 1200h58"/>
-    </g>
-    <text class="stage-title" x="475" y="1135">5 · Measure reliability</text>
-    <text class="card-copy" x="475" y="1184">Detection · diagnosis · delay</text>
-    <text class="card-note" x="475" y="1225">False alerts per monitored hour</text>
-  </g>
-
-  <g aria-label="Freeze the method, then conduct locked-test evaluation">
-    <rect class="gate" x="340" y="1290" width="520" height="140" rx="20"/>
-    <circle class="icon-bg-green" cx="410" cy="1360" r="39"/>
-    <g class="icon-green" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="391" y="1355" width="38" height="28" rx="5"/>
-      <path d="M398 1355v-9a12 12 0 0 1 24 0v9M399 1369l8 8 14-17"/>
-    </g>
-    <text class="stage-title" x="475" y="1335">6 · Freeze, then test once</text>
-    <text class="card-copy" x="475" y="1375">Locked-test evaluation</text>
-    <text class="card-note" x="475" y="1408">Locked rows open after method freeze</text>
+  <g aria-label="Stage 4 method freeze, locked test, and paper results">
+    <rect class="locked" x="120" y="985" width="960" height="130" rx="20"/>
+    <text class="stage-title" x="600" y="1038" text-anchor="middle">4 · After a pass: freeze → test once → report</text>
+    <text class="stage-copy" x="600" y="1083" text-anchor="middle">Locked Apple/EPYC evidence becomes the paper’s final result.</text>
   </g>
 </svg>
