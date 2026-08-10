@@ -23,6 +23,12 @@ PRISM maps platform-specific host telemetry into a common functional representat
 
 The proposed primary venue is **IEEE Transactions on Reliability**. The paper should be written as a reliability-monitoring contribution, not as a new conformal-inference theory paper.
 
+## PRISM Research Flow
+
+![PRISM research pipeline: historical and new cross-platform data are harmonized, modeled, monitored, and evaluated before locked testing](docs/assets/prism-research-flow.svg)
+
+The historical DICE data provides a baseline; the new Apple and AMD runs test whether the same monitoring method remains reliable across different platforms and sensor capabilities.
+
 ## Relationship to Existing Projects
 
 - **DICE (ITC):** conference baseline—host-side behavioral micro-twin, residual block scoring, split-conformal thresholds, and fixed persistence on Apple M2 Pro.
@@ -50,6 +56,8 @@ Safe online micro-twin updates and adaptive telemetry escalation are secondary c
 
 - `docs/research-plan.md`: schedule, owners, gates, and fallback rules.
 - `docs/data-collection.md`: DICE reuse policy and the new PRISM collection protocol.
+- `docs/data-collection-roadmap.md`: ordered Apple/Linux operator handbook from
+  environment freeze through locked-test completion.
 - `docs/extension-collection-contract.md`: executable acceptance mapping from the extension memo to required evidence.
 - `docs/apple-collection.md`: notebook-only Apple M2 setup, smoke test, and production workflow.
 - `docs/linux-asu-collection.md`: detailed ASU EPYC preparation, collection, validation, and transfer.
@@ -105,6 +113,40 @@ corresponding notebook cell instead.
 The DICE import keeps the 124 MB raw Apple M2 baseline in an ignored local
 payload directory. It tracks the source revision, SHA-256 inventory, and compact
 result summaries without duplicating gigabytes of tuning artifacts in Git.
+
+## Data Collection at a Glance
+
+### Dataset comparison
+
+A **case** is one workload/condition combination; a **run** is one independent
+execution of that combination.
+
+| | Legacy DICE Apple data | New PRISM Apple data | New PRISM AMD data |
+| --- | --- | --- | --- |
+| Machine | Apple M2 Pro, ARM64/macOS | Apple M2 Pro, ARM64/macOS | AMD EPYC 9354, x86-64/Ubuntu |
+| Role | Historical conference baseline | New same-protocol Apple evidence | New cross-platform Linux evidence |
+| Count | `4 workloads × 6 conditions × 1 execution = 24` | `4×8×3 = 96` required; `2×3×3 = 18` targeted; `4×3 = 12` long-benign; total 126 runs (32.4 h) | Same PRISM design: 126 runs (32.4 h) |
+| Workloads | Four original DICE workloads | `PY_STATS`, `PY_AI`, `BROWSER`, `VIDEO_SW` | Same four PRISM workload families |
+| Required scenarios | `NOMINAL`, `ATOMIC`, `BRANCH`, `CACHE`, `MEMBW`, `TLB` | DICE scenarios plus `CONTROLLED_CRASH` and `TELEMETRY_INTERRUPTION` | Same eight required scenarios as PRISM Apple |
+| Targeted scenarios | None | `THERMAL_SHIFT`, `POWER_SHIFT`, `DEGRADATION_PROXY` on two representative workloads | Same three targeted scenarios as PRISM Apple |
+| Repetition | No independent replication within each case | Three independent runs per required/targeted cell | Three independent runs per required/targeted cell |
+| Benign monitoring | Limited | 12 planned hours | 12 planned hours |
+| Telemetry | Apple-specific mixed/full tiers | Portable and Apple-native host channels | Portable and Linux-native host channels; unavailable sensors stay missing |
+
+### Procedure, method, and settings
+
+| Step | Procedure | Main method or setting |
+| ---: | --- | --- |
+| 1 | Prepare each physical machine and run notebook preflight | Use one approved, clean Git revision |
+| 2 | Run nominal and anomalous smoke traces, then compare platforms | 30 seconds at 5 Hz; readiness must pass |
+| 3 | Collect calibration and development runs while the host is idle | 12-minute runs at 5 Hz; 120-second anomaly warm-up; locked tests remain closed |
+| 4 | Collect benign monitoring across different times/restarts | Three 48-minute sessions per workload; 12 benign hours per platform overall |
+| 5 | Validate every run and back up raw evidence | Check cadence, coverage, events, manifests, and SHA-256 checksums |
+| 6 | Freeze models, features, thresholds, and analysis choices | Never tune with locked-test runs |
+| 7 | Collect and evaluate the locked test once | Unlock only after method freeze; report all outcomes |
+
+See the [end-to-end collection roadmap](docs/data-collection-roadmap.md) for
+the complete operator procedure.
 
 ## Reproducibility Rules
 
