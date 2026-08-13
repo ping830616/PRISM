@@ -198,6 +198,9 @@ Strict-G3 remediation order:
    `$PRISM_DATA_ROOT/processed/epyc-linux-audit/development-benign-supplement-progress-EPYC_LINUX.csv`.
 4. Rerun Sections 14, 15, 17B.3, 18, and 17B.4 in that order. The audit admits
    either zero supplement rows or all 16; it never selects a favorable subset.
+   When supplement rows are present, Section 17B.3 evaluates only the
+   pre-supplement `C=0.003`, probability threshold `0.45`, and 36-block
+   persistence setting. The new rows are not used to refit or retune it.
 5. Freeze in Section 19 only if strict platform/fold G3, fault-state reporting,
    and both calibrated-transfer directions all pass. Otherwise report the
    negative development result and keep the locked test closed.

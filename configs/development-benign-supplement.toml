@@ -28,4 +28,4 @@ forbid_window_level_split = true
 [decision]
 false_alert_budget_per_hour = 0.25
 minimum_detection_rate = 0.50
-notes = "Use unique supplement run IDs and keep an independent supplement tracker. Do not reinterpret or discard the existing EPYC/fold-1 false alert. Append all 16 valid sessions and rerun the already selected shared-quantile candidate without retuning. Invalid acquisitions retain their exclusion reason and are replaced in the same assigned fold. The supplement can confirm or reject strict G3; it does not guarantee a pass."
+notes = "Use unique supplement run IDs and keep an independent supplement tracker. Do not reinterpret or discard the existing EPYC/fold-1 false alert. Append all 16 valid sessions and rerun the frozen shared-quantile candidate (C=0.003, probability threshold=0.45, persistence=36 blocks) without refitting or retuning. Invalid acquisitions retain their exclusion reason and are replaced in the same assigned fold. The supplement can confirm or reject strict G3; it does not guarantee a pass."
