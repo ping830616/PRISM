@@ -141,7 +141,7 @@ Use the switches in the named notebook sections; do not run files from
 | 4 | Put both platforms under one `PRISM_DATA_ROOT`; set `RUN_PREFREEZE_AUDIT=True` in Section 14 and `RUN_PREPARE_ANALYSIS=True` once in Section 15 | A 160-run pre-freeze inventory, immutable dataset fingerprint, and five-second semantic-block cache |
 | 5 | Run Section 17 and Section 17A for the static and guarded baselines; then set `RUN_ROBUST_NORMALIZATION_G3=True` in Section 17B.2 | Baseline ablations plus the authoritative robust residual-fusion development selection |
 | 6 | Run Section 17B.3, then Section 17B.4: check pooled G3 **and** every platform/fold against ≤0.25 false alerts/hour and ≥50% detection | Shared benign-quantile alignment currently gives 62.5% pooled, 65% Apple, 60% EPYC, and 60%/65% across folds; one EPYC/fold false alert still blocks strict freeze |
-| 7 | Set `RUN_TRANSFER_ANALYSIS=True` in Section 18 and review both 0/1/2/4/8/12-minute directions | A source-qualified, destination-benign calibration curve; current development points first pass at 12 min M2→EPYC and 1 min EPYC→M2 |
+| 7 | Set `RUN_TRANSFER_ANALYSIS=True` in Section 18 and review both 0/1/2/4/8/12-minute directions | A leakage-proof zero-shot audit plus a destination-benign calibration curve; current development points first pass at 12 min M2→EPYC and 1 min EPYC→M2 |
 | 8 | Only after G3, transfer review, advisor approval, and Section 19 method freeze, collect the 46 locked rows per platform exactly once | Final held-out evidence for the journal paper; it must never be used to retune the method |
 
 ### Results supplied to the paper
@@ -165,14 +165,17 @@ platform/fold G3 is not yet met because the single EPYC/fold-1 false alert is
 0.268/hour over only 3.733 scored benign hours. Method freeze therefore remains
 blocked. Do not discard that alert, loosen G3, or inspect locked data.
 
-The revised transfer curve keeps the semantic classifier and persistence rule
-source-trained, then calibrates the same benign-score percentile separately for
-each destination workload using only a chronological nominal prefix. In the
-current development evidence, M2-to-EPYC first satisfies G3 with 12 benign
-minutes, while EPYC-to-M2 first satisfies it with 1 benign minute. This is
-bidirectional **calibrated transfer**, not evidence that zero-shot transfer
-works. Destination anomaly labels are evaluated only after the benign
-calibration rule is fixed.
+The revised transfer curve now makes the zero-shot comparison leakage-proof:
+regularization, percentile, workload thresholds, and persistence are selected
+using the source platform alone, then applied to the destination once. The
+destination result cannot influence that selection. Zero-shot still fails in
+both directions, so it must be reported as a measured limitation rather than
+retuned into a pass. The operational path keeps the semantic classifier and
+persistence rule source-trained, then calibrates the same benign-score
+percentile separately for each destination workload using only a chronological
+nominal prefix. M2-to-EPYC first satisfies G3 with 12 benign minutes, while
+EPYC-to-M2 first satisfies it with 1 benign minute. Destination anomaly labels
+are evaluated only after the benign calibration rule is fixed.
 
 If the advisor approves more evidence, use the prospective, balanced plan in
 `configs/development-benign-supplement.toml`: two new 48-minute nominal sessions
@@ -202,8 +205,19 @@ Strict-G3 remediation order:
    pre-supplement `C=0.003`, probability threshold `0.45`, and 36-block
    persistence setting. The new rows are not used to refit or retune it.
 5. Freeze in Section 19 only if strict platform/fold G3, fault-state reporting,
-   and both calibrated-transfer directions all pass. Otherwise report the
-   negative development result and keep the locked test closed.
+   and both calibrated-transfer directions all pass. Zero-shot is reported
+   independently and is not silently substituted for calibrated transfer.
+   Otherwise report the negative development result and keep the locked test
+   closed.
+
+Why more method tuning is not the current remedy: bounded development-only
+checks of denser threshold/persistence values, multi-group corroboration,
+unstable-channel removal, workload-conditioned tail calibration, and a
+classifier-free universal score produced no strict-G3 candidate. These negative
+ablations support the prospective supplement: strict EPYC/fold FAH is currently
+one event divided by only 3.733 scored hours, so additional predeclared benign
+exposure is the statistically honest confirmation step. None of these checks
+read locked-test rows.
 
 ### Main files to expect
 

@@ -115,8 +115,12 @@ and development evidence only, then rerun the affected development sections.
 
 If it passes, run Section 18 with `RUN_TRANSFER_ANALYSIS = True`. Review both
 transfer directions and all destination-calibration points before advisor
-review. A pooled G3 pass does not erase platform-specific or transfer
-limitations and does not by itself authorize locked-test collection.
+review. The zero-shot row is leakage-proof: its regularization, percentile,
+workload thresholds, and persistence are selected on the source platform only,
+then evaluated on the destination once. Positive-minute rows may use only a
+chronological benign destination prefix; destination event labels never select
+or calibrate a policy. A pooled G3 pass does not erase platform-specific or
+transfer limitations and does not by itself authorize locked-test collection.
 
 ## Current development checkpoint (August 13, 2026)
 
@@ -129,7 +133,14 @@ Dataset fingerprint:
 | Guarded adaptive VAR, lowest-alert detecting candidate | 10.00 | 0.90 | 44.2% (53/120) | Fail |
 | Robust residual fusion, pooled development selection | 7.47 | 0.134 | 51.7% (62/120) | **Pass** |
 
-The robust residual-fusion candidate passes the declared pooled development
-gate, but Apple detection and EPYC-to-Apple transfer remain weak. The correct
-status is therefore: **pooled development G3 passed; transfer/advisor review
-pending; method not frozen; locked test untouched**.
+The shared benign-quantile candidate passes pooled G3 and every platform/fold
+detection requirement, but one EPYC/fold-1 benign alert gives 0.268 FAH over
+3.733 scored hours. The correct status is therefore: **pooled development G3
+passed; strict subgroup G3 awaits prospective confirmation; calibrated transfer
+passes in both directions; method not frozen; locked test untouched**.
+
+Do not lower the 0.25-FAH limit, remove the observed alert, or tune on locked
+data. The declared 16-session benign supplement is confirmation-only: append
+all assigned rows, retain the existing alert, and rerun the frozen shared
+quantile configuration without fitting or tuning on the supplement. If strict
+G3 still fails, report that result and keep the locked test closed.
