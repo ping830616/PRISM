@@ -6,8 +6,11 @@ partitions associated with dataset fingerprint
 They are bundled so the paper-result cells in the canonical notebook remain
 portable when private raw telemetry is unavailable.
 
-They are not locked-test claims. Gate G3 remains closed, method freeze has not
-occurred, and the 46 locked rows per platform must remain unopened.
+They are not locked-test claims. The pooled development-only robust residual
+fusion passes Gate G3 at 0.134 false-alert episodes/hour and 51.7% controlled-
+event detection. Development-only transfer analysis reveals strong directional
+asymmetry; advisor review and method freeze have not occurred, so the 46
+locked rows per platform remain unopened.
 
 ## Five primary tables
 
@@ -17,8 +20,10 @@ occurred, and the 46 locked rows per platform must remain unopened.
 4. `table-4-headline-method-comparison.csv`
 5. `table-5-guarded-update-audit.csv`
 
-The two method-selection CSV/JSON pairs retain the complete candidate evidence
-used by the operating-point figure and supplementary notebook tables.
+The static and guarded selection pairs retain their complete candidate
+evidence. The canonical notebook writes the larger robust-normalization
+candidate and selection artifacts under the Git-ignored processed-data root
+when Section 17B.2 is explicitly enabled.
 
 ## Five primary figures
 
