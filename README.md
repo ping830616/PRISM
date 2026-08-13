@@ -128,20 +128,21 @@ reproducible. The automatic integrity section rejects embedded Mac/ASU paths
 and checks that the runtime, repository, and selected data root are writable
 and connected correctly.
 
-## Run PRISM: seven simple steps
+## Run PRISM: eight simple steps
 
 Use the switches in the named notebook sections; do not run files from
 `.prism_runtime/` directly.
 
 | Step | What the researcher does | What PRISM produces |
 | ---: | --- | --- |
-| 1 | Open the notebook and choose **Run All Cells** with every collection/analysis switch left `False` | A safe environment, portability, preflight, and 18-test check; no experiment starts |
+| 1 | Open the notebook and choose **Run All Cells** with every collection/analysis switch left `False` | A safe environment, portability, preflight, and embedded-test check; no experiment starts |
 | 2 | On each machine, run Section 7, then set `RUN_SMOKE_PAIR=True` in Section 8 | A 30-second normal/anomalous smoke pair and a readiness decision for Apple or Linux |
 | 3 | With the machine authorized and idle, use Sections 10–12 to collect all calibration/development rows | Validated raw telemetry, events, platform/channel metadata, checksums, progress, and quality reports |
 | 4 | Put both platforms under one `PRISM_DATA_ROOT`; set `RUN_PREFREEZE_AUDIT=True` in Section 14 and `RUN_PREPARE_ANALYSIS=True` once in Section 15 | A 160-run pre-freeze inventory, immutable dataset fingerprint, and five-second semantic-block cache |
-| 5 | Set `RUN_METHOD_SELECTION=True` in Section 17, `RUN_GUARDED_METHOD_SELECTION=True` in Section 17A, and `RUN_TRANSFER_ANALYSIS=True` in Section 18 | Static-versus-adaptive detection results, false-alert rates, detection delay, update audit, and cross-platform calibration results |
-| 6 | Check Gate G3: false alerts/hour must be ≤0.25 and development detection must be ≥50% | A pass permits method freeze; a failure stops the workflow and keeps all locked-test rows closed |
-| 7 | Only after G3, advisor review, and Section 19 method freeze, collect the 46 locked rows per platform exactly once | Final held-out evidence for the journal paper; it must never be used to retune the method |
+| 5 | Run Section 17 and Section 17A for the static and guarded baselines; then set `RUN_ROBUST_NORMALIZATION_G3=True` in Section 17B.2 | Baseline ablations plus the authoritative robust residual-fusion development selection |
+| 6 | Check Gate G3: pooled false alerts/hour must be ≤0.25 and pooled development detection must be ≥50% | The current development selection passes at 0.134 false alerts/hour and 51.7% detection; locked-test rows remain closed |
+| 7 | Set `RUN_TRANSFER_ANALYSIS=True` in Section 18 and review both transfer directions before advisor review | A 0/1/2/4/8/12-minute destination-calibration curve; transfer weakness must be reported and reviewed before freeze |
+| 8 | Only after G3, transfer review, advisor approval, and Section 19 method freeze, collect the 46 locked rows per platform exactly once | Final held-out evidence for the journal paper; it must never be used to retune the method |
 
 ### Results supplied to the paper
 
@@ -150,16 +151,18 @@ Use the switches in the named notebook sections; do not run files from
 | Dataset and quality table | Run counts, benign hours, cadence, channel coverage, failures, and checksum-backed provenance | Pre-freeze Apple/EPYC evidence available |
 | Cross-platform telemetry table | Shared semantic groups plus Apple- and Linux-specific sensor availability | Available from smoke and quality reports |
 | Monitoring comparison | Static VAR versus robust guarded adaptive VAR, persistence, EWMA, CUSUM, and conformal/e-process candidates | Development CSV/JSON generated |
-| Reliability results | False alerts per benign hour, anomaly-run detection, median time-to-detect, and telemetry-interruption identification | Development results generated; G3 currently fails |
+| Reliability results | False alerts per benign hour, anomaly-run detection, median time-to-detect, and telemetry-interruption identification | Pooled development G3 passes; this is not a locked-test claim |
 | Adaptation ablation | Accepted/rejected updates, fault freezes, promotions, and rollbacks | Guarded update audit generated |
-| Platform-transfer table | Destination-platform calibration amount versus detection/reliability behavior | Development-only output; run Section 18 |
+| Platform-transfer table | Destination-platform calibration amount versus detection/reliability behavior | Development-only output generated; strong directional asymmetry requires review |
 | Final headline table and figures | One-time locked-test performance with uncertainty and limitations | Not generated until G3 passes and the method is frozen |
 
 Generated development files are stored under
-`$PRISM_DATA_ROOT/processed/prism-analysis-v1/`. The current guarded candidate
-reduces the development false-alert rate from 24.81 to 0.90 alerts/hour, but
-detection changes from 97.5% to 44.2%; it therefore still fails the declared G3
-tradeoff. The README intentionally does not present a final test claim.
+`$PRISM_DATA_ROOT/processed/prism-analysis-v1/`. The static and guarded controls
+remain useful ablations, but both fail G3. The selected robust residual-fusion
+candidate passes the pooled development gate at 0.134 false alerts/hour and
+51.7% detection. Platform-specific and directional-transfer results are less
+uniform, so method freeze still requires review. The README intentionally does
+not present a final locked-test claim.
 
 ### Main files to expect
 
@@ -171,6 +174,8 @@ tradeoff. The README intentionally does not present a final test claim.
   static development candidates.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-guarded-method-selection.csv`:
   robust guarded adaptive-VAR candidates and G3 evidence.
+- `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-robust-normalization-selection.json`:
+  authoritative pooled development selection and G3 status.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-transfer-calibration.csv`:
   cross-platform calibration results after Section 18.
 - `paper/method-freeze.json`: frozen method and notebook fingerprint, created

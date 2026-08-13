@@ -34,7 +34,7 @@ Apple tracker, and the copied EPYC audit tracker in the documented layout.
 
 Restart the kernel, then use **Run All Cells** once with all collection and
 analysis switches left at `False`. This materializes `.prism_runtime`, runs
-preflight, executes the 18 embedded source tests, checks for machine-specific
+preflight, executes the embedded source tests, checks for machine-specific
 paths, and runs the synthetic analysis checks. It does not collect data.
 
 Stop if the notebook does not print both of these messages:
@@ -93,7 +93,16 @@ The cell writes ignored development artifacts under
 `PRISM_DATA_ROOT/processed/` path). Inspect the JSON report and retain the audit
 counts for accepted/rejected updates, fault freezes, promotions, and rollbacks.
 
-## 7. Apply Gate G3 without reinterpretation
+## 7. Run robust residual normalization
+
+Set `RUN_ROBUST_NORMALIZATION_G3 = True` in Section 17B.2 and run that cell.
+This is the authoritative development selection. It robustly normalizes
+run-local semantic levels, changes, and compact micro-twin residuals; fits
+platform/workload-local fusion models using complete-run cross-fitting; and
+writes the selected configuration without reading locked-test rows. Reset the
+switch to `False` after the run.
+
+## 8. Apply Gate G3 without reinterpretation
 
 G3 requires both:
 
@@ -102,9 +111,14 @@ G3 requires both:
 
 If `gate_passed` is `false`, do not create a method freeze and do not collect,
 copy, inspect, or score locked-test rows. Revise the method using calibration
-and development evidence only, then rerun Sections 14, 15, 17, and 17A.
+and development evidence only, then rerun the affected development sections.
 
-## Current development checkpoint (August 10, 2026)
+If it passes, run Section 18 with `RUN_TRANSFER_ANALYSIS = True`. Review both
+transfer directions and all destination-calibration points before advisor
+review. A pooled G3 pass does not erase platform-specific or transfer
+limitations and does not by itself authorize locked-test collection.
+
+## Current development checkpoint (August 13, 2026)
 
 Dataset fingerprint:
 `2d83c66675a3c4e31c7b85b67b39db5a44ad7862af9f56bc4a4c80c74e0eaf2f`
@@ -113,7 +127,9 @@ Dataset fingerprint:
 | --- | ---: | ---: | ---: | --- |
 | Static VAR sequential conformal | 12.53 | 24.81 | 97.5% (117/120) | Fail |
 | Guarded adaptive VAR, lowest-alert detecting candidate | 10.00 | 0.90 | 44.2% (53/120) | Fail |
+| Robust residual fusion, pooled development selection | 7.47 | 0.134 | 51.7% (62/120) | **Pass** |
 
-The guarded method materially reduces false alerts, but it does not yet meet
-the declared reliability/detection pair. The correct status is therefore:
-**implementation complete, G3 closed, locked test untouched**.
+The robust residual-fusion candidate passes the declared pooled development
+gate, but Apple detection and EPYC-to-Apple transfer remain weak. The correct
+status is therefore: **pooled development G3 passed; transfer/advisor review
+pending; method not frozen; locked test untouched**.
