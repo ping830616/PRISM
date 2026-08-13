@@ -1,0 +1,31 @@
+[amendment]
+name = "balanced_development_benign_supplement"
+version = "0.1.0"
+status = "proposed"
+approval_required = true
+purpose = "Estimate platform/fold false-alert rates beyond the current 3.733 scored hours without using locked-test rows."
+locked_test_access = false
+
+[design]
+platforms = ["M2_MACOS", "EPYC_LINUX"]
+workloads = ["PY_STATS", "PY_AI", "BROWSER", "VIDEO_SW"]
+scenario = "NOMINAL"
+sessions_per_workload_per_platform = 2
+session_duration_seconds = 2880
+sampling_hz = 5.0
+planned_split = "development"
+total_sessions = 16
+total_hours = 12.8
+additional_hours_per_platform = 6.4
+additional_hours_per_fold_per_platform = 3.2
+
+[assignment]
+unit = "complete_run_id"
+folds = 2
+rule = "For each platform/workload, assign one new complete run to each fold before collection."
+forbid_window_level_split = true
+
+[decision]
+false_alert_budget_per_hour = 0.25
+minimum_detection_rate = 0.50
+notes = "Use unique supplement run IDs and keep an independent supplement tracker. Do not reinterpret or discard the existing EPYC/fold-1 false alert. Append all valid sessions and rerun the frozen candidate. Invalid acquisitions retain their exclusion reason and are replaced in the same assigned fold."
