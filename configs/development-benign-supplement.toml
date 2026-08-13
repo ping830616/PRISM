@@ -1,7 +1,7 @@
 [amendment]
 name = "balanced_development_benign_supplement"
 version = "0.1.0"
-status = "proposed"
+status = "advisor_approval_required_before_collection"
 approval_required = true
 purpose = "Estimate platform/fold false-alert rates beyond the current 3.733 scored hours without using locked-test rows."
 locked_test_access = false
@@ -28,4 +28,4 @@ forbid_window_level_split = true
 [decision]
 false_alert_budget_per_hour = 0.25
 minimum_detection_rate = 0.50
-notes = "Use unique supplement run IDs and keep an independent supplement tracker. Do not reinterpret or discard the existing EPYC/fold-1 false alert. Append all valid sessions and rerun the frozen candidate. Invalid acquisitions retain their exclusion reason and are replaced in the same assigned fold."
+notes = "Use unique supplement run IDs and keep an independent supplement tracker. Do not reinterpret or discard the existing EPYC/fold-1 false alert. Append all 16 valid sessions and rerun the already selected shared-quantile candidate without retuning. Invalid acquisitions retain their exclusion reason and are replaced in the same assigned fold. The supplement can confirm or reject strict G3; it does not guarantee a pass."
