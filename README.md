@@ -140,8 +140,8 @@ Use the switches in the named notebook sections; do not run files from
 | 3 | With the machine authorized and idle, use Sections 10–12 to collect all calibration/development rows | Validated raw telemetry, events, platform/channel metadata, checksums, progress, and quality reports |
 | 4 | Put both platforms under one `PRISM_DATA_ROOT`; set `RUN_PREFREEZE_AUDIT=True` in Section 14 and `RUN_PREPARE_ANALYSIS=True` once in Section 15 | A 160-run pre-freeze inventory, immutable dataset fingerprint, and five-second semantic-block cache |
 | 5 | Run Section 17 and Section 17A for the static and guarded baselines; then set `RUN_ROBUST_NORMALIZATION_G3=True` in Section 17B.2 | Baseline ablations plus the authoritative robust residual-fusion development selection |
-| 6 | Check Gate G3: pooled false alerts/hour must be ≤0.25 and pooled development detection must be ≥50% | The current development selection passes at 0.134 false alerts/hour and 51.7% detection; locked-test rows remain closed |
-| 7 | Set `RUN_TRANSFER_ANALYSIS=True` in Section 18 and review both transfer directions before advisor review | A 0/1/2/4/8/12-minute destination-calibration curve; transfer weakness must be reported and reviewed before freeze |
+| 6 | Run Section 17B.3, then Section 17B.4: check pooled G3 **and** every platform/fold against ≤0.25 false alerts/hour and ≥50% detection | Shared benign-quantile alignment currently gives 62.5% pooled, 65% Apple, 60% EPYC, and 60%/65% across folds; one EPYC/fold false alert still blocks strict freeze |
+| 7 | Set `RUN_TRANSFER_ANALYSIS=True` in Section 18 and review both 0/1/2/4/8/12-minute transfer directions | A development-only calibration curve plus explicit telemetry-fault identification; both directions and the secondary robustness audit must pass before freeze |
 | 8 | Only after G3, transfer review, advisor approval, and Section 19 method freeze, collect the 46 locked rows per platform exactly once | Final held-out evidence for the journal paper; it must never be used to retune the method |
 
 ### Results supplied to the paper
@@ -151,18 +151,28 @@ Use the switches in the named notebook sections; do not run files from
 | Dataset and quality table | Run counts, benign hours, cadence, channel coverage, failures, and checksum-backed provenance | Pre-freeze Apple/EPYC evidence available |
 | Cross-platform telemetry table | Shared semantic groups plus Apple- and Linux-specific sensor availability | Available from smoke and quality reports |
 | Monitoring comparison | Static VAR versus robust guarded adaptive VAR, persistence, EWMA, CUSUM, and conformal/e-process candidates | Development CSV/JSON generated |
-| Reliability results | False alerts per benign hour, anomaly-run detection, median time-to-detect, and telemetry-interruption identification | Pooled development G3 passes; this is not a locked-test claim |
+| Reliability results | False alerts per benign hour, anomaly-run detection, median time-to-detect, and telemetry-interruption identification | Pooled G3 and balanced subgroup detection pass; strict subgroup FAH still fails by one alert, so this is not a locked-test claim |
 | Adaptation ablation | Accepted/rejected updates, fault freezes, promotions, and rollbacks | Guarded update audit generated |
 | Platform-transfer table | Destination-platform calibration amount versus detection/reliability behavior | Development-only output generated; strong directional asymmetry requires review |
 | Final headline table and figures | One-time locked-test performance with uncertainty and limitations | Not generated until G3 passes and the method is frozen |
 
 Generated development files are stored under
 `$PRISM_DATA_ROOT/processed/prism-analysis-v1/`. The static and guarded controls
-remain useful ablations, but both fail G3. The selected robust residual-fusion
-candidate passes the pooled development gate at 0.134 false alerts/hour and
-51.7% detection. Platform-specific and directional-transfer results are less
-uniform, so method freeze still requires review. The README intentionally does
-not present a final locked-test claim.
+remain useful ablations, but both fail G3. Shared benign-quantile alignment
+improves the development result to 0.134 pooled false alerts/hour and 62.5%
+detection, with at least 60% detection on each platform and fold. Strict
+platform/fold G3 is not yet met because the single EPYC/fold-1 false alert is
+0.268/hour over only 3.733 scored benign hours. Method freeze therefore remains
+blocked. Do not discard that alert, loosen G3, or inspect locked data.
+
+If the advisor approves more evidence, use the prospective, balanced plan in
+`configs/development-benign-supplement.toml`: two new 48-minute nominal sessions
+per workload/platform, assigned one per fold before collection (16 sessions,
+12.8 total hours). This supplement increases subgroup exposure without changing
+event labels or using locked-test rows. It must be appended in full and the
+already selected candidate rerun unchanged. Section 17B.5 previews/executes the
+separate `data/development-benign-supplement-plan.csv`; execution is guarded by
+an explicit advisor-approval switch and does not modify the original plan.
 
 ### Main files to expect
 
@@ -176,6 +186,10 @@ not present a final locked-test claim.
   robust guarded adaptive-VAR candidates and G3 evidence.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-robust-normalization-selection.json`:
   authoritative pooled development selection and G3 status.
+- `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-shared-quantile-selection.json`:
+  cross-platform alignment, platform/fold metrics, and strict-G3 status.
+- `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-operational-robustness.json`:
+  combined platform/fold, fault-state, and bidirectional-transfer freeze gate.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-transfer-calibration.csv`:
   cross-platform calibration results after Section 18.
 - `paper/method-freeze.json`: frozen method and notebook fingerprint, created
