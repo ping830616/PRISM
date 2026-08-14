@@ -37,6 +37,20 @@ The ITC study reports zero benign-run alerts on a small set of benign runs. PRIS
 
 Measure the accuracy/false-alert tradeoff as a function of benign calibration minutes on a newly observed platform. This is more useful than a binary “portable/not portable” claim and aligns with deployment practice.
 
+The transfer protocol must separate two claims:
+
+- **Leakage-proof zero-shot:** select the model and alert policy using the source
+  platform only, then evaluate the destination once with zero destination data.
+- **Benign-calibrated transfer:** retain the source semantic classifier and use a
+  chronological benign destination prefix to estimate local references and the
+  same percentile rule, without destination event labels.
+
+A zero-shot failure is scientifically informative when the calibrated curve
+quantifies the actual deployment cost. Current development evidence requires
+12 benign minutes for M2-to-EPYC and 1 minute for EPYC-to-M2; this asymmetry is
+part of the platform-robustness result, not a defect to hide through
+destination-informed tuning.
+
 ### N4. Failure-aware monitoring
 
 Evaluate controlled crashes, telemetry gaps, sensor dropout, and degradation proxies. Distinguish:
