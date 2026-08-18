@@ -141,8 +141,8 @@ Use the switches in the named notebook sections; do not run files from
 | 4 | Put both platforms under one `PRISM_DATA_ROOT`; set `RUN_PREFREEZE_AUDIT=True` in Section 14 and `RUN_PREPARE_ANALYSIS=True` once in Section 15 | A 160-run pre-freeze inventory, immutable dataset fingerprint, and five-second semantic-block cache |
 | 5 | Run Section 17 and Section 17A for the static and guarded baselines; then set `RUN_ROBUST_NORMALIZATION_G3=True` in Section 17B.2 | Baseline ablations plus the authoritative robust residual-fusion development selection |
 | 6 | Run Sections 17B.3 and 17B.4 to preserve the failed supplement-confirmation result; then set `RUN_RESIDUAL_CORROBORATED_V2=True` in Section 17B.3A | An analysis-v2 development search that requires residual corroboration, workload-conditioned score calibration, guarded adaptation, and pooled/platform/fold G3 |
-| 7 | If analysis v2 passes, record its selected configuration but keep Section 18 transfer and Section 19 freeze closed until a newly predeclared independent confirmation set passes unchanged | A reproducible method proposal without reusing the failed confirmation data as confirmation evidence |
-| 8 | Only after G3, transfer review, advisor approval, and Section 19 method freeze, collect the 46 locked rows per platform exactly once | Final held-out evidence for the journal paper; it must never be used to retune the method |
+| 7 | After the v2 development pass, use Section 17B.6 to collect the new 16-run independent confirmation plan and evaluate the selected method unchanged | A checksum-backed benign confirmation report with pooled, platform, and fold FAH; confirmation rows are excluded from fitting and tuning |
+| 8 | Only after confirmation passes, complete v2 transfer review, advisor review, and Section 19 method freeze; then collect the 46 locked rows per platform exactly once | Final independent test evidence for the journal paper; it must never be used to retune the method |
 
 ### Results supplied to the paper
 
@@ -202,14 +202,32 @@ Current guarded progression:
 1. Preserve the v1 failed-confirmation JSON and all five alert attributions.
 2. Run Section 17B.3A on development data and record the single strict-G3 v2
    selection; do not copy it into the authoritative freeze file yet.
-3. Predeclare a **new** independent benign confirmation set before collection.
-   Apply the selected v2 model and thresholds unchanged; no candidate search is
-   permitted on that set.
+3. Collect the now-predeclared 16-session independent benign confirmation set
+   in `data/v2-independent-confirmation-plan.csv` using Section 17B.6. Apply the
+   selected v2 model and thresholds unchanged; no candidate search is permitted.
 4. Open v2 transfer analysis and Section 19 method freeze only if the new
    confirmation independently meets pooled, platform, fold, and fault-state
    requirements. Report zero-shot transfer separately from calibrated transfer.
 5. Collect and evaluate locked-test rows exactly once only after confirmation,
    transfer review, and method freeze. Until then, locked testing remains closed.
+
+### Immediate next action after the completed supplement
+
+The 16 development-supplement sessions are finished and must not be repeated.
+The practical next action is Section 17B.6:
+
+1. Merge this notebook/protocol revision and use that same clean commit on both
+   machines.
+2. On the idle Mac, run a fresh smoke pair, preview the next confirmation row,
+   then set `V2_CONFIRMATION_PLAN_ACKNOWLEDGED=True`,
+   `EXECUTE_V2_CONFIRMATION=True`, and `V2_CONFIRMATION_BATCH_SIZE=8`.
+3. Repeat step 2 on the authorized idle EPYC compute host. Each platform takes
+   about 8.7 collection hours.
+4. Copy the EPYC confirmation raw folders and tracker to the Mac data root,
+   rerun Sections 14--15 with all checksum verification enabled, and set
+   `RUN_V2_CONFIRMATION_EVALUATION=True` in Section 17B.6.
+5. If the printed confirmation decision is `PASS`, proceed to v2 transfer review
+   and method freeze. Locked testing is still closed until those reviews finish.
 
 The v2 result must not be described as final: its design and operating point
 were selected after observing the failed confirmation. A fresh confirmation is
@@ -235,6 +253,11 @@ read locked-test rows.
   the mandatory independent-confirmation flag.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v2/development-residual-corroborated-false-alerts.csv`:
   traceable false-alert episodes for the selected v2 setting.
+- `$PRISM_DATA_ROOT/processed/prism-analysis-v2/independent-confirmation-result.json`:
+  frozen-method confirmation decision, dataset/method fingerprints, and pooled,
+  platform, and fold false-alert rates.
+- `$PRISM_DATA_ROOT/processed/prism-analysis-v2/independent-confirmation-runs.csv`:
+  one auditable result row for each of the 16 independent benign sessions.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-operational-robustness.json`:
   combined platform/fold, fault-state, and bidirectional-transfer freeze gate.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-transfer-calibration.csv`:
