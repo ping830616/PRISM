@@ -18,6 +18,8 @@ data/processed/
 data/external/**/payload/
 data/collection-probes/
 data/collection-progress.csv
+data/development-benign-supplement-progress.csv
+data/v2-independent-confirmation-progress.csv
 results/
 # Small, fingerprinted development summaries are bundled for portable notebook
 # reporting. Raw telemetry and data/processed artifacts remain ignored.

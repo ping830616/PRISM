@@ -70,6 +70,13 @@ Every independent execution receives a unique `run_id`. Windows from the same ru
 `data/collection-progress.csv` is the Git-ignored machine-local execution
 tracker. Do not regenerate or overwrite either file after production starts.
 
+`data/v2-independent-confirmation-plan.csv` separately declares 16 nominal,
+65-minute sessions used only to confirm the frozen analysis-v2 false-alert
+rate. Its machine-local tracker is
+`data/v2-independent-confirmation-progress.csv`. These run IDs must never enter
+model fitting, candidate search, threshold selection, or the original 252-run
+tracker. The locked-test partition remains closed during confirmation.
+
 ## Required Run Metadata
 
 - platform ID, architecture, operating system, kernel/version;
