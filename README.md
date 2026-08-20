@@ -140,9 +140,9 @@ Use the switches in the named notebook sections; do not run files from
 | 3 | With the machine authorized and idle, use Sections 10–12 to collect all calibration/development rows | Validated raw telemetry, events, platform/channel metadata, checksums, progress, and quality reports |
 | 4 | Put both platforms under one `PRISM_DATA_ROOT`; set `RUN_PREFREEZE_AUDIT=True` in Section 14 and `RUN_PREPARE_ANALYSIS=True` once in Section 15 | A 160-run pre-freeze inventory, immutable dataset fingerprint, and five-second semantic-block cache |
 | 5 | Run Section 17 and Section 17A for the static and guarded baselines; then set `RUN_ROBUST_NORMALIZATION_G3=True` in Section 17B.2 | Baseline ablations plus the authoritative robust residual-fusion development selection |
-| 6 | Run Sections 17B.3 and 17B.4 to preserve the failed supplement-confirmation result; then set `RUN_RESIDUAL_CORROBORATED_V2=True` in Section 17B.3A | An analysis-v2 development search that requires residual corroboration, workload-conditioned score calibration, guarded adaptation, and pooled/platform/fold G3 |
-| 7 | After the v2 development pass, use Section 17B.6 to collect the new 16-run independent confirmation plan and evaluate the selected method unchanged | A checksum-backed benign confirmation report with pooled, platform, and fold FAH; confirmation rows are excluded from fitting and tuning |
-| 8 | Only after confirmation passes, complete v2 transfer review, advisor review, and Section 19 method freeze; then collect the 46 locked rows per platform exactly once | Final independent test evidence for the journal paper; it must never be used to retune the method |
+| 6 | Preserve the failed v2 confirmation, then set `RUN_V3_DEVELOPMENT_SEARCH=True` once in Section 17B.7 | A bounded 216-candidate v3 development search with platform-conditioned calibration, sequential warnings, residual confirmation, subgroup G3, and adaptive-telemetry duty-cycle replay |
+| 7 | If v3 passes development G3, use Section 17B.8 to collect and evaluate the new 16-run independent confirmation plan with the selected method unchanged | A checksum-backed benign confirmation report with pooled, platform, and fold FAH; confirmation rows are excluded from fitting and tuning |
+| 8 | Only after v3 confirmation passes, complete transfer review, advisor review, and Section 19 method freeze; then collect the 46 locked rows per platform exactly once | Final independent test evidence for the journal paper; it must never be used to retune the method |
 
 ### Results supplied to the paper
 
@@ -151,88 +151,63 @@ Use the switches in the named notebook sections; do not run files from
 | Dataset and quality table | Run counts, benign hours, cadence, channel coverage, failures, and checksum-backed provenance | Pre-freeze Apple/EPYC evidence available |
 | Cross-platform telemetry table | Shared semantic groups plus Apple- and Linux-specific sensor availability | Available from smoke and quality reports |
 | Monitoring comparison | Static VAR versus robust guarded adaptive VAR, persistence, EWMA, CUSUM, and conformal/e-process candidates | Development CSV/JSON generated |
-| Reliability results | False alerts per benign hour, anomaly-run detection, median time-to-detect, and telemetry-interruption identification | Analysis v2 passes development G3 at 0.101 false alerts/hour and 52.5% detection, including every platform and fold; independent confirmation is still required |
+| Reliability results | False alerts per benign hour, anomaly-run detection, median time-to-detect, and telemetry-interruption identification | v3 passes strict development G3 at 0.164 FAH and 59.2% detection, including both platforms and folds; fresh independent confirmation is still required |
 | Adaptation ablation | Accepted/rejected updates, fault freezes, promotions, and rollbacks | Guarded update audit generated |
-| Platform-transfer table | Destination-platform benign calibration amount versus detection/reliability behavior | The earlier v1 curve remains an ablation; v2 transfer stays closed until independent confirmation fixes the selected method |
+| Adaptive telemetry and transfer | Warning-triggered rich-tier duty cycle plus destination-platform calibration effort | Adaptive telemetry is an offline trace replay; transfer review stays closed until v3 independent confirmation passes |
 | Final headline table and figures | One-time locked-test performance with uncertainty and limitations | Not generated until G3 passes and the method is frozen |
 
 The original and guarded ablations remain under
-`$PRISM_DATA_ROOT/processed/prism-analysis-v1/`. The first prospective
-supplement confirmation narrowly failed at 0.253 false alerts/hour. Its five
-alerts were concentrated in fold 1 and were led by benign compute/storage phase
-changes rather than telemetry faults. Because that confirmation was examined,
-analysis v2 correctly reclassifies all 16 supplement sessions as expanded
-development data; they can no longer confirm the revised method.
+`$PRISM_DATA_ROOT/processed/prism-analysis-v1/`. The first supplement
+confirmation failed narrowly, and the later independent v2 confirmation failed
+clearly: 17 false alerts over 16.8 benign hours (1.012/hour), driven mainly by
+EPYC. Both failures remain preserved. Once examined, those 32 benign sessions
+become development evidence and can never be reused to confirm another method.
 
-Section 17B.3A addresses that failure without deleting alerts or relaxing G3.
-Context channels condition a workload-specific classifier, but an alert also
-requires corroboration from behavioral residuals. Each fold/workload score is
-calibrated only with its training-benign observations, and a slow shadow
-reference update is frozen during faults or elevated evidence. On the expanded
-development set, the selected setting (`C=0.03`, probability percentile
-`0.925`, 36 consecutive five-second blocks) produces 2 false alerts over
-19.733 benign hours (0.101/hour) and detects 63 of 120 event runs (52.5%). Apple,
-EPYC, fold 0, and fold 1 all independently satisfy at most 0.25 false
-alerts/hour and at least 50% detection. This is a **development pass**, not an
-independent confirmation or locked-test claim. Scenario performance is still
-uneven—especially controlled crash—so the paper must report per-scenario
-results rather than treating the pooled pass as uniform fault coverage.
+Section 17B.7 implements the next scientifically valid iteration. The model is
+shared across the two platforms, but each platform/workload pair calibrates its
+own benign score distribution. A block-thinned sequential rule first emits a
+warning; a behavioral alert is issued only if residual-only evidence confirms
+that warning within a fixed six-block window. The bounded search records all
+216 candidates, every false alert, subgroup metrics, and a method fingerprint.
+It never reads locked-test rows.
 
-The revised transfer curve now makes the zero-shot comparison leakage-proof:
-regularization, percentile, workload thresholds, and persistence are selected
-using the source platform alone, then applied to the destination once. The
-destination result cannot influence that selection. Zero-shot still fails in
-both directions, so it must be reported as a measured limitation rather than
-retuned into a pass. The operational path keeps the semantic classifier and
-persistence rule source-trained, then calibrates the same benign-score
-percentile separately for each destination workload using only a chronological
-nominal prefix. M2-to-EPYC first satisfies G3 with 12 benign minutes, while
-EPYC-to-M2 first satisfies it with 1 benign minute. Destination anomaly labels
-are evaluated only after the benign calibration rule is fixed.
+On the current expanded development evidence, exactly one of the 216 candidates
+passes strict G3: 6 false alerts over 36.533 benign hours (0.164/hour) and 71/120
+event-run detections (59.2%). EPYC (0.219/hour; 56.7%), M2 (0.109/hour; 61.7%),
+fold 0 (0.109/hour; 55.0%), and fold 1 (0.219/hour; 63.3%) each pass separately.
+These are development-selection results—not independent or final claims.
 
-The balanced plan in `configs/development-benign-supplement.toml` has now served
-its one permitted confirmation attempt: 16 preassigned 48-minute sessions (12.8
-hours total) were admitted together, and the unchanged v1 candidate failed by
-five alerts. Section 17B.5 remains the resumable collection record, but its
-execution switches must stay `False`; these rows must not be recollected,
-selectively removed, or reused as independent evidence for v2.
+The same warning window defines an adaptive-telemetry replay. A portable base
+tier is treated as continuously available, while the richer diagnostic tier is
+retained only during warning verification. The notebook reports that tier's
+active-time fraction and the fraction avoided relative to always-on retention.
+This replay uses previously collected full traces, so it is evidence about data
+retention and diagnostic duty cycle—not a measured energy-saving claim. For the
+selected development candidate, the richer tier is active for 1.23% of eligible
+monitoring time.
 
-Current guarded progression:
+### Immediate next action
 
-1. Preserve the v1 failed-confirmation JSON and all five alert attributions.
-2. Run Section 17B.3A on development data and record the single strict-G3 v2
-   selection; do not copy it into the authoritative freeze file yet.
-3. Collect the now-predeclared 16-session independent benign confirmation set
-   in `data/v2-independent-confirmation-plan.csv` using Section 17B.6. Apply the
-   selected v2 model and thresholds unchanged; no candidate search is permitted.
-4. Open v2 transfer analysis and Section 19 method freeze only if the new
-   confirmation independently meets pooled, platform, fold, and fault-state
-   requirements. Report zero-shot transfer separately from calibrated transfer.
-5. Collect and evaluate locked-test rows exactly once only after confirmation,
-   transfer review, and method freeze. Until then, locked testing remains closed.
+1. Run Section 17B.7 once on the Mac with
+   `RUN_V3_DEVELOPMENT_SEARCH=True`. Preserve the complete candidate table and
+   selection JSON; do not edit the selected operating point afterward.
+2. If and only if `development_g3_passed` is `true`, merge this
+   notebook/protocol revision and use the same clean commit on both hosts.
+3. In Section 17B.8, preview the next row. On an idle Mac set
+   `V3_CONFIRMATION_PLAN_ACKNOWLEDGED=True`,
+   `EXECUTE_V3_CONFIRMATION=True`, and `V3_CONFIRMATION_BATCH_SIZE=8`.
+4. Repeat step 3 on the authorized idle EPYC host. Each platform requires about
+   8.7 collection hours.
+5. Copy the EPYC v3 raw folders and tracker to the Mac data root, rerun the
+   checksum-backed audit and semantic preparation, then set
+   `RUN_V3_CONFIRMATION_EVALUATION=True` in Section 17B.8.
+6. Only a pooled, per-platform, and per-fold confirmation pass advances PRISM
+   to transfer review and the signed method freeze. Locked testing remains
+   closed until those reviews are complete.
 
-### Immediate next action after the completed supplement
-
-The 16 development-supplement sessions are finished and must not be repeated.
-The practical next action is Section 17B.6:
-
-1. Merge this notebook/protocol revision and use that same clean commit on both
-   machines.
-2. On the idle Mac, run a fresh smoke pair, preview the next confirmation row,
-   then set `V2_CONFIRMATION_PLAN_ACKNOWLEDGED=True`,
-   `EXECUTE_V2_CONFIRMATION=True`, and `V2_CONFIRMATION_BATCH_SIZE=8`.
-3. Repeat step 2 on the authorized idle EPYC compute host. Each platform takes
-   about 8.7 collection hours.
-4. Copy the EPYC confirmation raw folders and tracker to the Mac data root,
-   rerun Sections 14--15 with all checksum verification enabled, and set
-   `RUN_V2_CONFIRMATION_EVALUATION=True` in Section 17B.6.
-5. If the printed confirmation decision is `PASS`, proceed to v2 transfer review
-   and method freeze. Locked testing is still closed until those reviews finish.
-
-The v2 result must not be described as final: its design and operating point
-were selected after observing the failed confirmation. A fresh confirmation is
-therefore the statistically honest next step. None of the v2 development checks
-read locked-test rows.
+A v3 development pass is not final evidence because its method was selected
+after observing both prior confirmation failures. The new 16-session v3 plan is
+therefore mandatory and may be evaluated only once without tuning.
 
 ### Main files to expect
 
@@ -258,6 +233,14 @@ read locked-test rows.
   platform, and fold false-alert rates.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v2/independent-confirmation-runs.csv`:
   one auditable result row for each of the 16 independent benign sessions.
+- `$PRISM_DATA_ROOT/processed/prism-analysis-v3/development-warning-confirmation-selection.json`:
+  bounded-search provenance, the strict v3 development selection, subgroup
+  metrics, and the explicit requirement for fresh confirmation.
+- `$PRISM_DATA_ROOT/processed/prism-analysis-v3/development-adaptive-telemetry-replay.json`:
+  warning-triggered rich-tier active time and avoided-time fractions from an
+  offline replay; it does not claim measured hardware-energy savings.
+- `$PRISM_DATA_ROOT/processed/prism-analysis-v3/independent-confirmation-result.json`:
+  one-shot v3 confirmation decision with pooled, platform, and fold FAH.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-operational-robustness.json`:
   combined platform/fold, fault-state, and bidirectional-transfer freeze gate.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-transfer-calibration.csv`:

@@ -1,0 +1,60 @@
+[confirmation]
+name = "prism_v3_independent_benign_confirmation"
+version = "0.1.0"
+status = "predeclared_before_collection"
+purpose = "Independently confirm the frozen platform-conditioned warning/confirmation controller without refitting, retuning, or accessing locked-test data."
+locked_test_access = false
+fit_or_tune_on_confirmation = false
+
+[design]
+platforms = ["M2_MACOS", "EPYC_LINUX"]
+workloads = ["PY_STATS", "PY_AI", "BROWSER", "VIDEO_SW"]
+scenario = "NOMINAL"
+sessions_per_workload_per_platform = 2
+session_duration_seconds = 3900
+sampling_hz = 5.0
+planned_split = "development"
+run_kind = "v3_independent_confirmation"
+total_sessions = 16
+total_hours = 17.3333333333
+hours_per_platform = 8.6666666667
+folds = 2
+sessions_per_fold = 8
+notes = "Each 65-minute session leaves at least 63 scored minutes after the frozen 120-second startup exclusion; four sessions per platform/fold provide at least 4.2 scored hours."
+
+[frozen_method]
+analysis_revision = "prism-analysis-v3"
+classifier_C = 0.03
+decision_stride_blocks = 2
+evalue_eta = 0.9
+evidence_threshold = 6.396929655216146
+residual_confirmation_alpha = 0.05
+confirmation_window_blocks = 6
+block_seconds = 5.0
+reset_ratio = 0.50
+reset_blocks = 6
+platform_workload_score_reference = true
+adaptation_alpha = 0.001
+adaptation_guard_probability = 0.20
+adaptation_promotion_blocks = 24
+adaptation_rollback_probability = 0.45
+adaptation_rollback_window = 12
+adaptation_max_abs_offset = 1.5
+startup_exclusion_seconds = 120
+
+[decision]
+false_alert_budget_per_hour = 0.25
+minimum_development_detection_rate = 0.50
+minimum_valid_monitoring_fraction_per_run = 0.95
+require_all_sessions = true
+require_pooled_pass = true
+require_each_platform_pass = true
+require_each_fold_pass = true
+notes = "Confirmation is benign-only. A base warning opens a six-block residual-confirmation window; only confirmed warnings count as behavioral alerts. Unconfirmed warnings are reported as escalation/abstention events. The frozen development detection result is 71/120 (0.5917)."
+
+[firewall]
+confirmation_run_ids_must_be_absent_from_fit = true
+candidate_search_permitted = false
+threshold_change_permitted = false
+selective_run_exclusion_permitted = false
+locked_test_collection_permitted = false
