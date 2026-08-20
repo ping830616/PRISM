@@ -122,25 +122,34 @@ chronological benign destination prefix; destination event labels never select
 or calibrate a policy. A pooled G3 pass does not erase platform-specific or
 transfer limitations and does not by itself authorize locked-test collection.
 
-## Current development checkpoint (August 13, 2026)
+## Current development checkpoint (August 20, 2026)
 
-Dataset fingerprint:
-`2d83c66675a3c4e31c7b85b67b39db5a44ad7862af9f56bc4a4c80c74e0eaf2f`
+The supplement confirmation failed at 0.253 FAH, and the later independent v2
+confirmation failed at 1.012 FAH (17 alerts/16.8 h). Both outcomes are preserved
+and their rows are now development evidence. They cannot confirm another
+method. Locked-test access remains false.
 
-| Development control | Benign hours | False alerts/hour | Detection | G3 |
+Section 17B.7 performs one bounded v3 development search. It keeps a shared
+workload classifier, calibrates the benign score reference by platform and
+workload, thins sequential decisions to one per two blocks, and requires
+residual-only confirmation within six blocks of a warning.
+
+| v3 development subgroup | Benign h | FAH | Detection | G3 |
 | --- | ---: | ---: | ---: | --- |
-| Static VAR sequential conformal | 12.53 | 24.81 | 97.5% (117/120) | Fail |
-| Guarded adaptive VAR, lowest-alert detecting candidate | 10.00 | 0.90 | 44.2% (53/120) | Fail |
-| Robust residual fusion, pooled development selection | 7.47 | 0.134 | 51.7% (62/120) | **Pass** |
+| Pooled | 36.533 | 0.164 | 59.2% (71/120) | **Pass** |
+| Apple M2 | 18.267 | 0.109 | 61.7% (37/60) | **Pass** |
+| AMD EPYC | 18.267 | 0.219 | 56.7% (34/60) | **Pass** |
+| Fold 0 | 18.267 | 0.109 | 55.0% (33/60) | **Pass** |
+| Fold 1 | 18.267 | 0.219 | 63.3% (38/60) | **Pass** |
 
-The shared benign-quantile candidate passes pooled G3 and every platform/fold
-detection requirement, but one EPYC/fold-1 benign alert gives 0.268 FAH over
-3.733 scored hours. The correct status is therefore: **pooled development G3
-passed; strict subgroup G3 awaits prospective confirmation; calibrated transfer
-passes in both directions; method not frozen; locked test untouched**.
+Exactly one of 216 candidates passes every development subgroup. Its
+warning-triggered rich-tier replay activates the diagnostic tier for 1.23% of
+eligible monitoring time. This is a development selection and an offline
+retention replay, not independent confirmation or measured energy savings.
 
-Do not lower the 0.25-FAH limit, remove the observed alert, or tune on locked
-data. The declared 16-session benign supplement is confirmation-only: append
-all assigned rows, retain the existing alert, and rerun the frozen shared
-quantile configuration without fitting or tuning on the supplement. If strict
-G3 still fails, report that result and keep the locked test closed.
+The next permitted step is the disjoint 16-session plan in
+`data/v3-independent-confirmation-plan.csv`. Apply the selected v3 method once,
+unchanged. A pooled, per-platform, and per-fold confirmation pass permits
+transfer review and formal method-freeze preparation; it does not automatically
+open the locked test. If confirmation fails, preserve it, report the limitation,
+and do not retune on those rows.

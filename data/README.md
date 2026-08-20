@@ -77,6 +77,13 @@ rate. Its machine-local tracker is
 model fitting, candidate search, threshold selection, or the original 252-run
 tracker. The locked-test partition remains closed during confirmation.
 
+`data/v3-independent-confirmation-plan.csv` declares a second, disjoint set of
+16 nominal 65-minute sessions. It is used only after the failed v2 confirmation
+has been preserved and Section 17B.7 has selected one v3 development method.
+Its machine-local tracker is `data/v3-independent-confirmation-progress.csv`.
+The v3 rows cannot enter fitting or tuning, and they may be evaluated only once
+with the method recorded in `configs/v3-independent-confirmation.toml`.
+
 ## Required Run Metadata
 
 - platform ID, architecture, operating system, kernel/version;
