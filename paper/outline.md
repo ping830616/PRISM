@@ -17,6 +17,11 @@ State the field reliability problem, limits of the one-platform ITC study, PRISM
 3. cross-platform transfer or few-shot calibration effort;
 4. telemetry cost or adaptation-safety result, only if validated.
 
+For the current pre-lock manuscript, report the frozen v3 independent benign
+confirmation failure, the two nearest v4 operating points, and the post-hoc
+temporal sensitivity analysis. State that G3 did not pass and that the 92
+locked rows remain sealed for future confirmatory work.
+
 ## I. Introduction
 
 - Post-deployment operating conditions change.
@@ -68,7 +73,7 @@ Trigger, active channel policy, de-escalation, and safety fallback.
 
 - M2/macOS and EPYC/Linux hardware/software.
 - Workloads, scenarios, repetitions, durations, and benign hours.
-- Run-level data splits and locked test protocol.
+- Run-level data splits and the sealed future-confirmation protocol.
 - Baselines and ablations.
 - Confidence intervals and temporal-dependence treatment.
 - Reproducibility and exclusion rules.
@@ -78,6 +83,8 @@ Trigger, active channel policy, de-escalation, and safety fallback.
 ### A. Within-platform detection and long-horizon reliability
 
 Report sample counts, monitored hours, false alerts/hour, detection, and delay.
+Lead with the independent v3 benign-confirmation failure rather than a selected
+development operating point.
 
 ### B. Cross-platform transfer and calibration effort
 
@@ -87,15 +94,21 @@ Compare raw intersection, platform-local, and semantic adapters.
 
 Compare DICE persistence, EWMA/CUSUM, and the chosen sequential conformal method at matched false-alert budgets.
 
-### D. Crash, interruption, and drift robustness
+### D. Nested run-grouped temporal sensitivity
+
+Keep complete runs intact, use earlier matched runs for inner selection and
+later runs for outer evaluation, disclose the complete candidate table, and
+label the result post hoc. It is not a locked-test substitute.
+
+### E. Crash, interruption, and drift robustness
 
 Separate system anomalies from unavailable/stale telemetry and collector failure.
 
-### E. Diagnosis stability
+### F. Diagnosis stability
 
 Category/subsystem-path accuracy, selective coverage, and platform agreement.
 
-### F. Optional update or telemetry policy
+### G. Optional update or telemetry policy
 
 Include only passed, frozen results.
 
@@ -104,12 +117,16 @@ Include only passed, frozen results.
 - Why the findings matter to SLM reliability practice.
 - What transfers and what remains platform-local.
 - Negative and failure cases.
+- Why the predeclared reliability gate prevented an unsupported deployment
+  claim and why the locked set was reserved.
 - Relationship to DICE and boundary with CITADEL.
 - Limits: two hosts are not a fleet; degradation proxies are not physical aging.
 
 ## VIII. Conclusion
 
-Summarize operational reliability, platform calibration effort, and the path toward fleet-scale CPU/GPU monitoring.
+Summarize the portable monitoring workflow, the observed reliability boundary,
+and the path toward a separately confirmed fleet-scale CPU/GPU study. Do not
+claim that PRISM passed G3 or achieved final held-out reliability.
 
 ## Required Tables
 
