@@ -18,9 +18,10 @@ State the field reliability problem, limits of the one-platform ITC study, PRISM
 4. telemetry cost or adaptation-safety result, only if validated.
 
 For the current pre-lock manuscript, report the frozen v3 independent benign
-confirmation failure, the two nearest v4 operating points, and the post-hoc
-temporal sensitivity analysis. State that G3 did not pass and that the 92
-locked rows remain sealed for future confirmatory work.
+confirmation failure, the two nearest v4 operating points, the post-hoc
+temporal sensitivity analysis, and the final bounded redesign stopping result.
+State that G3 did not pass and that the 92 locked rows remain sealed for future
+confirmatory work.
 
 ## I. Introduction
 
@@ -100,15 +101,21 @@ Keep complete runs intact, use earlier matched runs for inner selection and
 later runs for outer evaluation, disclose the complete candidate table, and
 label the result post hoc. It is not a locked-test substitute.
 
-### E. Crash, interruption, and drift robustness
+### E. Final bounded redesign and stopping decision
+
+Report the semantic-corroboration mechanism, all 36 bounded candidates, and
+the no-pass decision. Emphasize that suppressing false alerts also suppressed
+true events, so the redesign did not earn another confirmation collection.
+
+### F. Crash, interruption, and drift robustness
 
 Separate system anomalies from unavailable/stale telemetry and collector failure.
 
-### F. Diagnosis stability
+### G. Diagnosis stability
 
 Category/subsystem-path accuracy, selective coverage, and platform agreement.
 
-### G. Optional update or telemetry policy
+### H. Optional update or telemetry policy
 
 Include only passed, frozen results.
 

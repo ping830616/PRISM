@@ -9,15 +9,21 @@ Planning date: **July 27, 2026**
 The original full-extension success definition below has not been met. The
 frozen v3 detector failed independent benign confirmation at 0.357 false
 alerts/hour, and the bounded v4 analysis found no operating point meeting both
-G3 limits. The 92 locked rows therefore remain sealed.
+G3 limits. Post-hoc nested temporal validation reached 65.0% detection but
+0.327 false alerts/hour. A final bounded 36-candidate semantic-corroboration
+redesign also failed the stricter development margin: its best-detecting point
+reached 13.3% detection at 0.056 false alerts/hour. The stopping rule is now
+active, and the 92 locked rows remain sealed.
 
 The current defensible submission scope is a transparent pre-lock reliability
 study: dual-platform collection and semantics, behavioral digital-micro-twin
 monitoring, explicit telemetry-fault handling, preserved negative
-confirmation, G3 boundary analysis, and post-hoc nested complete-run temporal
-sensitivity. This amendment does not redefine a failure as success and does
-not permit favorable-result-only reporting. A later confirmatory study may use
-the locked rows only after a method is frozen independently of their outcomes.
+confirmation, G3 boundary analysis, post-hoc nested complete-run temporal
+sensitivity, and the recorded final-redesign stopping decision. This amendment
+does not redefine a failure as success and does not permit
+favorable-result-only reporting. No further detector tuning or confirmation
+collection is planned for this manuscript. A later confirmatory study may use
+the locked rows only after a new method is frozen and independently confirmed.
 
 ## Success Definition
 
@@ -123,7 +129,8 @@ The manuscript is submission-ready only if:
 - Audit every number from manuscript to CSV and run manifest.
 - Create a complete journal-vs-ITC contribution and text-reuse disclosure.
 
-**Gate G5 — August 24:** no new model tuning. Results and paper outline are frozen.
+**Gate G5 — August 24:** passed as a scope-freeze decision. No new model tuning,
+confirmation collection, or locked access; results and paper outline are frozen.
 
 ### August 25–27 — Manuscript and advisor review
 

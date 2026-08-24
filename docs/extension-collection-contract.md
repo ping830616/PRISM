@@ -9,7 +9,9 @@ valid and both platforms meet the benign-hour target.
 **Current scope note (August 24, 2026):** the pre-lock manuscript does not
 claim that this full empirical contract is complete. It reports the collected
 development and independent-confirmation evidence, retains all failed gates,
-and leaves the 92 locked rows sealed for a future confirmatory study.
+records the final bounded redesign and stopping decision, and leaves the 92
+locked rows sealed for a future confirmatory study. No additional confirmation
+collection is authorized for the current manuscript.
 
 ## Extension-to-Run Mapping
 

@@ -1,0 +1,26 @@
+{
+  "analysis_revision": "prism-analysis-v5",
+  "bounded_change": "Promote a fixed v3 warning only after residual corroboration across semantic groups or exceptionally persistent evidence from one group.",
+  "candidate_count": 36,
+  "classifier_C_fixed_from_v3": 0.03,
+  "development_dataset_fingerprint": "0d9fb60b48762a06e349b08ae26dbdd95b9d7871a0b6845fc2be275c8a6b759a",
+  "development_margin_passed": false,
+  "eligible_for_fresh_independent_confirmation_review": false,
+  "eligible_for_locked_test": false,
+  "locked_test_accessed": false,
+  "next_step": "Stop detector iteration for this manuscript and retain the transparent pre-lock paper. Do not collect further confirmation or locked-test data.",
+  "normalization": "platform/workload benign quantiles with shared workload model",
+  "posthoc_temporal_failure_preserved": true,
+  "posthoc_temporal_result_sha256": "182b4c88488c8afd11bc04d19009127ea90e41b3391e8fee909b5c67b1c07959",
+  "schema_version": 1,
+  "selected": null,
+  "stage": "final_bounded_development_semantic_corroboration",
+  "strict_g3_candidate_count": 0,
+  "strict_margin": {
+    "maximum_fah_per_hour": 0.15,
+    "minimum_detection_rate": 0.55,
+    "minimum_fault_identification_rate": 0.95
+  },
+  "strict_margin_candidate_count": 0,
+  "v2_v3_failures_preserved": true
+}
