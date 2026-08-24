@@ -1,0 +1,167 @@
+{
+  "analysis_revision": "prism-analysis-v4-posthoc-nested-temporal",
+  "artifacts": {
+    "inner_candidates_csv": {
+      "path": "processed/prism-analysis-v4-posthoc-nested-temporal/nested-run-grouped-inner-candidates.csv",
+      "sha256": "cf1920a958dbe7fd78b4db9f2ca10a80d87bd4e2d4b08feaba4ea8138ead4659"
+    },
+    "outer_runs_csv": {
+      "path": "processed/prism-analysis-v4-posthoc-nested-temporal/nested-run-grouped-outer-runs.csv",
+      "sha256": "12b919eb8d43b674ec78651d1247ce2e0a6525db88b603e69ae7d45dbbe8c346"
+    },
+    "paper_figure_png": {
+      "path": "paper/figures/development/figure-7-nested-temporal-validation.png",
+      "sha256": "47b244eaf8ab45f718f46bd1df1df0b4569c8e3c744214e9d82b68ff4392d7dd"
+    },
+    "paper_table_csv": {
+      "path": "paper/results/development/table-7-nested-temporal-validation.csv",
+      "sha256": "bd6c16209e5c4369c0e42492b937352c792f92d821936920a118c0792fb1fca6"
+    }
+  },
+  "candidate_count": 216,
+  "development_dataset_fingerprint": "0d9fb60b48762a06e349b08ae26dbdd95b9d7871a0b6845fc2be275c8a6b759a",
+  "eligible_for_locked_test": false,
+  "inner_fold_count": 2,
+  "locked_test_accessed": false,
+  "next_step": "Report as post-hoc pre-lock robustness evidence. It cannot open locked testing or erase the preserved independent confirmation failure.",
+  "not_a_replacement_for_locked_test": true,
+  "outer_metrics": {
+    "metrics": {
+      "benign_hours": 33.60000000000001,
+      "detected": 39,
+      "detection": 0.65,
+      "event_runs": 60,
+      "fah": 0.3273809523809523,
+      "false_alerts": 11,
+      "fault_identified": 8,
+      "fault_runs": 8,
+      "median_ttd_seconds": 182.49812312284485,
+      "telemetry_fault_identification_rate": 1.0,
+      "valid_monitoring_fraction": 0.9281767955801105
+    },
+    "platform_metrics": {
+      "EPYC_LINUX": {
+        "benign_hours": 16.800000000000004,
+        "detected": 18,
+        "detection": 0.6,
+        "event_runs": 30,
+        "fah": 0.35714285714285704,
+        "false_alerts": 6,
+        "fault_identified": 4,
+        "fault_runs": 4,
+        "median_ttd_seconds": 214.99832975841127,
+        "telemetry_fault_identification_rate": 1.0,
+        "valid_monitoring_fraction": 0.9281767955801105
+      },
+      "M2_MACOS": {
+        "benign_hours": 16.800000000000004,
+        "detected": 21,
+        "detection": 0.7,
+        "event_runs": 30,
+        "fah": 0.29761904761904756,
+        "false_alerts": 5,
+        "fault_identified": 4,
+        "fault_runs": 4,
+        "median_ttd_seconds": 177.49186216597445,
+        "telemetry_fault_identification_rate": 1.0,
+        "valid_monitoring_fraction": 0.9281767955801105
+      }
+    }
+  },
+  "outer_protocol": "earlier half trains; later half evaluates within each platform/workload/scenario stratum",
+  "outer_split_fingerprint": "7cfdbd1863568a2e8fcb27c2e60f2f64758bf6eada6a0da71e514c390705a38f",
+  "outer_strict_g3": false,
+  "outer_test_runs": 100,
+  "outer_training_runs": 100,
+  "posthoc": true,
+  "publication_role": "posthoc_prelock_sensitivity_analysis",
+  "reproducibility": {
+    "candidate_count": 216,
+    "candidate_grid_sha256": "747be87863c2970e8f897dc6510b4e2b212aab930d68dfb38ec59f8ce3f212f3",
+    "determinism": "complete-run ordering, folds, sampling, classifier seeds, and tie-breaking are deterministic; small floating-point differences may remain across BLAS libraries and processor architectures",
+    "machine": "arm64",
+    "notebook_source_sha256": "c228aa8e05e336ae736b5429ff81526be0d1c8ad354b3ff090872681b4f48fea",
+    "operating_system": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "packages": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "pandas": "3.0.5",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.0"
+    },
+    "python": "3.13.5",
+    "repository_commit": "e827cd78074827072f8a86f88ec3907fa7c79b89",
+    "schema_version": 1,
+    "selection_rule": "strict pooled-and-platform G3 first; otherwise deterministic minimum normalized constraint violation",
+    "thread_controls": {
+      "BLIS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PRISM_NUM_THREADS": "1",
+      "PYTHONHASHSEED": "0",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    }
+  },
+  "selected_candidate": {
+    "C": 0.03,
+    "confirmation_blocks": 6,
+    "detector": "eprocess",
+    "parameters": {
+      "eta": 0.9,
+      "reset_blocks": 6,
+      "reset_ratio": 0.5,
+      "threshold": 5.298317366548036
+    },
+    "residual_alpha": 0.025,
+    "stride": 2
+  },
+  "selected_inner_metrics": {
+    "metrics": {
+      "benign_hours": 19.733333333333338,
+      "detected": 41,
+      "detection": 0.6833333333333333,
+      "event_runs": 60,
+      "fah": 0.304054054054054,
+      "false_alerts": 6,
+      "fault_identified": 8,
+      "fault_runs": 8,
+      "median_ttd_seconds": 177.49220170802437,
+      "telemetry_fault_identification_rate": 1.0,
+      "valid_monitoring_fraction": 0.8992248062015504
+    },
+    "platform_metrics": {
+      "EPYC_LINUX": {
+        "benign_hours": 9.866666666666667,
+        "detected": 21,
+        "detection": 0.7,
+        "event_runs": 30,
+        "fah": 0.4054054054054054,
+        "false_alerts": 4,
+        "fault_identified": 4,
+        "fault_runs": 4,
+        "median_ttd_seconds": 157.4979781699367,
+        "telemetry_fault_identification_rate": 1.0,
+        "valid_monitoring_fraction": 0.8992248062015504
+      },
+      "M2_MACOS": {
+        "benign_hours": 9.866666666666667,
+        "detected": 20,
+        "detection": 0.6666666666666666,
+        "event_runs": 30,
+        "fah": 0.2027027027027027,
+        "false_alerts": 2,
+        "fault_identified": 4,
+        "fault_runs": 4,
+        "median_ttd_seconds": 187.48698077100562,
+        "telemetry_fault_identification_rate": 1.0,
+        "valid_monitoring_fraction": 0.8992248062015504
+      }
+    }
+  },
+  "selected_on_strict_inner_g3": false,
+  "stage": "posthoc_nested_run_grouped_temporal_validation",
+  "strict_inner_candidate_count": 0,
+  "temporal_order_source": "collection.start_utc"
+}

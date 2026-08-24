@@ -21,15 +21,20 @@ over 16.8 hours (0.357 per hour) on an independently collected benign
 confirmation set. A final bounded development-only search exposed a narrow
 trade-off: 0.244 false alerts per hour with 49.2% detection, or 0.281 with 50.8%
 detection. Because neither configuration satisfied both requirements, the 92
-locked-test runs remain sealed. These findings demonstrate PRISM's portable
-cross-platform monitoring workflow while showing why long-horizon independent
-confirmation and explicit reliability gates are necessary before operational
-claims are made.
+locked-test runs remain sealed. A post-hoc complete-run temporal analysis
+detected 39 of 60 later-run events (65.0%) but yielded 0.327 false alerts per
+hour, confirming that useful detection did not meet the operational alert
+budget. A final bounded semantic-corroboration redesign reduced false alerts
+but detected at most 16 of 120 events (13.3%), activating the predeclared
+stopping rule. These findings demonstrate PRISM's portable cross-platform
+monitoring workflow while showing why long-horizon independent confirmation
+and explicit reliability gates are necessary before operational claims are
+made.
 
 ## Claim boundary
 
-- Add the nested temporal result only after Section 17B.10 runs, and label it
-  post hoc whether it supports or challenges the method.
+- Label the nested temporal result post hoc and the final redesign as a bounded
+  stopping experiment; neither is independent confirmation.
 - Do not state that G3 passed, that locked testing was completed, or that PRISM
   is deployment-ready.
 - Retain complete candidate tables and both failed independent confirmations

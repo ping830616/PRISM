@@ -130,7 +130,7 @@ reproducible. The automatic integrity section rejects embedded Mac/ASU paths
 and checks that the runtime, repository, and selected data root are writable
 and connected correctly.
 
-## Run PRISM: eight simple steps
+## Run PRISM: nine simple steps
 
 Use the switches in the named notebook sections; do not run files from
 `.prism_runtime/` directly.
@@ -144,7 +144,8 @@ Use the switches in the named notebook sections; do not run files from
 | 5 | Run Section 17 and Section 17A for the static and guarded baselines; then set `RUN_ROBUST_NORMALIZATION_G3=True` in Section 17B.2 | Baseline ablations plus the authoritative robust residual-fusion development selection |
 | 6 | Preserve the v2 and v3 confirmation records, then run the bounded v4 development gate in Section 17B.9 | Complete candidate evidence plus the two nearest operating points when no candidate meets both G3 limits |
 | 7 | Optionally run Section 17B.10 with `RUN_NESTED_TEMPORAL_VALIDATION=True` | Post-hoc nested complete-run temporal validation, including environment and artifact fingerprints; locked rows remain inaccessible |
-| 8 | Choose the publication scope explicitly | Either report the transparent pre-lock study and reserve the sealed test for future work, or freeze a passing method before evaluating the locked rows once; never use locked outcomes for selection |
+| 8 | Run the final bounded redesign once in Section 17B.11 with `RUN_V5_DEVELOPMENT_REDESIGN=True` | A 36-candidate semantic-corroboration audit that either earns fresh confirmation review or terminates detector iteration; it cannot access locked rows |
+| 9 | Freeze the publication scope | The recorded v5 result did not earn confirmation, so submit the transparent pre-lock study, retain all negative results, and keep the sealed test for a separately confirmed future method |
 
 ### Results supplied to the paper
 
@@ -157,6 +158,7 @@ Use the switches in the named notebook sections; do not run files from
 | Adaptation ablation | Accepted/rejected updates, fault freezes, promotions, and rollbacks | Guarded update audit generated |
 | Adaptive telemetry and transfer | Warning-triggered rich-tier duty cycle plus destination-platform calibration effort | Adaptive telemetry remains an offline trace replay; it is not a measured energy-saving claim |
 | Temporal robustness | Nested complete-run inner selection and later-run outer evaluation | Available as an explicitly post-hoc sensitivity analysis in Section 17B.10 |
+| Final redesign | Semantic-group corroboration of sequential warnings | No candidate passed: the best-detecting point reached 13.3% detection at 0.056 FAH, so further confirmation was not authorized |
 | Final headline table and figures | Independent-confirmation failure, v4 boundary points, complete candidate tables, and limitations | Supported for a pre-lock paper; no locked-test or deployment-readiness claim |
 
 The original and guarded ablations remain under
@@ -170,9 +172,13 @@ failures remain preserved and cannot be reused as independent confirmation.
 The final bounded v4 development search also found no configuration meeting
 both predeclared G3 limits. Its two nearest points were 0.244 false alerts/hour
 with 59/120 detections (49.2%), and 0.281/hour with 61/120 detections (50.8%).
-Section 17B.10 adds a nested, complete-run temporal sensitivity analysis, but
-it is post hoc and cannot erase either confirmation failure or authorize
-locked-test access.
+Section 17B.10's nested complete-run temporal sensitivity analysis detected
+39/60 later-run events (65.0%) but produced 11 false alerts over 33.6 benign
+hours (0.327/hour). It is post hoc and cannot erase either confirmation failure
+or authorize locked-test access. The final 36-candidate semantic-corroboration
+redesign reduced false alerts but over-suppressed real events: its
+best-detecting point reached only 16/120 detections (13.3%) at 0.056/hour.
+Consequently, no new confirmation collection is justified for this manuscript.
 
 The same warning window defines an adaptive-telemetry replay. A portable base
 tier is treated as continuously available, while the richer diagnostic tier is
@@ -185,12 +191,11 @@ monitoring time.
 
 ### Immediate next action
 
-1. On an analysis host with both platform datasets, run Section 17B.10 once
-   with `RUN_NESTED_TEMPORAL_VALIDATION=True` and preserve every generated
-   candidate, run-level result, fingerprint, and artifact hash.
+1. Stop detector tuning and collect no additional confirmation or locked-test
+   rows for this manuscript. The final bounded redesign did not earn them.
 2. Use Table 6 for the independent-confirmation and v4 boundary results; use
-   the nested Table 7/Figure 7 only with the label **post-hoc temporal
-   sensitivity analysis**, whether it favors PRISM or not.
+   Table 7/Figure 7 only with the label **post-hoc temporal sensitivity
+   analysis**, and Table 8 as the final redesign stopping record.
 3. Write the current submission as a transparent pre-lock study. State that
    the 92 locked rows remain sealed for a future confirmatory study and do not
    claim G3 passage, final held-out performance, or deployment readiness.
@@ -236,6 +241,12 @@ monitoring time.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v4-posthoc-nested-temporal/`:
   optional nested complete-run temporal candidates, outer-run results,
   environment manifest, split and candidate fingerprints, and artifact hashes.
+- `$PRISM_DATA_ROOT/processed/prism-analysis-v5/`:
+  final bounded semantic-corroboration candidate table and stopping decision;
+  the recorded result authorizes neither new confirmation nor locked testing.
+- `paper/results/development/v5-final-semantic-corroboration-*`:
+  portable tracked copies of the complete final candidate table and stopping
+  decision for review without private raw telemetry.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-operational-robustness.json`:
   combined platform/fold, fault-state, and bidirectional-transfer freeze gate.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-transfer-calibration.csv`:

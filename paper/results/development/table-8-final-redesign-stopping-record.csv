@@ -1,0 +1,3 @@
+Evidence stage,Candidates,False alerts,Benign h,FAH,Detected events,Detection (%),Fault ID (%),Decision
+Nested later-run outer evaluation,selected inner rules,11,33.6,0.327,39/60,65.0,100.0,Post-hoc G3 fail
+Final semantic corroboration,36,3,53.333,0.056,16/120,13.3,100.0,No development-margin pass
