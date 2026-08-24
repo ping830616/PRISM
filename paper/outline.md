@@ -95,27 +95,35 @@ Compare raw intersection, platform-local, and semantic adapters.
 
 Compare DICE persistence, EWMA/CUSUM, and the chosen sequential conformal method at matched false-alert budgets.
 
-### D. Nested run-grouped temporal sensitivity
+### D. DICE comparable complete run metrics
+
+Report AUC PR, ROC AUC, precision, recall, event F1, and macro F1 from one
+cross-fitted score per complete development run. Report the event prevalence
+beside AUC PR and retain FAH, delay, and telemetry-fault identification as the
+operational measures. Do not present these secondary metrics as independent
+confirmation.
+
+### E. Nested run-grouped temporal sensitivity
 
 Keep complete runs intact, use earlier matched runs for inner selection and
 later runs for outer evaluation, disclose the complete candidate table, and
 label the result post hoc. It is not a locked-test substitute.
 
-### E. Final bounded redesign and stopping decision
+### F. Final bounded redesign and stopping decision
 
 Report the semantic-corroboration mechanism, all 36 bounded candidates, and
 the no-pass decision. Emphasize that suppressing false alerts also suppressed
 true events, so the redesign did not earn another confirmation collection.
 
-### F. Crash, interruption, and drift robustness
+### G. Crash, interruption, and drift robustness
 
 Separate system anomalies from unavailable/stale telemetry and collector failure.
 
-### G. Diagnosis stability
+### H. Diagnosis stability
 
 Category/subsystem-path accuracy, selective coverage, and platform agreement.
 
-### H. Optional update or telemetry policy
+### I. Optional update or telemetry policy
 
 Include only passed, frozen results.
 

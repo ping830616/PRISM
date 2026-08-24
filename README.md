@@ -130,7 +130,7 @@ reproducible. The automatic integrity section rejects embedded Mac/ASU paths
 and checks that the runtime, repository, and selected data root are writable
 and connected correctly.
 
-## Run PRISM: nine simple steps
+## Run PRISM: ten simple steps
 
 Use the switches in the named notebook sections; do not run files from
 `.prism_runtime/` directly.
@@ -145,7 +145,8 @@ Use the switches in the named notebook sections; do not run files from
 | 6 | Preserve the v2 and v3 confirmation records, then run the bounded v4 development gate in Section 17B.9 | Complete candidate evidence plus the two nearest operating points when no candidate meets both G3 limits |
 | 7 | Optionally run Section 17B.10 with `RUN_NESTED_TEMPORAL_VALIDATION=True` | Post-hoc nested complete-run temporal validation, including environment and artifact fingerprints; locked rows remain inaccessible |
 | 8 | Run the final bounded redesign once in Section 17B.11 with `RUN_V5_DEVELOPMENT_REDESIGN=True` | A 36-candidate semantic-corroboration audit that either earns fresh confirmation review or terminates detector iteration; it cannot access locked rows |
-| 9 | Freeze the publication scope | The recorded v5 result did not earn confirmation, so submit the transparent pre-lock study, retain all negative results, and keep the sealed test for a separately confirmed future method |
+| 9 | Set `RUN_DICE_COMPARABLE_METRICS=True` once in Section 17B.13, then return it to `False` | Complete run AUC PR, ROC AUC, precision, recall, event F1, macro F1, platform/workload tables, confidence intervals, and Figure 8; no method retuning or locked access |
+| 10 | Freeze the publication scope | The recorded v5 result did not earn confirmation, so submit the transparent pre-lock study, retain all negative results, and keep the sealed test for a separately confirmed future method |
 
 ### Results supplied to the paper
 
@@ -159,6 +160,7 @@ Use the switches in the named notebook sections; do not run files from
 | Adaptive telemetry and transfer | Warning-triggered rich-tier duty cycle plus destination-platform calibration effort | Adaptive telemetry remains an offline trace replay; it is not a measured energy-saving claim |
 | Temporal robustness | Nested complete-run inner selection and later-run outer evaluation | Available as an explicitly post-hoc sensitivity analysis in Section 17B.10 |
 | Final redesign | Semantic-group corroboration of sequential warnings | No candidate passed: the best-detecting point reached 13.3% detection at 0.056 FAH, so further confirmation was not authorized |
+| DICE comparable metrics | Complete-run AUC PR, ROC AUC, precision, recall, event F1, macro F1, FAH, delay, and fault identification | Pooled development: 0.755 AUC PR, 0.527 ROC AUC, 0.922 precision, 0.592 recall, 0.721 event F1, and 0.663 macro F1; independent confirmation remains the controlling reliability result |
 | Final headline table and figures | Independent-confirmation failure, v4 boundary points, complete candidate tables, and limitations | Supported for a pre-lock paper; no locked-test or deployment-readiness claim |
 
 The original and guarded ablations remain under
