@@ -1,0 +1,4 @@
+Evidence,Source,Benign h,False alerts,FAH,Detected events,Detection (%),Interpretation
+v3 frozen method,independent benign confirmation,16.8,6,0.35714285714285715,71/120,59.166666666666664,Independent FAH check failed
+v4 point A,expanded development,53.333333333333336,13,0.24375,59/120,49.166666666666664,FAH met; detection missed by one run
+v4 point B,expanded development,53.333333333333336,15,0.28125,61/120,50.833333333333336,Detection met; FAH above budget

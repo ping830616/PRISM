@@ -67,6 +67,8 @@ Safe online micro-twin updates and adaptive telemetry escalation are secondary c
 - `configs/experiment-matrix.toml`: machine-readable experiment design.
 - `data/README.md`: immutable data layout and provenance rules.
 - `paper/outline.md`: journal narrative and required tables/figures.
+- `paper/abstract-prelock.md`: evidence-aligned abstract and publication claim
+  boundary for the current pre-lock manuscript.
 - `notebooks/PRISM_Complete_Experiment.ipynb`: canonical source for collection,
   validation, tests, DICE import, dual-platform semantic preprocessing,
   ridge/VAR micro-twins, sequential method selection, transfer calibration,
@@ -140,9 +142,9 @@ Use the switches in the named notebook sections; do not run files from
 | 3 | With the machine authorized and idle, use Sections 10–12 to collect all calibration/development rows | Validated raw telemetry, events, platform/channel metadata, checksums, progress, and quality reports |
 | 4 | Put both platforms under one `PRISM_DATA_ROOT`; set `RUN_PREFREEZE_AUDIT=True` in Section 14 and `RUN_PREPARE_ANALYSIS=True` once in Section 15 | A 160-run pre-freeze inventory, immutable dataset fingerprint, and five-second semantic-block cache |
 | 5 | Run Section 17 and Section 17A for the static and guarded baselines; then set `RUN_ROBUST_NORMALIZATION_G3=True` in Section 17B.2 | Baseline ablations plus the authoritative robust residual-fusion development selection |
-| 6 | Preserve the failed v2 confirmation, then set `RUN_V3_DEVELOPMENT_SEARCH=True` once in Section 17B.7 | A bounded 216-candidate v3 development search with platform-conditioned calibration, sequential warnings, residual confirmation, subgroup G3, and adaptive-telemetry duty-cycle replay |
-| 7 | If v3 passes development G3, use Section 17B.8 to collect and evaluate the new 16-run independent confirmation plan with the selected method unchanged | A checksum-backed benign confirmation report with pooled, platform, and fold FAH; confirmation rows are excluded from fitting and tuning |
-| 8 | Only after v3 confirmation passes, complete transfer review, advisor review, and Section 19 method freeze; then collect the 46 locked rows per platform exactly once | Final independent test evidence for the journal paper; it must never be used to retune the method |
+| 6 | Preserve the v2 and v3 confirmation records, then run the bounded v4 development gate in Section 17B.9 | Complete candidate evidence plus the two nearest operating points when no candidate meets both G3 limits |
+| 7 | Optionally run Section 17B.10 with `RUN_NESTED_TEMPORAL_VALIDATION=True` | Post-hoc nested complete-run temporal validation, including environment and artifact fingerprints; locked rows remain inaccessible |
+| 8 | Choose the publication scope explicitly | Either report the transparent pre-lock study and reserve the sealed test for future work, or freeze a passing method before evaluating the locked rows once; never use locked outcomes for selection |
 
 ### Results supplied to the paper
 
@@ -151,31 +153,26 @@ Use the switches in the named notebook sections; do not run files from
 | Dataset and quality table | Run counts, benign hours, cadence, channel coverage, failures, and checksum-backed provenance | Pre-freeze Apple/EPYC evidence available |
 | Cross-platform telemetry table | Shared semantic groups plus Apple- and Linux-specific sensor availability | Available from smoke and quality reports |
 | Monitoring comparison | Static VAR versus robust guarded adaptive VAR, persistence, EWMA, CUSUM, and conformal/e-process candidates | Development CSV/JSON generated |
-| Reliability results | False alerts per benign hour, anomaly-run detection, median time-to-detect, and telemetry-interruption identification | v3 passes strict development G3 at 0.164 FAH and 59.2% detection, including both platforms and folds; fresh independent confirmation is still required |
+| Reliability results | False alerts per benign hour, anomaly-run detection, median time-to-detect, and telemetry-interruption identification | Frozen v3 failed independent benign confirmation at 0.357 FAH; v4 found no point meeting both G3 limits |
 | Adaptation ablation | Accepted/rejected updates, fault freezes, promotions, and rollbacks | Guarded update audit generated |
-| Adaptive telemetry and transfer | Warning-triggered rich-tier duty cycle plus destination-platform calibration effort | Adaptive telemetry is an offline trace replay; transfer review stays closed until v3 independent confirmation passes |
-| Final headline table and figures | One-time locked-test performance with uncertainty and limitations | Not generated until G3 passes and the method is frozen |
+| Adaptive telemetry and transfer | Warning-triggered rich-tier duty cycle plus destination-platform calibration effort | Adaptive telemetry remains an offline trace replay; it is not a measured energy-saving claim |
+| Temporal robustness | Nested complete-run inner selection and later-run outer evaluation | Available as an explicitly post-hoc sensitivity analysis in Section 17B.10 |
+| Final headline table and figures | Independent-confirmation failure, v4 boundary points, complete candidate tables, and limitations | Supported for a pre-lock paper; no locked-test or deployment-readiness claim |
 
 The original and guarded ablations remain under
-`$PRISM_DATA_ROOT/processed/prism-analysis-v1/`. The first supplement
-confirmation failed narrowly, and the later independent v2 confirmation failed
-clearly: 17 false alerts over 16.8 benign hours (1.012/hour), driven mainly by
-EPYC. Both failures remain preserved. Once examined, those 32 benign sessions
-become development evidence and can never be reused to confirm another method.
+`$PRISM_DATA_ROOT/processed/prism-analysis-v1/`. The independent v2
+confirmation failed at 17 false alerts over 16.8 benign hours (1.012/hour).
+The later frozen v3 method detected 71/120 controlled event runs (59.2%) during
+development, but its new 16-run benign confirmation produced 6 false alerts
+over 16.8 hours (0.357/hour), exceeding the 0.25/hour requirement. Both
+failures remain preserved and cannot be reused as independent confirmation.
 
-Section 17B.7 implements the next scientifically valid iteration. The model is
-shared across the two platforms, but each platform/workload pair calibrates its
-own benign score distribution. A block-thinned sequential rule first emits a
-warning; a behavioral alert is issued only if residual-only evidence confirms
-that warning within a fixed six-block window. The bounded search records all
-216 candidates, every false alert, subgroup metrics, and a method fingerprint.
-It never reads locked-test rows.
-
-On the current expanded development evidence, exactly one of the 216 candidates
-passes strict G3: 6 false alerts over 36.533 benign hours (0.164/hour) and 71/120
-event-run detections (59.2%). EPYC (0.219/hour; 56.7%), M2 (0.109/hour; 61.7%),
-fold 0 (0.109/hour; 55.0%), and fold 1 (0.219/hour; 63.3%) each pass separately.
-These are development-selection results—not independent or final claims.
+The final bounded v4 development search also found no configuration meeting
+both predeclared G3 limits. Its two nearest points were 0.244 false alerts/hour
+with 59/120 detections (49.2%), and 0.281/hour with 61/120 detections (50.8%).
+Section 17B.10 adds a nested, complete-run temporal sensitivity analysis, but
+it is post hoc and cannot erase either confirmation failure or authorize
+locked-test access.
 
 The same warning window defines an adaptive-telemetry replay. A portable base
 tier is treated as continuously available, while the richer diagnostic tier is
@@ -188,26 +185,18 @@ monitoring time.
 
 ### Immediate next action
 
-1. Run Section 17B.7 once on the Mac with
-   `RUN_V3_DEVELOPMENT_SEARCH=True`. Preserve the complete candidate table and
-   selection JSON; do not edit the selected operating point afterward.
-2. If and only if `development_g3_passed` is `true`, merge this
-   notebook/protocol revision and use the same clean commit on both hosts.
-3. In Section 17B.8, preview the next row. On an idle Mac set
-   `V3_CONFIRMATION_PLAN_ACKNOWLEDGED=True`,
-   `EXECUTE_V3_CONFIRMATION=True`, and `V3_CONFIRMATION_BATCH_SIZE=8`.
-4. Repeat step 3 on the authorized idle EPYC host. Each platform requires about
-   8.7 collection hours.
-5. Copy the EPYC v3 raw folders and tracker to the Mac data root, rerun the
-   checksum-backed audit and semantic preparation, then set
-   `RUN_V3_CONFIRMATION_EVALUATION=True` in Section 17B.8.
-6. Only a pooled, per-platform, and per-fold confirmation pass advances PRISM
-   to transfer review and the signed method freeze. Locked testing remains
-   closed until those reviews are complete.
-
-A v3 development pass is not final evidence because its method was selected
-after observing both prior confirmation failures. The new 16-session v3 plan is
-therefore mandatory and may be evaluated only once without tuning.
+1. On an analysis host with both platform datasets, run Section 17B.10 once
+   with `RUN_NESTED_TEMPORAL_VALIDATION=True` and preserve every generated
+   candidate, run-level result, fingerprint, and artifact hash.
+2. Use Table 6 for the independent-confirmation and v4 boundary results; use
+   the nested Table 7/Figure 7 only with the label **post-hoc temporal
+   sensitivity analysis**, whether it favors PRISM or not.
+3. Write the current submission as a transparent pre-lock study. State that
+   the 92 locked rows remain sealed for a future confirmatory study and do not
+   claim G3 passage, final held-out performance, or deployment readiness.
+4. Preserve the full candidate tables and negative results. Reporting only the
+   most favorable point would be selection bias and would weaken both the
+   scientific paper and the public research artifact.
 
 ### Main files to expect
 
@@ -241,6 +230,12 @@ therefore mandatory and may be evaluated only once without tuning.
   offline replay; it does not claim measured hardware-energy savings.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v3/independent-confirmation-result.json`:
   one-shot v3 confirmation decision with pooled, platform, and fold FAH.
+- `$PRISM_DATA_ROOT/processed/prism-analysis-v4/development-persistent-corroboration-selection.json`:
+  bounded v4 development result, both nearest G3 boundary points, and the
+  preserved no-pass decision.
+- `$PRISM_DATA_ROOT/processed/prism-analysis-v4-posthoc-nested-temporal/`:
+  optional nested complete-run temporal candidates, outer-run results,
+  environment manifest, split and candidate fingerprints, and artifact hashes.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-operational-robustness.json`:
   combined platform/fold, fault-state, and bidirectional-transfer freeze gate.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-transfer-calibration.csv`:
@@ -287,7 +282,7 @@ execution of that combination.
 | 4 | Collect benign monitoring across different times/restarts | Three 48-minute sessions per workload; 12 benign hours per platform overall |
 | 5 | Validate every run and back up raw evidence | Check cadence, coverage, events, manifests, and SHA-256 checksums |
 | 6 | Freeze models, features, thresholds, and analysis choices | Never tune with locked-test runs |
-| 7 | Collect and evaluate the locked test once | Unlock only after method freeze; report all outcomes |
+| 7 | Reserve or evaluate the locked test according to the declared paper scope | For the current pre-lock paper, keep it sealed; for a future confirmatory study, unlock only after method freeze and report all outcomes |
 
 See the [end-to-end collection roadmap](docs/data-collection-roadmap.md) for
 the complete operator procedure.
@@ -295,7 +290,9 @@ the complete operator procedure.
 ## Reproducibility Rules
 
 - Split by independent run, never by windows from the same run.
-- Tune only on development runs; keep the final platform/workload test partition locked.
+- Tune only on development runs; keep the final platform/workload test partition
+  locked unless a passing method is frozen for a separately declared future
+  confirmatory evaluation.
 - Treat repeated seeds on one trace as computational sensitivity, not independent experimental replication.
 - Record raw data immutably and derive processed tables with hashes and manifests.
 - Report confidence intervals and denominator counts with every headline rate.
@@ -303,4 +300,9 @@ the complete operator procedure.
 
 ## Publication Status
 
-Working research repository. Do not make public, archive a release, or add a code/data license until the authors and advisor approve the publication plan.
+Working research repository. The current defensible manuscript scope is a
+transparent pre-lock study: independent confirmation failures and all bounded
+development analyses are retained, while the 92 locked rows remain sealed for
+future confirmation. Do not claim final held-out performance or deployment
+readiness, and do not make the repository public, archive a release, or add a
+code/data license until the authors and advisor approve the publication plan.

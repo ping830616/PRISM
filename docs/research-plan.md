@@ -4,6 +4,21 @@ Target submission date: **August 30, 2026**
 
 Planning date: **July 27, 2026**
 
+## Status amendment — August 24, 2026
+
+The original full-extension success definition below has not been met. The
+frozen v3 detector failed independent benign confirmation at 0.357 false
+alerts/hour, and the bounded v4 analysis found no operating point meeting both
+G3 limits. The 92 locked rows therefore remain sealed.
+
+The current defensible submission scope is a transparent pre-lock reliability
+study: dual-platform collection and semantics, behavioral digital-micro-twin
+monitoring, explicit telemetry-fault handling, preserved negative
+confirmation, G3 boundary analysis, and post-hoc nested complete-run temporal
+sensitivity. This amendment does not redefine a failure as success and does
+not permit favorable-result-only reporting. A later confirmatory study may use
+the locked rows only after a method is frozen independently of their outcomes.
+
 ## Success Definition
 
 Submit a journal manuscript whose central result is:
