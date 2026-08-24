@@ -130,7 +130,7 @@ reproducible. The automatic integrity section rejects embedded Mac/ASU paths
 and checks that the runtime, repository, and selected data root are writable
 and connected correctly.
 
-## Run PRISM: nine simple steps
+## Run PRISM: ten simple steps
 
 Use the switches in the named notebook sections; do not run files from
 `.prism_runtime/` directly.
@@ -145,7 +145,8 @@ Use the switches in the named notebook sections; do not run files from
 | 6 | Preserve the v2 and v3 confirmation records, then run the bounded v4 development gate in Section 17B.9 | Complete candidate evidence plus the two nearest operating points when no candidate meets both G3 limits |
 | 7 | Optionally run Section 17B.10 with `RUN_NESTED_TEMPORAL_VALIDATION=True` | Post-hoc nested complete-run temporal validation, including environment and artifact fingerprints; locked rows remain inaccessible |
 | 8 | Run the final bounded redesign once in Section 17B.11 with `RUN_V5_DEVELOPMENT_REDESIGN=True` | A 36-candidate semantic-corroboration audit that either earns fresh confirmation review or terminates detector iteration; it cannot access locked rows |
-| 9 | Freeze the publication scope | The recorded v5 result did not earn confirmation, so submit the transparent pre-lock study, retain all negative results, and keep the sealed test for a separately confirmed future method |
+| 9 | Set `RUN_DICE_COMPARABLE_METRICS=True` once in Section 17B.13, return it to `False`, then run the paper cells in Section 17D | Operational Tables 9--10 and Figure 8; conventional AUC and F1 results are retained as Supplementary Tables S1--S2 and Figure S1; no retuning or locked access |
+| 10 | Freeze the publication scope | The recorded v5 result did not earn confirmation, so submit the transparent pre-lock study, retain all negative results, and keep the sealed test for a separately confirmed future method |
 
 ### Results supplied to the paper
 
@@ -159,7 +160,10 @@ Use the switches in the named notebook sections; do not run files from
 | Adaptive telemetry and transfer | Warning-triggered rich-tier duty cycle plus destination-platform calibration effort | Adaptive telemetry remains an offline trace replay; it is not a measured energy-saving claim |
 | Temporal robustness | Nested complete-run inner selection and later-run outer evaluation | Available as an explicitly post-hoc sensitivity analysis in Section 17B.10 |
 | Final redesign | Semantic-group corroboration of sequential warnings | No candidate passed: the best-detecting point reached 13.3% detection at 0.056 FAH, so further confirmation was not authorized |
-| Final headline table and figures | Independent-confirmation failure, v4 boundary points, complete candidate tables, and limitations | Supported for a pre-lock paper; no locked-test or deployment-readiness claim |
+| Operational scorecard | Monitored hours, alert episodes per hour, controlled event coverage, detection delay, fault identification, valid monitoring, and adaptive telemetry replay | 59.2% development event coverage, 100% telemetry fault identification, 337.5-s median detection time, 36.53 development benign hours, and 99.7% rich telemetry time avoided in independent offline replay |
+| Scenario and platform robustness | Complete-run scenario counts, Apple/AMD subgroup rates, and independent benign confirmation | Seven of nine event scenarios reached at least 50% development coverage; Apple and AMD differed by five detection percentage points; confirmation remains the controlling reliability result |
+| Conventional classifier supplement | Complete-run AUC PR, ROC AUC, precision, recall, and F1 | Retained transparently in Supplementary Tables S1--S2 and Figure S1 rather than used as the headline PRISM claim |
+| Final headline table and figures | Operational scorecard, scenario coverage, independent-confirmation evidence, v4 boundary points, complete candidate tables, and limitations | Supported for a pre-lock paper; no locked-test or deployment-readiness claim |
 
 The original and guarded ablations remain under
 `$PRISM_DATA_ROOT/processed/prism-analysis-v1/`. The independent v2

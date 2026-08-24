@@ -1,0 +1,26 @@
+\begin{table*}[!t]
+\centering
+\caption{Supplementary DICE comparable complete run development metrics.}
+\label{tab:prism_dice_comparable_supplement}
+{\scriptsize
+\setlength{\tabcolsep}{3.0pt}
+\renewcommand{\arraystretch}{1.05}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccccccccc}
+\toprule
+Scope & $N_0$ & $N_1$ & Detected & AUC PR & ROC AUC & Precision & Recall & $F_1$ & Macro $F_1$ & FAH & TTD (s) \\
+\midrule
+Pooled & 48 & 120 & 71/120 & 0.755 & 0.527 & 0.922 & 0.592 & 0.721 & 0.663 & 0.164 & 337.5 \\
+AMD EPYC & 24 & 60 & 34/60 & 0.717 & 0.469 & 0.895 & 0.567 & 0.694 & 0.633 & 0.219 & 347.5 \\
+Apple M2 & 24 & 60 & 37/60 & 0.797 & 0.579 & 0.949 & 0.617 & 0.747 & 0.693 & 0.109 & 302.5 \\
+\bottomrule
+\end{tabular}%
+}
+\par\smallskip
+\raggedright\scriptsize
+AUC PR uses average precision from the peak valid score per complete run;
+$N_0/N_1$ are benign/event runs. FAH and TTD denote false alerts per benign
+hour and median time to detect. All 16 telemetry interruption runs were
+identified separately as telemetry faults.
+}
+\end{table*}
