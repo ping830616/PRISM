@@ -4,7 +4,7 @@ Tables 1--5 and Figures 1--5 are derived from the original calibration and
 development snapshot with fingerprint
 `2d83c66675a3c4e31c7b85b67b39db5a44ad7862af9f56bc4a4c80c74e0eaf2f`.
 Tables 6--10 and Figures 6--8 preserve later pre-lock checkpoint, mechanism,
-temporal-sensitivity, stopping-rule, and DICE-comparable complete-run evidence;
+temporal-sensitivity, stopping-rule, and operational complete-run evidence;
 their source artifacts and fingerprints are identified in the canonical
 notebook. The tracked copies keep paper rendering portable when private raw
 telemetry is unavailable.
@@ -28,18 +28,19 @@ Development-only transfer analysis reveals strong directional asymmetry; the
 6. `table-6-prelock-reliability-checkpoint.csv`
 7. `table-7-nested-temporal-validation.csv`
 8. `table-8-final-redesign-stopping-record.csv`
-9. `table-9-dice-comparable-performance.csv`
-10. `table-10-dice-comparable-workload-performance.csv`
+9. `table-9-operational-evidence-scorecard.csv`
+10. `table-10-scenario-detection-coverage.csv`
 
 Table 7 must be reported as a post-hoc temporal sensitivity result and may not
 replace independent confirmation. Table 8 documents why no additional
 confirmation or locked-test collection was authorized.
 
-Tables 9 and 10 report secondary, DICE-comparable complete-run metrics. The
-pooled frozen v3 decision reached 0.922 precision, 0.592 recall, 0.721 event F1,
-and 0.663 macro F1. Its AUC PR was 0.755 against an event prevalence of 0.714,
-while ROC AUC was 0.527. These development metrics characterize the selected
-rule but do not supersede the failed independent benign confirmation.
+Tables 9 and 10 are the primary operational summaries. Table 9 reports
+monitored hours, false-alert episodes per hour, controlled-event coverage,
+detection delay, telemetry-fault identification, valid monitoring, and adaptive
+telemetry replay. Table 10 retains counts for every controlled scenario so that
+pooled coverage cannot conceal a weak event type. Neither table supersedes the
+independent benign confirmation.
 
 The complete nested audit is retained in
 `nested-run-grouped-inner-candidates.csv`,
@@ -51,7 +52,9 @@ The complete final-redesign audit is retained in
 `v5-final-semantic-corroboration-selection.json`. The summary table does not
 replace these full candidate and stopping-decision artifacts.
 
-The DICE-comparable audit is retained in
+The conventional DICE-comparable audit is retained as supplementary evidence in
+`supplement-s1-dice-comparable-performance.csv`,
+`supplement-s2-dice-comparable-workload-performance.csv`, and
 `supporting-dice-comparable-complete-run-scores.csv`. It contains one row per
 complete run, fold identity, peak/median/p95 score summaries, frozen alert
 outcomes, FAH accounting, delay, fault identification, and an explicit false
@@ -71,5 +74,7 @@ The notebook regenerates eight 300-dpi PNGs under
 headline method performance, guarded-update safety audit, and research
 progression, plus a data-grounded behavioral digital-micro-twin illustration.
 Figure 7 is the post-hoc nested temporal analysis and must retain that label.
-Figure 8 shows pooled and per-platform complete-run ROC and precision-recall
-curves; its precision-recall panel includes the 0.714 event-prevalence baseline.
+Figure 8 integrates scenario coverage, development and confirmation FAH,
+detection-time distributions, telemetry-fault identification, valid monitoring,
+and adaptive rich-telemetry replay. Conventional complete-run ROC and
+precision-recall curves remain available as `figure-s1-dice-comparable-discrimination.png`.

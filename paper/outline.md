@@ -95,7 +95,14 @@ Compare raw intersection, platform-local, and semantic adapters.
 
 Compare DICE persistence, EWMA/CUSUM, and the chosen sequential conformal method at matched false-alert budgets.
 
-### D. DICE comparable complete run metrics
+### D. Operational evidence scorecard
+
+Lead with monitored hours, false-alert episodes per hour, complete-run event
+coverage, detection delay, telemetry-fault identification, valid monitoring,
+and adaptive telemetry duty cycle. Retain scenario and platform subgroups so
+pooled performance cannot conceal a weak condition.
+
+### E. Conventional complete run metrics (supplement)
 
 Report AUC PR, ROC AUC, precision, recall, event F1, and macro F1 from one
 cross-fitted score per complete development run. Report the event prevalence
@@ -103,19 +110,19 @@ beside AUC PR and retain FAH, delay, and telemetry-fault identification as the
 operational measures. Do not present these secondary metrics as independent
 confirmation.
 
-### E. Nested run-grouped temporal sensitivity
+### F. Nested run-grouped temporal sensitivity
 
 Keep complete runs intact, use earlier matched runs for inner selection and
 later runs for outer evaluation, disclose the complete candidate table, and
 label the result post hoc. It is not a locked-test substitute.
 
-### F. Final bounded redesign and stopping decision
+### G. Final bounded redesign and stopping decision
 
 Report the semantic-corroboration mechanism, all 36 bounded candidates, and
 the no-pass decision. Emphasize that suppressing false alerts also suppressed
 true events, so the redesign did not earn another confirmation collection.
 
-### G. Crash, interruption, and drift robustness
+### H. Crash, interruption, and drift robustness
 
 Separate system anomalies from unavailable/stale telemetry and collector failure.
 

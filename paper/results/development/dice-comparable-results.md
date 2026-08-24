@@ -1,4 +1,4 @@
-# DICE comparable complete run results
+# Supplementary DICE comparable complete run results
 
 ## Recommended results text
 
@@ -32,11 +32,11 @@ confirmation, which remains the controlling reliability result.
 
 ## Paper artifacts
 
-- `table-9-dice-comparable-performance.csv`: pooled and platform summary.
-- `table-10-dice-comparable-workload-performance.csv`: workload summary.
+- `supplement-s1-dice-comparable-performance.csv`: pooled and platform summary.
+- `supplement-s2-dice-comparable-workload-performance.csv`: workload summary.
 - `supporting-dice-comparable-complete-run-scores.csv`: one auditable row per
   complete development run.
-- `figure-8-dice-comparable-discrimination.png`: pooled and platform ROC and
+- `figure-s1-dice-comparable-discrimination.png`: pooled and platform ROC and
   precision recall curves.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v3-dice-comparable/`: full JSON,
   confidence intervals, scope table, and run scores.
