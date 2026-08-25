@@ -43,9 +43,12 @@ telemetry replay. Table 10 retains counts for every controlled scenario so that
 pooled coverage cannot conceal a weak event type. Neither table supersedes the
 independent benign confirmation.
 
-Table 11 is a separate post hoc offline diagnostic analysis. It uses controlled
-event labels and repetition held out complete run folds. Its best development
-result is 0.997 AUC PR, 0.986 ROC AUC, and 0.971 F1. It does not repair the
+Table 11 is a separate post hoc offline diagnostic design space. It compares
+One Class SVM, logistic regression, Random Forest, ExtraTrees, and gradient
+boosting with repetition held out complete run folds. In addition to AUC PR,
+ROC AUC, and F1, it reports MCC, balanced accuracy, Brier score, worst platform
+F1, and inference time. ExtraTrees reaches 0.997 AUC PR, 0.986 ROC AUC, 0.858
+MCC, 0.914 balanced accuracy, and 0.971 F1. It does not repair the
 online false alert gate, replace independent confirmation, authorize locked
 access, or establish deployment readiness. New independent event confirmation
 would be required before treating these values as final performance.
