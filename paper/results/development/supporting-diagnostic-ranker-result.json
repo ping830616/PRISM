@@ -1,0 +1,222 @@
+{
+  "analysis_revision": "prism-analysis-v6-diagnostic-ranker",
+  "bootstrap_95_percent": {
+    "auc_pr": [
+      0.9915824079967551,
+      0.9993149929970485
+    ],
+    "f1": [
+      0.9465020576131687,
+      0.9885079323456143
+    ],
+    "roc_auc": [
+      0.9694486564847844,
+      0.9972582253240279
+    ]
+  },
+  "bounded_comparators": [
+    "benign_only_one_class_svm",
+    "event_labelled_logistic"
+  ],
+  "dataset_fingerprint": "e8cccd65a69310464d9de9bed4cfd48c0c221443632a40ecef3048881a372044",
+  "eligible_for_locked_test": false,
+  "fit_or_tune_on_confirmation": false,
+  "interpretation": "The diagnostic ranker is an offline supervised development analysis. It does not repair or replace the online FAH gate and requires new independent event confirmation before a final performance claim.",
+  "locked_test_accessed": false,
+  "model_configuration": {
+    "baseline_seconds": 120,
+    "class_weight": "balanced",
+    "decision_threshold": 0.5,
+    "family": "extremely_randomized_trees",
+    "maximum_features": "sqrt",
+    "minimum_leaf_runs": 2,
+    "observation_seconds": 600,
+    "post_hoc": true,
+    "trees": 500
+  },
+  "model_fingerprint": "54cce352ca499ce0f4c707c8910f343dd8973d6dc039a4aa66e05524cc3c57bd",
+  "performance": [
+    {
+      "auc_pr": 0.9340608562867807,
+      "event_prevalence": 0.7894736842105263,
+      "f1": 0.9056603773584906,
+      "model": "Benign-only OCSVM",
+      "precision": 0.8275862068965517,
+      "recall": 1.0,
+      "roc_auc": 0.8809895833333334,
+      "runs": 152,
+      "scope": "Pooled"
+    },
+    {
+      "auc_pr": 0.9955609384430268,
+      "event_prevalence": 0.7894736842105263,
+      "f1": 0.8571428571428571,
+      "model": "Event-labelled logistic",
+      "precision": 1.0,
+      "recall": 0.75,
+      "roc_auc": 0.9815104166666666,
+      "runs": 152,
+      "scope": "Pooled"
+    },
+    {
+      "auc_pr": 0.9965003122822005,
+      "event_prevalence": 0.7894736842105263,
+      "f1": 0.9711934156378601,
+      "model": "Event-labelled ExtraTrees",
+      "precision": 0.959349593495935,
+      "recall": 0.9833333333333333,
+      "roc_auc": 0.9864583333333334,
+      "runs": 152,
+      "scope": "Pooled"
+    },
+    {
+      "auc_pr": 0.9955690948536845,
+      "event_prevalence": 0.7894736842105263,
+      "f1": 0.9666666666666667,
+      "model": "Event-labelled ExtraTrees",
+      "precision": 0.9666666666666667,
+      "recall": 0.9666666666666667,
+      "roc_auc": 0.9822916666666667,
+      "runs": 76,
+      "scope": "Apple M2"
+    },
+    {
+      "auc_pr": 0.9972793702864781,
+      "event_prevalence": 0.7894736842105263,
+      "f1": 0.975609756097561,
+      "model": "Event-labelled ExtraTrees",
+      "precision": 0.9523809523809523,
+      "recall": 1.0,
+      "roc_auc": 0.9895833333333334,
+      "runs": 76,
+      "scope": "AMD EPYC"
+    }
+  ],
+  "post_hoc": true,
+  "scenario_stress": [
+    {
+      "auc_pr": 0.9749661377708978,
+      "event_prevalence": 0.5,
+      "f1": 0.9090909090909091,
+      "precision": 0.8823529411764706,
+      "recall": 0.9375,
+      "roc_auc": 0.97265625,
+      "runs": 32,
+      "scenario": "ATOMIC"
+    },
+    {
+      "auc_pr": 0.9930555555555556,
+      "event_prevalence": 0.5,
+      "f1": 0.9411764705882353,
+      "precision": 0.8888888888888888,
+      "recall": 1.0,
+      "roc_auc": 0.9921875,
+      "runs": 32,
+      "scenario": "BRANCH"
+    },
+    {
+      "auc_pr": 0.9930555555555556,
+      "event_prevalence": 0.5,
+      "f1": 0.9411764705882353,
+      "precision": 0.8888888888888888,
+      "recall": 1.0,
+      "roc_auc": 0.9921875,
+      "runs": 32,
+      "scenario": "CACHE"
+    },
+    {
+      "auc_pr": 1.0,
+      "event_prevalence": 0.5,
+      "f1": 0.9142857142857143,
+      "precision": 0.8421052631578947,
+      "recall": 1.0,
+      "roc_auc": 1.0,
+      "runs": 32,
+      "scenario": "CONTROLLED_CRASH"
+    },
+    {
+      "auc_pr": 0.975,
+      "event_prevalence": 0.3333333333333333,
+      "f1": 0.8421052631578947,
+      "precision": 0.7272727272727273,
+      "recall": 1.0,
+      "roc_auc": 0.984375,
+      "runs": 24,
+      "scenario": "DEGRADATION_PROXY"
+    },
+    {
+      "auc_pr": 0.9891493055555556,
+      "event_prevalence": 0.5,
+      "f1": 0.9142857142857143,
+      "precision": 0.8421052631578947,
+      "recall": 1.0,
+      "roc_auc": 0.98828125,
+      "runs": 32,
+      "scenario": "MEMBW"
+    },
+    {
+      "auc_pr": 0.9659090909090909,
+      "event_prevalence": 0.3333333333333333,
+      "f1": 0.7777777777777778,
+      "precision": 0.7,
+      "recall": 0.875,
+      "roc_auc": 0.9765625,
+      "runs": 24,
+      "scenario": "POWER_SHIFT"
+    },
+    {
+      "auc_pr": 1.0,
+      "event_prevalence": 0.3333333333333333,
+      "f1": 0.8,
+      "precision": 0.6666666666666666,
+      "recall": 1.0,
+      "roc_auc": 1.0,
+      "runs": 24,
+      "scenario": "THERMAL_SHIFT"
+    },
+    {
+      "auc_pr": 0.9875,
+      "event_prevalence": 0.5,
+      "f1": 0.8823529411764706,
+      "precision": 0.8333333333333334,
+      "recall": 0.9375,
+      "roc_auc": 0.984375,
+      "runs": 32,
+      "scenario": "TLB"
+    }
+  ],
+  "stage": "post_hoc_development_complete_run_ranking",
+  "stress_validation": [
+    {
+      "auc_pr": 0.9886858415903372,
+      "event_prevalence": 0.7894736842105263,
+      "f1": 0.9543568464730291,
+      "precision": 0.9504132231404959,
+      "recall": 0.9583333333333334,
+      "roc_auc": 0.9614583333333333,
+      "runs": 152,
+      "scope": "Leave workload out"
+    },
+    {
+      "auc_pr": 0.9447809540005051,
+      "event_prevalence": 0.7894736842105263,
+      "f1": 0.9282700421940928,
+      "precision": 0.9401709401709402,
+      "recall": 0.9166666666666666,
+      "roc_auc": 0.8794270833333333,
+      "runs": 152,
+      "scope": "Leave platform out"
+    },
+    {
+      "auc_pr": 0.9749661377708978,
+      "event_prevalence": 0.5,
+      "f1": 0.9090909090909091,
+      "precision": 0.8823529411764706,
+      "recall": 0.9375,
+      "roc_auc": 0.97265625,
+      "runs": 32,
+      "scope": "Worst unseen scenario"
+    }
+  ],
+  "uses_controlled_event_labels": true
+}
