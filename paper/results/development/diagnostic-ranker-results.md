@@ -12,14 +12,21 @@ availability without using filenames, run kind, variable run duration, future
 confirmation data, or locked data. Two cross validation folds hold out complete
 repetitions, so blocks from one run cannot appear in both fitting and scoring.
 
-The event labelled ExtraTrees ranker achieved 0.997 AUC PR, 0.986 ROC AUC,
-0.959 precision, 0.983 recall, and 0.971 F1. The 2,000 run bootstrap intervals
+The bounded comparison includes a benign only One Class SVM, logistic
+regression, Random Forest, ExtraTrees, and gradient boosting. Every supervised
+candidate uses the same fixed 0.5 threshold. The selected ExtraTrees ranker
+achieved 0.997 AUC PR, 0.986 ROC AUC, 0.858 MCC, 0.914 balanced accuracy,
+0.971 F1, and 0.054 Brier score. Its worst platform F1 was 0.967 and its warm
+cache, single threaded prediction time was 0.324 ms per run on the recorded execution
+host. The 2,000 run bootstrap intervals
 were 0.992 to 0.999 for AUC PR, 0.969 to 0.997 for ROC AUC, and 0.947 to 0.989
 for F1. Apple and EPYC F1 values were 0.967 and 0.976, respectively. A benign
-only one class SVM ablation reached 0.934 AUC PR, 0.881 ROC AUC, and 0.906 F1.
-An event labelled logistic comparator reached 0.996 AUC PR and 0.982 ROC AUC,
-but its fixed 0.5 threshold produced 0.857 F1, supporting the selected nonlinear
-ranker without tuning the reported decision threshold on the held out folds.
+only One Class SVM reached 0.934 AUC PR, 0.881 ROC AUC, and 0.906 F1; its Brier
+score is not reported because its decision values are not calibrated
+probabilities. Random Forest reached 0.950 F1, and gradient boosting reached
+0.955 F1 with 0.031 ms per run. Logistic regression ranked runs well but its
+fixed threshold produced 0.857 F1. The comparison therefore supports
+ExtraTrees without tuning the reported threshold on the held out folds.
 
 Excluded domain stress tests remained favorable but exposed the transfer
 boundary. Leaving one workload out at a time produced 0.989 AUC PR, 0.961 ROC

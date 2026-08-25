@@ -117,10 +117,12 @@ confirmation.
 
 ### F. Post hoc complete run diagnostic ranking
 
-Report the event labelled ExtraTrees result only as an offline development
-analysis. Use repetition held out complete run folds, include the benign only
-OCSVM ablation, bootstrap intervals, platform and workload subgroups, and the
-excluded workload, platform, and scenario stress tests. State that the analysis
+Report the bounded One Class SVM, logistic regression, Random Forest,
+ExtraTrees, and gradient boosting comparison only as an offline development
+analysis. Use repetition held out complete run folds and report AUC PR, ROC AUC,
+MCC, balanced accuracy, F1, Brier score, worst platform F1, inference time,
+bootstrap intervals, platform and workload subgroups, and the excluded
+workload, platform, and scenario stress tests. State that the analysis
 uses controlled event labels and requires new independent event confirmation.
 It does not replace the online FAH gate or authorize locked data.
 

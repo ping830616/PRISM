@@ -14,13 +14,44 @@
       0.9972582253240279
     ]
   },
-  "bounded_comparators": [
-    "benign_only_one_class_svm",
-    "event_labelled_logistic"
-  ],
   "dataset_fingerprint": "e8cccd65a69310464d9de9bed4cfd48c0c221443632a40ecef3048881a372044",
+  "design_space": {
+    "Benign only One Class SVM": {
+      "kernel": "rbf",
+      "nu": 0.1,
+      "probability_output": false
+    },
+    "ExtraTrees": {
+      "class_weight": "balanced",
+      "maximum_features": "sqrt",
+      "minimum_leaf_runs": 2,
+      "threshold": 0.5,
+      "trees": 500
+    },
+    "Gradient boosting": {
+      "iterations": 200,
+      "l2_regularization": 1.0,
+      "learning_rate": 0.05,
+      "maximum_leaf_nodes": 15,
+      "minimum_leaf_runs": 5,
+      "threshold": 0.5
+    },
+    "Logistic regression": {
+      "C": 0.003,
+      "class_weight": "balanced",
+      "threshold": 0.5
+    },
+    "Random Forest": {
+      "class_weight": "balanced",
+      "maximum_features": "sqrt",
+      "minimum_leaf_runs": 2,
+      "threshold": 0.5,
+      "trees": 500
+    }
+  },
   "eligible_for_locked_test": false,
   "fit_or_tune_on_confirmation": false,
+  "inference_time_definition": "Median warm-cache held-fold prediction time in milliseconds per run; 30 repetitions; single-threaded tree inference.",
   "interpretation": "The diagnostic ranker is an offline supervised development analysis. It does not repair or replace the online FAH gate and requires new independent event confirmation before a final performance claim.",
   "locked_test_accessed": false,
   "model_configuration": {
@@ -34,70 +65,93 @@
     "post_hoc": true,
     "trees": 500
   },
-  "model_fingerprint": "54cce352ca499ce0f4c707c8910f343dd8973d6dc039a4aa66e05524cc3c57bd",
+  "model_fingerprint": "9bdccd6788144442c19dcf19d7af5cda4b0aac9aa032c906f8a582666007f1ce",
   "performance": [
     {
       "auc_pr": 0.9340608562867807,
+      "balanced_accuracy": 0.609375,
+      "brier": NaN,
       "event_prevalence": 0.7894736842105263,
       "f1": 0.9056603773584906,
-      "model": "Benign-only OCSVM",
+      "inference_time_ms_per_run": 0.007595111597574463,
+      "mcc": 0.4254814716983816,
+      "model": "Benign only One Class SVM",
       "precision": 0.8275862068965517,
       "recall": 1.0,
       "roc_auc": 0.8809895833333334,
       "runs": 152,
-      "scope": "Pooled"
+      "worst_platform_f1": 0.8955223880597015
     },
     {
       "auc_pr": 0.9955609384430268,
+      "balanced_accuracy": 0.875,
+      "brier": 0.17972000088850898,
       "event_prevalence": 0.7894736842105263,
       "f1": 0.8571428571428571,
-      "model": "Event-labelled logistic",
+      "inference_time_ms_per_run": 0.010168905474098497,
+      "mcc": 0.6221710168382552,
+      "model": "Logistic regression",
       "precision": 1.0,
       "recall": 0.75,
       "roc_auc": 0.9815104166666666,
       "runs": 152,
-      "scope": "Pooled"
+      "worst_platform_f1": 0.8235294117647058
+    },
+    {
+      "auc_pr": 0.9943062527482212,
+      "balanced_accuracy": 0.88125,
+      "brier": 0.0642470019710744,
+      "event_prevalence": 0.7894736842105263,
+      "f1": 0.95,
+      "inference_time_ms_per_run": 0.2946521017675925,
+      "mcc": 0.7625,
+      "model": "Random Forest",
+      "precision": 0.95,
+      "recall": 0.95,
+      "roc_auc": 0.97890625,
+      "runs": 152,
+      "worst_platform_f1": 0.9401709401709402
     },
     {
       "auc_pr": 0.9965003122822005,
+      "balanced_accuracy": 0.9135416666666667,
+      "brier": 0.05364785517164794,
       "event_prevalence": 0.7894736842105263,
       "f1": 0.9711934156378601,
-      "model": "Event-labelled ExtraTrees",
+      "inference_time_ms_per_run": 0.3240216923203613,
+      "mcc": 0.8581502372752331,
+      "model": "ExtraTrees",
       "precision": 0.959349593495935,
       "recall": 0.9833333333333333,
       "roc_auc": 0.9864583333333334,
       "runs": 152,
-      "scope": "Pooled"
+      "worst_platform_f1": 0.9666666666666667
     },
     {
-      "auc_pr": 0.9955690948536845,
+      "auc_pr": 0.9891061405038551,
+      "balanced_accuracy": 0.8739583333333334,
+      "brier": 0.054445505134393,
       "event_prevalence": 0.7894736842105263,
-      "f1": 0.9666666666666667,
-      "model": "Event-labelled ExtraTrees",
-      "precision": 0.9666666666666667,
+      "f1": 0.9547325102880658,
+      "inference_time_ms_per_run": 0.030551343214730815,
+      "mcc": 0.7760099122967473,
+      "model": "Gradient boosting",
+      "precision": 0.943089430894309,
       "recall": 0.9666666666666667,
-      "roc_auc": 0.9822916666666667,
-      "runs": 76,
-      "scope": "Apple M2"
-    },
-    {
-      "auc_pr": 0.9972793702864781,
-      "event_prevalence": 0.7894736842105263,
-      "f1": 0.975609756097561,
-      "model": "Event-labelled ExtraTrees",
-      "precision": 0.9523809523809523,
-      "recall": 1.0,
-      "roc_auc": 0.9895833333333334,
-      "runs": 76,
-      "scope": "AMD EPYC"
+      "roc_auc": 0.9627604166666667,
+      "runs": 152,
+      "worst_platform_f1": 0.9411764705882353
     }
   ],
   "post_hoc": true,
   "scenario_stress": [
     {
       "auc_pr": 0.9749661377708978,
+      "balanced_accuracy": 0.90625,
+      "brier": 0.10175853970256374,
       "event_prevalence": 0.5,
       "f1": 0.9090909090909091,
+      "mcc": 0.8140915784106943,
       "precision": 0.8823529411764706,
       "recall": 0.9375,
       "roc_auc": 0.97265625,
@@ -106,8 +160,11 @@
     },
     {
       "auc_pr": 0.9930555555555556,
+      "balanced_accuracy": 0.9375,
+      "brier": 0.0987127894727963,
       "event_prevalence": 0.5,
       "f1": 0.9411764705882353,
+      "mcc": 0.8819171036881969,
       "precision": 0.8888888888888888,
       "recall": 1.0,
       "roc_auc": 0.9921875,
@@ -116,8 +173,11 @@
     },
     {
       "auc_pr": 0.9930555555555556,
+      "balanced_accuracy": 0.9375,
+      "brier": 0.09220830821097781,
       "event_prevalence": 0.5,
       "f1": 0.9411764705882353,
+      "mcc": 0.8819171036881969,
       "precision": 0.8888888888888888,
       "recall": 1.0,
       "roc_auc": 0.9921875,
@@ -126,8 +186,11 @@
     },
     {
       "auc_pr": 1.0,
+      "balanced_accuracy": 0.90625,
+      "brier": 0.09495463473745658,
       "event_prevalence": 0.5,
       "f1": 0.9142857142857143,
+      "mcc": 0.827170191868511,
       "precision": 0.8421052631578947,
       "recall": 1.0,
       "roc_auc": 1.0,
@@ -136,8 +199,11 @@
     },
     {
       "auc_pr": 0.975,
+      "balanced_accuracy": 0.90625,
+      "brier": 0.12533454654296547,
       "event_prevalence": 0.3333333333333333,
       "f1": 0.8421052631578947,
+      "mcc": 0.7687061147858074,
       "precision": 0.7272727272727273,
       "recall": 1.0,
       "roc_auc": 0.984375,
@@ -146,8 +212,11 @@
     },
     {
       "auc_pr": 0.9891493055555556,
+      "balanced_accuracy": 0.90625,
+      "brier": 0.09518211713686722,
       "event_prevalence": 0.5,
       "f1": 0.9142857142857143,
+      "mcc": 0.827170191868511,
       "precision": 0.8421052631578947,
       "recall": 1.0,
       "roc_auc": 0.98828125,
@@ -156,8 +225,11 @@
     },
     {
       "auc_pr": 0.9659090909090909,
+      "balanced_accuracy": 0.84375,
+      "brier": 0.12655291146219141,
       "event_prevalence": 0.3333333333333333,
       "f1": 0.7777777777777778,
+      "mcc": 0.6573757351339165,
       "precision": 0.7,
       "recall": 0.875,
       "roc_auc": 0.9765625,
@@ -166,8 +238,11 @@
     },
     {
       "auc_pr": 1.0,
+      "balanced_accuracy": 0.875,
+      "brier": 0.12588048036496066,
       "event_prevalence": 0.3333333333333333,
       "f1": 0.8,
+      "mcc": 0.7071067811865476,
       "precision": 0.6666666666666666,
       "recall": 1.0,
       "roc_auc": 1.0,
@@ -176,8 +251,11 @@
     },
     {
       "auc_pr": 0.9875,
+      "balanced_accuracy": 0.875,
+      "brier": 0.09670181757308971,
       "event_prevalence": 0.5,
       "f1": 0.8823529411764706,
+      "mcc": 0.7559289460184544,
       "precision": 0.8333333333333334,
       "recall": 0.9375,
       "roc_auc": 0.984375,
@@ -185,12 +263,16 @@
       "scenario": "TLB"
     }
   ],
+  "selected_model": "ExtraTrees",
   "stage": "post_hoc_development_complete_run_ranking",
   "stress_validation": [
     {
       "auc_pr": 0.9886858415903372,
+      "balanced_accuracy": 0.8854166666666667,
+      "brier": 0.06634215488625732,
       "event_prevalence": 0.7894736842105263,
       "f1": 0.9543568464730291,
+      "mcc": 0.7799245065057375,
       "precision": 0.9504132231404959,
       "recall": 0.9583333333333334,
       "roc_auc": 0.9614583333333333,
@@ -199,8 +281,11 @@
     },
     {
       "auc_pr": 0.9447809540005051,
+      "balanced_accuracy": 0.8489583333333333,
+      "brier": 0.14476718448523776,
       "event_prevalence": 0.7894736842105263,
       "f1": 0.9282700421940928,
+      "mcc": 0.6758374114801627,
       "precision": 0.9401709401709402,
       "recall": 0.9166666666666666,
       "roc_auc": 0.8794270833333333,
@@ -209,8 +294,11 @@
     },
     {
       "auc_pr": 0.9749661377708978,
+      "balanced_accuracy": NaN,
+      "brier": NaN,
       "event_prevalence": 0.5,
       "f1": 0.9090909090909091,
+      "mcc": NaN,
       "precision": 0.8823529411764706,
       "recall": 0.9375,
       "roc_auc": 0.97265625,
@@ -218,5 +306,6 @@
       "scope": "Worst unseen scenario"
     }
   ],
-  "uses_controlled_event_labels": true
+  "uses_controlled_event_labels": true,
+  "worst_platform_definition": "minimum Apple or EPYC F1"
 }

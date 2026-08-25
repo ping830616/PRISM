@@ -1,15 +1,19 @@
-\begin{table}
-\caption{Post-hoc development complete-run diagnostic ranking.}
+\begin{table*}[!t]
+\centering
+\caption{Bounded post-hoc complete-run diagnostic design space.}
 \label{tab:prism_diagnostic_ranker}
-\begin{tabular}{llrrrrrr}
+{\scriptsize\setlength{\tabcolsep}{3.2pt}\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{lrrrrrrrr}
 \toprule
-model & scope & runs & auc\_pr & roc\_auc & precision & recall & f1 \\
+Model & AUC-PR & ROC-AUC & MCC & Bal. acc. & F1 & Brier & Worst F1 & ms/run \\
 \midrule
-Benign-only OCSVM & Pooled & 152 & 0.934 & 0.881 & 0.828 & 1.000 & 0.906 \\
-Event-labelled logistic & Pooled & 152 & 0.996 & 0.982 & 1.000 & 0.750 & 0.857 \\
-Event-labelled ExtraTrees & Pooled & 152 & 0.997 & 0.986 & 0.959 & 0.983 & 0.971 \\
-Event-labelled ExtraTrees & Apple M2 & 76 & 0.996 & 0.982 & 0.967 & 0.967 & 0.967 \\
-Event-labelled ExtraTrees & AMD EPYC & 76 & 0.997 & 0.990 & 0.952 & 1.000 & 0.976 \\
+Benign only One Class SVM & 0.934 & 0.881 & 0.425 & 0.609 & 0.906 & -- & 0.896 & 0.008 \\
+Logistic regression & 0.996 & 0.982 & 0.622 & 0.875 & 0.857 & 0.180 & 0.824 & 0.010 \\
+Random Forest & 0.994 & 0.979 & 0.762 & 0.881 & 0.950 & 0.064 & 0.940 & 0.295 \\
+ExtraTrees & 0.997 & 0.986 & 0.858 & 0.914 & 0.971 & 0.054 & 0.967 & 0.324 \\
+Gradient boosting & 0.989 & 0.963 & 0.776 & 0.874 & 0.955 & 0.054 & 0.941 & 0.031 \\
 \bottomrule
 \end{tabular}
-\end{table}
+}
+\vspace{2pt}\scriptsize\raggedright Worst F1 is the lower Apple or EPYC F1. Timing is warm-cache prediction time per complete run on the execution host. Brier is unavailable for the uncalibrated One Class SVM.
+\end{table*}
