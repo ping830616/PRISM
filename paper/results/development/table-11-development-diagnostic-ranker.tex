@@ -1,0 +1,15 @@
+\begin{table}
+\caption{Post-hoc development complete-run diagnostic ranking.}
+\label{tab:prism_diagnostic_ranker}
+\begin{tabular}{llrrrrrr}
+\toprule
+model & scope & runs & auc\_pr & roc\_auc & precision & recall & f1 \\
+\midrule
+Benign-only OCSVM & Pooled & 152 & 0.934 & 0.881 & 0.828 & 1.000 & 0.906 \\
+Event-labelled logistic & Pooled & 152 & 0.996 & 0.982 & 1.000 & 0.750 & 0.857 \\
+Event-labelled ExtraTrees & Pooled & 152 & 0.997 & 0.986 & 0.959 & 0.983 & 0.971 \\
+Event-labelled ExtraTrees & Apple M2 & 76 & 0.996 & 0.982 & 0.967 & 0.967 & 0.967 \\
+Event-labelled ExtraTrees & AMD EPYC & 76 & 0.997 & 0.990 & 0.952 & 1.000 & 0.976 \\
+\bottomrule
+\end{tabular}
+\end{table}

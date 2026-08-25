@@ -23,6 +23,11 @@ temporal sensitivity analysis, and the final bounded redesign stopping result.
 State that G3 did not pass and that the 92 locked rows remain sealed for future
 confirmatory work.
 
+If the complete run ranker is mentioned, label its 0.997 AUC PR, 0.986 ROC AUC,
+and 0.971 F1 as post hoc development discrimination. Do not present those
+values as independent confirmation or as evidence that the online reliability
+gate passed.
+
 ## I. Introduction
 
 - Post-deployment operating conditions change.
@@ -110,27 +115,36 @@ beside AUC PR and retain FAH, delay, and telemetry-fault identification as the
 operational measures. Do not present these secondary metrics as independent
 confirmation.
 
-### F. Nested run-grouped temporal sensitivity
+### F. Post hoc complete run diagnostic ranking
+
+Report the event labelled ExtraTrees result only as an offline development
+analysis. Use repetition held out complete run folds, include the benign only
+OCSVM ablation, bootstrap intervals, platform and workload subgroups, and the
+excluded workload, platform, and scenario stress tests. State that the analysis
+uses controlled event labels and requires new independent event confirmation.
+It does not replace the online FAH gate or authorize locked data.
+
+### G. Nested run-grouped temporal sensitivity
 
 Keep complete runs intact, use earlier matched runs for inner selection and
 later runs for outer evaluation, disclose the complete candidate table, and
 label the result post hoc. It is not a locked-test substitute.
 
-### G. Final bounded redesign and stopping decision
+### H. Final bounded redesign and stopping decision
 
 Report the semantic-corroboration mechanism, all 36 bounded candidates, and
 the no-pass decision. Emphasize that suppressing false alerts also suppressed
 true events, so the redesign did not earn another confirmation collection.
 
-### H. Crash, interruption, and drift robustness
+### I. Crash, interruption, and drift robustness
 
 Separate system anomalies from unavailable/stale telemetry and collector failure.
 
-### H. Diagnosis stability
+### J. Diagnosis stability
 
 Category/subsystem-path accuracy, selective coverage, and platform agreement.
 
-### I. Optional update or telemetry policy
+### K. Optional update or telemetry policy
 
 Include only passed, frozen results.
 

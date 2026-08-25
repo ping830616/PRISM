@@ -3,7 +3,7 @@
 Tables 1--5 and Figures 1--5 are derived from the original calibration and
 development snapshot with fingerprint
 `2d83c66675a3c4e31c7b85b67b39db5a44ad7862af9f56bc4a4c80c74e0eaf2f`.
-Tables 6--10 and Figures 6--8 preserve later pre-lock checkpoint, mechanism,
+Tables 6--11 and Figures 6--9 preserve later pre-lock checkpoint, mechanism,
 temporal-sensitivity, stopping-rule, and operational complete-run evidence;
 their source artifacts and fingerprints are identified in the canonical
 notebook. The tracked copies keep paper rendering portable when private raw
@@ -30,6 +30,7 @@ Development-only transfer analysis reveals strong directional asymmetry; the
 8. `table-8-final-redesign-stopping-record.csv`
 9. `table-9-operational-evidence-scorecard.csv`
 10. `table-10-scenario-detection-coverage.csv`
+11. `table-11-development-diagnostic-ranker.csv`
 
 Table 7 must be reported as a post-hoc temporal sensitivity result and may not
 replace independent confirmation. Table 8 documents why no additional
@@ -41,6 +42,13 @@ detection delay, telemetry-fault identification, valid monitoring, and adaptive
 telemetry replay. Table 10 retains counts for every controlled scenario so that
 pooled coverage cannot conceal a weak event type. Neither table supersedes the
 independent benign confirmation.
+
+Table 11 is a separate post hoc offline diagnostic analysis. It uses controlled
+event labels and repetition held out complete run folds. Its best development
+result is 0.997 AUC PR, 0.986 ROC AUC, and 0.971 F1. It does not repair the
+online false alert gate, replace independent confirmation, authorize locked
+access, or establish deployment readiness. New independent event confirmation
+would be required before treating these values as final performance.
 
 The complete nested audit is retained in
 `nested-run-grouped-inner-candidates.csv`,
@@ -69,7 +77,7 @@ when Section 17B.2 is explicitly enabled.
 
 ## Primary figures
 
-The notebook regenerates eight 300-dpi PNGs under
+The notebook regenerates nine 300-dpi PNGs under
 `paper/figures/development/`: scenario coverage, operating-point tradeoff,
 headline method performance, guarded-update safety audit, and research
 progression, plus a data-grounded behavioral digital-micro-twin illustration.
@@ -78,3 +86,6 @@ Figure 8 integrates scenario coverage, development and confirmation FAH,
 detection-time distributions, telemetry-fault identification, valid monitoring,
 and adaptive rich-telemetry replay. Conventional complete-run ROC and
 precision-recall curves remain available as `figure-s1-dice-comparable-discrimination.png`.
+Figure 9 shows the post hoc diagnostic ROC and precision recall curves,
+platform and workload subgroup areas, and excluded workload, platform, and
+scenario stress tests.

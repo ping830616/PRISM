@@ -130,7 +130,7 @@ reproducible. The automatic integrity section rejects embedded Mac/ASU paths
 and checks that the runtime, repository, and selected data root are writable
 and connected correctly.
 
-## Run PRISM: ten simple steps
+## Run PRISM: eleven simple steps
 
 Use the switches in the named notebook sections; do not run files from
 `.prism_runtime/` directly.
@@ -146,7 +146,8 @@ Use the switches in the named notebook sections; do not run files from
 | 7 | Optionally run Section 17B.10 with `RUN_NESTED_TEMPORAL_VALIDATION=True` | Post-hoc nested complete-run temporal validation, including environment and artifact fingerprints; locked rows remain inaccessible |
 | 8 | Run the final bounded redesign once in Section 17B.11 with `RUN_V5_DEVELOPMENT_REDESIGN=True` | A 36-candidate semantic-corroboration audit that either earns fresh confirmation review or terminates detector iteration; it cannot access locked rows |
 | 9 | Set `RUN_DICE_COMPARABLE_METRICS=True` once in Section 17B.13, return it to `False`, then run the paper cells in Section 17D | Operational Tables 9--10 and Figure 8; conventional AUC and F1 results are retained as Supplementary Tables S1--S2 and Figure S1; no retuning or locked access |
-| 10 | Freeze the publication scope | The recorded v5 result did not earn confirmation, so submit the transparent pre-lock study, retain all negative results, and keep the sealed test for a separately confirmed future method |
+| 10 | Optionally set `RUN_DIAGNOSTIC_RANKER=True` once in Section 17B.14, return it to `False`, and rerun the Table 11 and Figure 9 cells | A post hoc, event labelled, complete run diagnostic analysis with repetition held out cross validation and excluded workload, platform, and scenario stress tests; it cannot access locked rows or replace G3 |
+| 11 | Freeze the publication scope | The recorded v5 result did not earn confirmation, so submit the transparent pre-lock study, retain all negative results, and keep the sealed test for a separately confirmed future method |
 
 ### Results supplied to the paper
 
@@ -163,6 +164,7 @@ Use the switches in the named notebook sections; do not run files from
 | Operational scorecard | Monitored hours, alert episodes per hour, controlled event coverage, detection delay, fault identification, valid monitoring, and adaptive telemetry replay | 59.2% development event coverage, 100% telemetry fault identification, 337.5-s median detection time, 36.53 development benign hours, and 99.7% rich telemetry time avoided in independent offline replay |
 | Scenario and platform robustness | Complete-run scenario counts, Apple/AMD subgroup rates, and independent benign confirmation | Seven of nine event scenarios reached at least 50% development coverage; Apple and AMD differed by five detection percentage points; confirmation remains the controlling reliability result |
 | Conventional classifier supplement | Complete-run AUC PR, ROC AUC, precision, recall, and F1 | Retained transparently in Supplementary Tables S1--S2 and Figure S1 rather than used as the headline PRISM claim |
+| Optional diagnostic ranker | Event labelled complete run ExtraTrees with repetition held out cross validation | Development AUC PR 0.997, ROC AUC 0.986, and F1 0.971; post hoc and awaiting new independent event confirmation |
 | Final headline table and figures | Operational scorecard, scenario coverage, independent-confirmation evidence, v4 boundary points, complete candidate tables, and limitations | Supported for a pre-lock paper; no locked-test or deployment-readiness claim |
 
 The original and guarded ablations remain under
@@ -183,6 +185,16 @@ or authorize locked-test access. The final 36-candidate semantic-corroboration
 redesign reduced false alerts but over-suppressed real events: its
 best-detecting point reached only 16/120 detections (13.3%) at 0.056/hour.
 Consequently, no new confirmation collection is justified for this manuscript.
+
+Section 17B.14 adds an explicitly separate offline diagnostic question: given a
+complete development run, can robust temporal summaries distinguish controlled
+events from benign operation? The event labelled ranker reaches 0.997 AUC PR,
+0.986 ROC AUC, and 0.971 F1 under repetition held out cross validation. Excluding
+an entire workload gives 0.989 AUC PR, while excluding an entire platform gives
+0.945 AUC PR. These post hoc results are useful diagnosis evidence, but they do
+not change the failed online confirmation, authorize locked access, or establish
+deployment readiness. A new independent event confirmation set is required for
+a final diagnostic performance claim.
 
 The same warning window defines an adaptive-telemetry replay. A portable base
 tier is treated as continuously available, while the richer diagnostic tier is
@@ -251,6 +263,13 @@ monitoring time.
 - `paper/results/development/v5-final-semantic-corroboration-*`:
   portable tracked copies of the complete final candidate table and stopping
   decision for review without private raw telemetry.
+- `$PRISM_DATA_ROOT/processed/prism-analysis-v6-diagnostic-ranker/`:
+  optional post hoc complete run diagnostic scores, model fingerprint,
+  bootstrap intervals, and excluded domain stress tests. It uses controlled
+  event labels and is not an online reliability or locked test result.
+- `paper/results/development/table-11-development-diagnostic-ranker.csv` and
+  `paper/figures/development/figure-9-development-diagnostic-ranker.png`:
+  portable paper facing copies of the diagnostic ranking result.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-operational-robustness.json`:
   combined platform/fold, fault-state, and bidirectional-transfer freeze gate.
 - `$PRISM_DATA_ROOT/processed/prism-analysis-v1/development-transfer-calibration.csv`:
