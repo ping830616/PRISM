@@ -1,5 +1,9 @@
 # Journal-Extension Data Collection Contract
 
+> Original full-extension contract. The current paper reports the narrower
+> v3 evidence in [paper-results.md](paper-results.md); it does not claim the
+> complete acquisition plan or final reserved evaluation was fulfilled.
+
 This file turns the data promises in the DICE journal-extension memo into
 executable PRISM acceptance criteria. The repository is collection-ready only
 when notebook section 5 passes. The journal extension is empirically

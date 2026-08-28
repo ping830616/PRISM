@@ -1,5 +1,9 @@
 # Apple M2 PRISM Collection
 
+> Historical acquisition instructions. The paper's collection is complete for
+> its reported scope. Use [paper reproduction](reproducibility.md) to edit
+> figures; do not recollect confirmation or reserved runs.
+
 This workflow collects **new PRISM evidence**. It does not modify the frozen
 DICE baseline. Each run synchronizes portable `psutil` counters with `macmon`
 power/temperature telemetry and can capture an `xctrace` Time Profiler trace.

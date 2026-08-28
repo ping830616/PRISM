@@ -1,94 +1,49 @@
-# PRISM development evidence
+# Experiment artifacts: development and confirmation
 
-Tables 1--5 and Figures 1--5 are derived from the original calibration and
-development snapshot with fingerprint
+This directory retains stable notebook artifact names. **Its name does not
+mean every row is development evidence**: Table 9 and Figure 8 include
+independent v3 benign confirmation. Dataset fingerprints and evidence roles
+remain attached to the underlying reports.
+
+Start with the [current paper artifact map](../../../docs/paper-artifacts.md).
+The manuscript has different figure and table numbers. Its primary numerical
+exports are generated under [../manuscript](../manuscript/).
+
+## Current paper inputs
+
+| Notebook artifact | Purpose in the paper |
+| --- | --- |
+| Tables 1–3 | Original 160-run inventory, scenario coverage, and integrity |
+| Table 4 / Figure 2 | Initial static, guarded, and robust fusion checkpoints |
+| Table 5 / Figure 4 | Earlier guarded VAR audit, not v3 offset updates |
+| Figure 6 | Representative behavioral micro-twin illustration |
+| Table 9 / Figure 8 | v3 development, independent confirmation, delay, and replay |
+| Table 10 | Controlled event detection counts by scenario |
+
+The original candidate snapshot has fingerprint
 `2d83c66675a3c4e31c7b85b67b39db5a44ad7862af9f56bc4a4c80c74e0eaf2f`.
-Tables 6--11 and Figures 6--9 preserve later pre-lock checkpoint, mechanism,
-temporal-sensitivity, stopping-rule, and operational complete-run evidence;
-their source artifacts and fingerprints are identified in the canonical
-notebook. The tracked copies keep paper rendering portable when private raw
-telemetry is unavailable.
+Static, guarded, and robust fusion JSON/CSV pairs are bundled. Their method
+exposures differ. Later v3 used expanded development evidence; these
+checkpoints are not a paired comparison on an identical exposure.
 
-They are not locked-test claims. Later evidence supersedes the early pooled
-development pass: the frozen v3 method failed independent benign confirmation
-at 0.357 false-alert episodes/hour, and the bounded v4 search found no setting
-meeting both G3 requirements. Post-hoc nested temporal validation reached
-65.0% detection but 0.327 FAH. The final semantic-corroboration redesign found
-no development-margin pass and therefore triggered the stopping rule.
-Development-only transfer analysis reveals strong directional asymmetry; the
-46 locked rows per platform remain sealed.
+The selected v3 candidate passed G3 and its platform/fold requirements during
+development. It recorded 0.357 FAH on the independent benign set, above 0.25.
+The 92 reserved runs remained sealed. A fixed candidate is not a final
+method freeze or a deployment approval.
 
-## Primary tables
+## Supporting records
 
-1. `table-1-dataset-inventory.csv`
-2. `table-2-scenario-coverage.csv`
-3. `table-3-data-quality.csv`
-4. `table-4-headline-method-comparison.csv`
-5. `table-5-guarded-update-audit.csv`
-6. `table-6-prelock-reliability-checkpoint.csv`
-7. `table-7-nested-temporal-validation.csv`
-8. `table-8-final-redesign-stopping-record.csv`
-9. `table-9-operational-evidence-scorecard.csv`
-10. `table-10-scenario-detection-coverage.csv`
-11. `table-11-development-diagnostic-ranker.csv`
+Table 6 retains the v3 confirmation and later v4 boundary points. Tables 7–8
+and Figure 7 preserve post hoc temporal validation and the final redesign
+stopping record. Full candidate and run tables remain available under
+`nested-run-grouped-*` and `v5-final-semantic-corroboration-*`.
 
-Table 7 must be reported as a post-hoc temporal sensitivity result and may not
-replace independent confirmation. Table 8 documents why no additional
-confirmation or locked-test collection was authorized.
+Table 11 / Figure 9 and `supporting-diagnostic-ranker-*` describe a separate
+post hoc offline classifier comparison. Supplementary Tables S1–S2, Figure S1,
+and `supporting-dice-comparable-complete-run-scores.csv` retain conventional
+metrics. They do not replace independent benign confirmation or demonstrate
+online deployment reliability. See [supporting analyses](../../../docs/supporting-analyses.md).
 
-Tables 9 and 10 are the primary operational summaries. Table 9 reports
-monitored hours, false-alert episodes per hour, controlled-event coverage,
-detection delay, telemetry-fault identification, valid monitoring, and adaptive
-telemetry replay. Table 10 retains counts for every controlled scenario so that
-pooled coverage cannot conceal a weak event type. Neither table supersedes the
-independent benign confirmation.
-
-Table 11 is a separate post hoc offline diagnostic design space. It compares
-One Class SVM, logistic regression, Random Forest, ExtraTrees, and gradient
-boosting with repetition held out complete run folds. In addition to AUC PR,
-ROC AUC, and F1, it reports MCC, balanced accuracy, Brier score, worst platform
-F1, and inference time. ExtraTrees reaches 0.997 AUC PR, 0.986 ROC AUC, 0.858
-MCC, 0.914 balanced accuracy, and 0.971 F1. It does not repair the
-online false alert gate, replace independent confirmation, authorize locked
-access, or establish deployment readiness. New independent event confirmation
-would be required before treating these values as final performance.
-
-The complete nested audit is retained in
-`nested-run-grouped-inner-candidates.csv`,
-`nested-run-grouped-outer-runs.csv`, and
-`nested-run-grouped-temporal-result.json`.
-
-The complete final-redesign audit is retained in
-`v5-final-semantic-corroboration-candidates.csv` and
-`v5-final-semantic-corroboration-selection.json`. The summary table does not
-replace these full candidate and stopping-decision artifacts.
-
-The conventional DICE-comparable audit is retained as supplementary evidence in
-`supplement-s1-dice-comparable-performance.csv`,
-`supplement-s2-dice-comparable-workload-performance.csv`, and
-`supporting-dice-comparable-complete-run-scores.csv`. It contains one row per
-complete run, fold identity, peak/median/p95 score summaries, frozen alert
-outcomes, FAH accounting, delay, fault identification, and an explicit false
-locked-access flag. Bootstrap intervals and complete platform/workload scopes
-are stored under the processed-data root in
-`prism-analysis-v3-dice-comparable/complete-run-performance.json`.
-
-The static and guarded selection pairs retain their complete candidate
-evidence. The canonical notebook writes the larger robust-normalization
-candidate and selection artifacts under the Git-ignored processed-data root
-when Section 17B.2 is explicitly enabled.
-
-## Primary figures
-
-The notebook regenerates nine 300-dpi PNGs under
-`paper/figures/development/`: scenario coverage, operating-point tradeoff,
-headline method performance, guarded-update safety audit, and research
-progression, plus a data-grounded behavioral digital-micro-twin illustration.
-Figure 7 is the post-hoc nested temporal analysis and must retain that label.
-Figure 8 integrates scenario coverage, development and confirmation FAH,
-detection-time distributions, telemetry-fault identification, valid monitoring,
-and adaptive rich-telemetry replay. Conventional complete-run ROC and
-precision-recall curves remain available as `figure-s1-dice-comparable-discrimination.png`.
-Figure 9 shows the post hoc diagnostic ROC and precision recall curves,
-platform and workload subgroup areas, and excluded workload, platform, and
-scenario stress tests.
+Generated plots are saved as PNG and vector PDF when their source arrays are
+available. A cache-dependent cell may instead display a bundled PNG; no new
+calculation or vector reconstruction is implied.

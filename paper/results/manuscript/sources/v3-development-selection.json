@@ -1,0 +1,139 @@
+{
+  "adaptive_telemetry_replay": {
+    "confirmed_alert_episodes": 77,
+    "eligible_monitoring_hours": 58.93333333333333,
+    "full_tier_active_hours": 0.7277777777777777,
+    "full_tier_duty_cycle": 0.012349170437405731,
+    "full_tier_time_avoided_fraction": 0.9876508295625943,
+    "interpretation": "Replay estimates how often a richer diagnostic tier would be retained after a base warning. It is not a measured hardware power reduction.",
+    "mode": "offline_trace_replay_of_continuously_collected_telemetry",
+    "physical_energy_saving_claimed": false,
+    "warning_episodes": 89
+  },
+  "analysis_revision": "prism-analysis-v3",
+  "candidate_count": 216,
+  "dataset_fingerprint": "91d34f827e3fdebf872e0379251ea43ca354285f51e6d4909c33c3c0e1e00a07",
+  "development_g3_passed": true,
+  "eligible_for_locked_test": false,
+  "locked_test_accessed": false,
+  "next_step": "Collect and evaluate the predeclared independent v3 benign confirmation with this selected method unchanged.",
+  "selected": {
+    "C": 0.03,
+    "benign_hours": 36.53333333333333,
+    "confirmation_blocks": 6,
+    "confirmed_alert_episodes": 77,
+    "detected": 71,
+    "detection": 0.5916666666666667,
+    "detector": "eprocess",
+    "eligible_blocks": 42432,
+    "escalation_fraction": 0.012349170437405731,
+    "fah": 0.1642335766423358,
+    "false_alerts": 6,
+    "fold_metrics": {
+      "0": {
+        "benign_hours": 18.266666666666666,
+        "detected": 33,
+        "detection": 0.55,
+        "fah": 0.10948905109489052,
+        "false_alerts": 2,
+        "runs": 60,
+        "telemetry_fault_identification_rate": 1.0
+      },
+      "1": {
+        "benign_hours": 18.266666666666666,
+        "detected": 38,
+        "detection": 0.6333333333333333,
+        "fah": 0.21897810218978103,
+        "false_alerts": 4,
+        "runs": 60,
+        "telemetry_fault_identification_rate": 1.0
+      }
+    },
+    "full_tier_blocks": 524,
+    "parameters": {
+      "eta": 0.9,
+      "reset_blocks": 6,
+      "reset_ratio": 0.5,
+      "threshold": 6.396929655216146
+    },
+    "platform_metrics": {
+      "EPYC_LINUX": {
+        "benign_hours": 18.266666666666666,
+        "detected": 34,
+        "detection": 0.5666666666666667,
+        "fah": 0.21897810218978103,
+        "false_alerts": 4,
+        "runs": 60,
+        "telemetry_fault_identification_rate": 1.0
+      },
+      "M2_MACOS": {
+        "benign_hours": 18.266666666666666,
+        "detected": 37,
+        "detection": 0.6166666666666667,
+        "fah": 0.10948905109489052,
+        "false_alerts": 2,
+        "runs": 60,
+        "telemetry_fault_identification_rate": 1.0
+      }
+    },
+    "pooled_g3": true,
+    "residual_alpha": 0.05,
+    "runs": 120,
+    "scenario_metrics": {
+      "ATOMIC": {
+        "detected": 11,
+        "detection": 0.6875,
+        "runs": 16
+      },
+      "BRANCH": {
+        "detected": 10,
+        "detection": 0.625,
+        "runs": 16
+      },
+      "CACHE": {
+        "detected": 10,
+        "detection": 0.625,
+        "runs": 16
+      },
+      "CONTROLLED_CRASH": {
+        "detected": 4,
+        "detection": 0.25,
+        "runs": 16
+      },
+      "DEGRADATION_PROXY": {
+        "detected": 3,
+        "detection": 0.375,
+        "runs": 8
+      },
+      "MEMBW": {
+        "detected": 10,
+        "detection": 0.625,
+        "runs": 16
+      },
+      "POWER_SHIFT": {
+        "detected": 5,
+        "detection": 0.625,
+        "runs": 8
+      },
+      "THERMAL_SHIFT": {
+        "detected": 6,
+        "detection": 0.75,
+        "runs": 8
+      },
+      "TLB": {
+        "detected": 12,
+        "detection": 0.75,
+        "runs": 16
+      }
+    },
+    "strict_platform_fold_g3": true,
+    "stride": 2,
+    "telemetry_fault_identification_rate": 1.0,
+    "ttd": 337.48666995798703,
+    "warning_episodes": 89
+  },
+  "stage": "development_only_warning_confirmation_search",
+  "strict_candidate_count": 1,
+  "v2_confirmation_reused_only_as_development": true,
+  "v2_failure_preserved": true
+}

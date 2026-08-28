@@ -1,5 +1,9 @@
 # PRISM End-to-End Data Collection Roadmap
 
+> Acquisition reference, not the current paper reproduction checklist.
+> The v3 confirmation is complete and reserved evaluation remains closed.
+> Use [reproducibility.md](reproducibility.md) for saved figures and tables.
+
 This document is the operator handbook for collecting the journal-extension
 dataset. It translates the frozen experiment contract into an ordered workflow
 for Apple M2 Pro/macOS and AMD EPYC 9354/Ubuntu.

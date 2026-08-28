@@ -1,0 +1,5 @@
+Development checkpoint,FAH,DR,Selection
+Static VAR,24.81,97.5%,Outside
+Guarded adaptive VAR,0.90,44.2%,Outside
+Robust residual fusion,0.13,51.7%,Pooled only
+PRISM sequential (v3),0.164,59.2%,Advanced to confirmation

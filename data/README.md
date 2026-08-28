@@ -1,7 +1,12 @@
 # Data Contract
 
 Raw telemetry is not tracked in Git. It remains machine-local or in a
-versioned external data store, with provenance and checksums committed here.
+versioned external data store. Bundled reports preserve dataset and method
+fingerprints; raw manifests still require access to the external data.
+
+The current paper reports 208 validated runs outside the reserved partition.
+See [evidence roles and results](../docs/paper-results.md) before using the
+historical acquisition procedures below. The 92 reserved rows remain sealed.
 
 ## DICE Baseline
 
@@ -64,7 +69,9 @@ data/
 
 ## Run Identity
 
-Every independent execution receives a unique `run_id`. Windows from the same run inherit that ID and must never appear in multiple train/calibration/development/test partitions.
+Every independent execution receives a unique `run_id`. Windows from the same
+run inherit that ID. Within an analysis revision, a complete run has one
+evidence role and cannot enter both fitting and its excluded evaluation fold.
 
 `data/collection-plan.csv` is the tracked, immutable declaration.
 `data/collection-progress.csv` is the Git-ignored machine-local execution
@@ -73,16 +80,20 @@ tracker. Do not regenerate or overwrite either file after production starts.
 `data/v2-independent-confirmation-plan.csv` separately declares 16 nominal,
 65-minute sessions used only to confirm the frozen analysis-v2 false-alert
 rate. Its machine-local tracker is
-`data/v2-independent-confirmation-progress.csv`. These run IDs must never enter
-model fitting, candidate search, threshold selection, or the original 252-run
-tracker. The locked-test partition remains closed during confirmation.
+`data/v2-independent-confirmation-progress.csv`. Within v2, these run IDs cannot
+enter fitting, candidate search, or threshold selection. After its confirmation
+result was finalized and preserved, the runs entered the separately declared
+v3 development revision. They did not alter the original 252-run tracker and
+cannot independently confirm v3.
 
 `data/v3-independent-confirmation-plan.csv` declares a second, disjoint set of
 16 nominal 65-minute sessions. It is used only after the failed v2 confirmation
 has been preserved and Section 17B.7 has selected one v3 development method.
 Its machine-local tracker is `data/v3-independent-confirmation-progress.csv`.
-The v3 rows cannot enter fitting or tuning, and they may be evaluated only once
-with the method recorded in `configs/v3-independent-confirmation.toml`.
+Within the reported v3 evaluation, these rows were used exclusively for
+confirmation with the method recorded in `configs/v3-independent-confirmation.toml`.
+Later explicitly labeled development analyses do not change that preserved
+result or turn reused data into another independent confirmation set.
 
 ## Required Run Metadata
 
