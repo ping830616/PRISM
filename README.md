@@ -132,6 +132,11 @@ and connected correctly.
 
 ## Run PRISM: eleven simple steps
 
+To edit or regenerate paper figures from saved evidence without starting new
+experiments, see [Paper figure reproduction](reproduction/README.md).
+Figure 2's axis and title sizes are controlled by `OPERATING_POINT_FONTS` in
+its notebook cell. Keep `RUN_DIAGNOSTIC_RANKER=False` for figure formatting.
+
 Use the switches in the named notebook sections; do not run files from
 `.prism_runtime/` directly.
 
