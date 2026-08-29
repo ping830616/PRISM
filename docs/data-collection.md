@@ -1,5 +1,9 @@
 # PRISM Data Collection Protocol
 
+> Acquisition reference. The current paper reports 208 admitted runs, not
+> completion of the original 252-run plan. Reserved evaluation remains closed.
+> See [the evidence guide](paper-results.md) and [reproduction guide](reproducibility.md).
+
 ## What to Reuse from DICE
 
 Reuse the DICE Apple M2 Pro dataset for two purposes only:

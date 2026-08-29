@@ -1,0 +1,24 @@
+\begin{table}[!t]
+\centering
+\caption{Development transfer calibration in both platform directions.}
+\label{tab:transfer_calibration}
+{\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.05}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{rrlrl}
+\toprule
+Destination (min) & \multicolumn{2}{c}{M2 to EPYC} & \multicolumn{2}{c}{EPYC to M2} \\
+ & FAH & DR & FAH & DR \\
+\midrule
+0 & 0.268 & 58.3\% & 1.071 & 6.7\% \\
+1 & 0.000 & 45.0\% & 0.268 & 6.7\% \\
+2 & 0.000 & 38.3\% & 0.268 & 10.0\% \\
+4 & 0.536 & 43.3\% & 0.268 & 6.7\% \\
+8 & 0.000 & 38.3\% & 0.268 & 5.0\% \\
+12 & 0.000 & 35.0\% & 1.339 & 5.0\% \\
+\bottomrule
+\end{tabular}
+}
+}
+\end{table}

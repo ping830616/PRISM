@@ -1,0 +1,158 @@
+{
+  "analysis_revision": "prism-analysis-v1",
+  "candidate_count": 4836,
+  "candidate_table": "/Users/hsiaopingni/Documents/New project/PRISM-SLM/data/processed/prism-analysis-v1/development-robust-normalization-candidates.csv",
+  "dataset_fingerprint": "2d83c66675a3c4e31c7b85b67b39db5a44ad7862af9f56bc4a4c80c74e0eaf2f",
+  "false_alert_rows": 1,
+  "false_alert_table": "/Users/hsiaopingni/Documents/New project/PRISM-SLM/data/processed/prism-analysis-v1/development-robust-normalization-false-alerts.csv",
+  "feasible_candidate_count": 4,
+  "folds": 2,
+  "gate": {
+    "maximum_false_alerts_per_hour": 0.25,
+    "minimum_detection_rate": 0.5,
+    "scope": "pooled development"
+  },
+  "gate_passed": true,
+  "locked_test_accessed": false,
+  "normalization": {
+    "center": "run-local pre-onset median",
+    "cross_fitting": "two complete-run folds with equal benign exposure",
+    "evidence": "run-local signed/magnitude micro-twin residual and semantic-context level/change features",
+    "fusion": "platform/workload-local L2 logistic regression",
+    "micro_twin": "one-lag ridge-regularized compact VAR",
+    "micro_twin_configuration": {
+      "lags": 1,
+      "penalty": 100.0
+    },
+    "scale": "run-local pre-onset MAD with standard-deviation fallback",
+    "startup_seconds": 120.0
+  },
+  "operational_robustness": {
+    "all_folds_pass": false,
+    "all_platforms_pass": false,
+    "fold_pass": {
+      "0": true,
+      "1": false
+    },
+    "platform_pass": {
+      "EPYC_LINUX": false,
+      "M2_MACOS": false
+    },
+    "ready_for_method_freeze": false
+  },
+  "selected": {
+    "C": 0.3,
+    "benign_hours": 7.466666666666667,
+    "consecutive": 44,
+    "detected": 62,
+    "detection": 0.5166666666666667,
+    "detector": "probability_persistence",
+    "fah": 0.13392857142857142,
+    "false_alerts": 1,
+    "family": "robust_normalized_fusion",
+    "fold_metrics": {
+      "0": {
+        "benign_hours": 3.7333333333333334,
+        "detected": 34,
+        "detection": 0.5666666666666667,
+        "fah": 0.0,
+        "false_alerts": 0,
+        "runs": 60,
+        "telemetry_fault_identification_rate": 1.0
+      },
+      "1": {
+        "benign_hours": 3.7333333333333334,
+        "detected": 28,
+        "detection": 0.4666666666666667,
+        "fah": 0.26785714285714285,
+        "false_alerts": 1,
+        "runs": 60,
+        "telemetry_fault_identification_rate": 1.0
+      }
+    },
+    "model_configuration": {
+      "positive_training_window_seconds": 240.0,
+      "regularization_C": 0.3,
+      "startup_seconds": 120.0
+    },
+    "parameters": {
+      "consecutive_blocks": 44,
+      "probability_threshold": 0.9,
+      "reset_blocks": 6,
+      "reset_ratio": 0.8
+    },
+    "platform_metrics": {
+      "EPYC_LINUX": {
+        "benign_hours": 3.7333333333333334,
+        "detected": 37,
+        "detection": 0.6166666666666667,
+        "fah": 0.26785714285714285,
+        "false_alerts": 1,
+        "runs": 60,
+        "telemetry_fault_identification_rate": 1.0
+      },
+      "M2_MACOS": {
+        "benign_hours": 3.7333333333333334,
+        "detected": 25,
+        "detection": 0.4166666666666667,
+        "fah": 0.0,
+        "false_alerts": 0,
+        "runs": 60,
+        "telemetry_fault_identification_rate": 1.0
+      }
+    },
+    "runs": 120,
+    "scenario_metrics": {
+      "ATOMIC": {
+        "detected": 6,
+        "detection": 0.375,
+        "runs": 16
+      },
+      "BRANCH": {
+        "detected": 6,
+        "detection": 0.375,
+        "runs": 16
+      },
+      "CACHE": {
+        "detected": 8,
+        "detection": 0.5,
+        "runs": 16
+      },
+      "CONTROLLED_CRASH": {
+        "detected": 6,
+        "detection": 0.375,
+        "runs": 16
+      },
+      "DEGRADATION_PROXY": {
+        "detected": 5,
+        "detection": 0.625,
+        "runs": 8
+      },
+      "MEMBW": {
+        "detected": 9,
+        "detection": 0.5625,
+        "runs": 16
+      },
+      "POWER_SHIFT": {
+        "detected": 7,
+        "detection": 0.875,
+        "runs": 8
+      },
+      "THERMAL_SHIFT": {
+        "detected": 6,
+        "detection": 0.75,
+        "runs": 8
+      },
+      "TLB": {
+        "detected": 9,
+        "detection": 0.5625,
+        "runs": 16
+      }
+    },
+    "telemetry_fault_identification_rate": 1.0,
+    "threshold": 0.9,
+    "ttd": 217.49835690204054
+  },
+  "selection_policy": "Among pooled G3-feasible candidates, maximize development detection, then minimize FAH, median delay, C, threshold, and persistence in that order.",
+  "stage": "development_only_robust_residual_normalization"
+}

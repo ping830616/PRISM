@@ -1,5 +1,13 @@
 # Novelty and Project Boundary
 
+## Current paper scope
+
+The reported v3 candidate passed its requirements during development but did
+not pass independent benign confirmation. The reserved partition remains
+sealed. Use [the methods guide](methods.md) and [results guide](paper-results.md)
+for current terminology and evidence; optional experiments below are not all
+claims established by this paper.
+
 ## Recommended Claim
 
 PRISM is a **cross-platform host-side reliability monitoring framework** that translates heterogeneous telemetry into platform-semantic signals and evaluates established sequential evidence mechanisms under realistic temporal dependence, repeated trials, and long benign operation.
@@ -45,11 +53,10 @@ The transfer protocol must separate two claims:
   chronological benign destination prefix to estimate local references and the
   same percentile rule, without destination event labels.
 
-A zero-shot failure is scientifically informative when the calibrated curve
-quantifies the actual deployment cost. Current development evidence requires
-12 benign minutes for M2-to-EPYC and 1 minute for EPYC-to-M2; this asymmetry is
-part of the platform-robustness result, not a defect to hide through
-destination-informed tuning.
+The preserved development transfer curve evaluates 0, 1, 2, 4, 8, and 12
+benign destination minutes. No point meets both FAH and detection requirements
+in either direction. The paper therefore reports a transfer boundary, not a
+validated minimum calibration time or successful detector portability.
 
 ### N4. Failure-aware monitoring
 

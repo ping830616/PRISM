@@ -68,8 +68,14 @@ remain clearly separated from the independent confirmation result.
   validation, analysis, and paper artifact notebook.
 - `configs/`: frozen collection and confirmation contracts.
 - `docs/data-collection-roadmap.md`: end to end collection and transfer guide.
+- `docs/README.md`: documentation index and current versus historical files.
 - `docs/apple-collection.md`: Apple M2 setup and collection procedure.
 - `docs/linux-asu-collection.md`: AMD EPYC server setup and collection procedure.
+- `docs/methods.md`: current v3 hybrid method, evidence roles, and terminology.
+- `docs/paper-artifacts.md`: manuscript figure and table provenance.
+- `docs/paper-results.md`: result denominators, uncertainty, and interpretation.
+- `docs/reproducibility.md`: bundled reproduction and raw reanalysis procedures.
+- `docs/supporting-analyses.md`: development analyses outside the main paper.
 - `docs/drift-aware-analysis.md`: analysis sequence, feasibility gate, and
   confirmation boundary.
 - `docs/novelty-boundary.md`: relationship to DICE and separation from CITADEL.
@@ -129,13 +135,29 @@ thread counts where supported.
 4. Leave every collection, redesign, confirmation, and reserved access switch
    set to `False` for a read only reproduction.
 5. Run the setup, validation, analysis loading, and paper result cells in
-   order. The notebook checks fingerprints before combining artifacts.
+   order. Section 17D displays paper evidence, and Section 17E checks the
+   reported numbers and exports manuscript tables. The notebook checks
+   fingerprints before combining artifacts.
 6. Use collection switches only on the intended host and only under the frozen
    protocol described in `docs/`.
 
 The repository bundles paper facing development artifacts for inspection. A
 full clean reproduction of numerical results requires the separately stored raw
 telemetry and its checksum manifests.
+
+For a terminal check without opening JupyterLab:
+
+```bash
+mkdir -p .prism_runtime/reproduction
+python -m jupyter nbconvert --to notebook --execute \
+  notebooks/PRISM_Complete_Experiment.ipynb \
+  --ExecutePreprocessor.timeout=300 \
+  --output PRISM.executed.ipynb \
+  --output-dir .prism_runtime/reproduction
+```
+
+Keep all collection, search, confirmation, and reserved access switches set to
+`False` for this check.
 
 ## Claim boundary
 

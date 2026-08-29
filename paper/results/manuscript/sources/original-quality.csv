@@ -1,0 +1,3 @@
+Platform,Valid runs,Invalid runs,Valid benign hours,Warning events,Failure events,Minimum critical availability
+M2_MACOS,80,0,4.7993227206018565,86,0,0.8152777777777778
+EPYC_LINUX,80,0,4.7992264542261065,0,0,1.0

@@ -1,5 +1,10 @@
 # Research and Submission Plan
 
+> Historical schedule and scope amendments. The current manuscript reports
+> the v3 study described in [paper-results.md](paper-results.md); later analyses
+> remain supporting evidence. The dated goals below do not authorize new
+> collection or reserved evaluation, and they are not the current paper outline.
+
 Target submission date: **August 30, 2026**
 
 Planning date: **July 27, 2026**

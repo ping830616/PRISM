@@ -1,0 +1,81 @@
+{
+  "analysis_revision": "prism-analysis-v2",
+  "candidate_count": 1,
+  "confirmation_collection_commit": "78785bf503f3e9fc4bc988bf89cf9ce9ea2ebea5",
+  "confirmation_dataset_fingerprint": "00b7540af25becc84fb7a763558f14d5857822a5a91ae9e99dc197e92d2e7012",
+  "confirmation_passed": false,
+  "development_dataset_fingerprint": "e8cccd65a69310464d9de9bed4cfd48c0c221443632a40ecef3048881a372044",
+  "development_detection": {
+    "detected_runs": 63,
+    "detection_rate": 0.525,
+    "event_runs": 120
+  },
+  "eligible_for_locked_test": false,
+  "eligible_for_v2_transfer_and_method_freeze_review": false,
+  "fit_or_tune_on_confirmation": false,
+  "fold_metrics": {
+    "0": {
+      "benign_hours": 8.4,
+      "fah": 0.8333333333333333,
+      "false_alerts": 7,
+      "runs": 8,
+      "telemetry_fault_blocks": 0,
+      "valid_monitoring_fraction": 1.0
+    },
+    "1": {
+      "benign_hours": 8.4,
+      "fah": 1.1904761904761905,
+      "false_alerts": 10,
+      "runs": 8,
+      "telemetry_fault_blocks": 0,
+      "valid_monitoring_fraction": 1.0
+    }
+  },
+  "frozen_method": {
+    "C": 0.03,
+    "adaptation": {
+      "alpha": 0.001,
+      "maximum_offset": 1.5,
+      "promotion_blocks": 24,
+      "rollback_probability": 0.45,
+      "rollback_window_blocks": 12,
+      "update_guard": 0.2
+    },
+    "consecutive_blocks": 36,
+    "probability_threshold": 0.925,
+    "reset_blocks": 6,
+    "reset_ratio": 0.8
+  },
+  "locked_test_accessed": false,
+  "method_fingerprint": "7196fa5d62db61aebd8ca9525a949ab5c9903fb90fe1457ce94897c75f144eca",
+  "next_step": "Confirmation failed; preserve the result and keep transfer, freeze, and locked testing closed.",
+  "plan_sha256": "0013158a7b07843d68e614bfd48f0c30013c5cf853eb08caf48225d2d8f88dc1",
+  "platform_metrics": {
+    "EPYC_LINUX": {
+      "benign_hours": 8.4,
+      "fah": 1.9047619047619047,
+      "false_alerts": 16,
+      "runs": 8,
+      "telemetry_fault_blocks": 0,
+      "valid_monitoring_fraction": 1.0
+    },
+    "M2_MACOS": {
+      "benign_hours": 8.4,
+      "fah": 0.11904761904761904,
+      "false_alerts": 1,
+      "runs": 8,
+      "telemetry_fault_blocks": 0,
+      "valid_monitoring_fraction": 1.0
+    }
+  },
+  "pooled_metrics": {
+    "benign_hours": 16.8,
+    "fah": 1.0119047619047619,
+    "false_alerts": 17,
+    "runs": 16,
+    "telemetry_fault_blocks": 0,
+    "valid_monitoring_fraction": 1.0
+  },
+  "protocol_sha256": "d87eebca25906bfe5f1145df301566c72ed59ad1c638c25610cf8c5e3346db84",
+  "stage": "independent_benign_confirmation"
+}

@@ -1,5 +1,9 @@
 # ASU AMD EPYC Linux Collection
 
+> Historical acquisition instructions. The paper's collection is complete for
+> its reported scope. Use [paper reproduction](reproducibility.md) to edit
+> figures; do not recollect confirmation or reserved runs.
+
 Use this workflow after the Apple smoke pair passes. Do not send passwords,
 private keys, tokens, or Duo codes through chat or commit them to the
 repository.

@@ -1,0 +1,97 @@
+{
+  "analysis_revision": "prism-analysis-v3",
+  "candidate_count": 1,
+  "confirmation_collection_commit": "b3224577040c95391e57c518c22497d1f7b115b3",
+  "confirmation_dataset_fingerprint": "8257ba8eb91a14153510f6a4df651be0a9eeeb63a4c28eccce935cfe23caf840",
+  "confirmation_passed": false,
+  "development_dataset_fingerprint": "91d34f827e3fdebf872e0379251ea43ca354285f51e6d4909c33c3c0e1e00a07",
+  "development_detection": {
+    "detected_runs": 71,
+    "detection_rate": 0.5916666666666667,
+    "event_runs": 120
+  },
+  "eligible_for_locked_test": false,
+  "eligible_for_transfer_and_method_freeze_review": false,
+  "fit_or_tune_on_confirmation": false,
+  "fold_metrics": {
+    "0": {
+      "benign_hours": 8.4,
+      "fah": 0.35714285714285715,
+      "false_alerts": 3,
+      "full_tier_duty_cycle": 0.0021494708994708994,
+      "runs": 8,
+      "telemetry_fault_blocks": 0,
+      "valid_monitoring_fraction": 1.0,
+      "warning_episodes": 3
+    },
+    "1": {
+      "benign_hours": 8.4,
+      "fah": 0.35714285714285715,
+      "false_alerts": 3,
+      "full_tier_duty_cycle": 0.003968253968253968,
+      "runs": 8,
+      "telemetry_fault_blocks": 0,
+      "valid_monitoring_fraction": 1.0,
+      "warning_episodes": 4
+    }
+  },
+  "frozen_method": {
+    "C": 0.03,
+    "confirmation_blocks": 6,
+    "detector": "eprocess",
+    "guarded_adaptation": {
+      "alpha": 0.001,
+      "maximum_offset": 1.5,
+      "promotion_blocks": 24,
+      "rollback_probability": 0.45,
+      "rollback_window_blocks": 12,
+      "update_guard": 0.2
+    },
+    "parameters": {
+      "eta": 0.9,
+      "reset_blocks": 6,
+      "reset_ratio": 0.5,
+      "threshold": 6.396929655216146
+    },
+    "residual_alpha": 0.05,
+    "stride": 2
+  },
+  "locked_test_accessed": false,
+  "method_fingerprint": "4ce225879e0584f9319c588be1969c2dc2251b8ed275a9dc03cf2f07c25b1ae8",
+  "next_step": "Preserve the v3 failure and report the limitation; do not tune on these rows and do not open locked testing.",
+  "plan_sha256": "3d7e9dae80b66abac1551d50425f09fad2f1bb75f1ab1d9abf9d06d84b9c2c14",
+  "platform_metrics": {
+    "EPYC_LINUX": {
+      "benign_hours": 8.4,
+      "fah": 0.35714285714285715,
+      "false_alerts": 3,
+      "full_tier_duty_cycle": 0.003968253968253968,
+      "runs": 8,
+      "telemetry_fault_blocks": 0,
+      "valid_monitoring_fraction": 1.0,
+      "warning_episodes": 4
+    },
+    "M2_MACOS": {
+      "benign_hours": 8.4,
+      "fah": 0.35714285714285715,
+      "false_alerts": 3,
+      "full_tier_duty_cycle": 0.0021494708994708994,
+      "runs": 8,
+      "telemetry_fault_blocks": 0,
+      "valid_monitoring_fraction": 1.0,
+      "warning_episodes": 3
+    }
+  },
+  "pooled_metrics": {
+    "benign_hours": 16.8,
+    "fah": 0.35714285714285715,
+    "false_alerts": 6,
+    "full_tier_duty_cycle": 0.0030588624338624337,
+    "runs": 16,
+    "telemetry_fault_blocks": 0,
+    "valid_monitoring_fraction": 1.0,
+    "warning_episodes": 7
+  },
+  "protocol_sha256": "dc80ff6c4fbc0166a9ee9b2cfe8ab786cf2912714e23d9de7c3ec02a685ccb9e",
+  "stage": "independent_benign_confirmation"
+}

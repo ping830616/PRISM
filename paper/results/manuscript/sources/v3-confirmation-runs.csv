@@ -1,0 +1,17 @@
+run_id,platform_id,workload,fold,false_alerts,benign_hours,valid_blocks,eligible_blocks,valid_monitoring_fraction,warning_episodes,full_tier_blocks,adaptation_promotions,adaptation_rollbacks
+epyc_linux__browser__v3_independent_confirmation__f0,EPYC_LINUX,BROWSER,0,1,1.05,756,756,1.0,1,6,0,0
+epyc_linux__browser__v3_independent_confirmation__f1,EPYC_LINUX,BROWSER,1,0,1.05,756,756,1.0,1,6,0,0
+epyc_linux__py_ai__v3_independent_confirmation__f0,EPYC_LINUX,PY_AI,0,0,1.05,756,756,1.0,0,0,0,0
+epyc_linux__py_ai__v3_independent_confirmation__f1,EPYC_LINUX,PY_AI,1,0,1.05,756,756,1.0,0,0,0,0
+epyc_linux__py_stats__v3_independent_confirmation__f0,EPYC_LINUX,PY_STATS,0,0,1.05,756,756,1.0,0,0,0,0
+epyc_linux__py_stats__v3_independent_confirmation__f1,EPYC_LINUX,PY_STATS,1,0,1.05,756,756,1.0,0,0,0,0
+epyc_linux__video_sw__v3_independent_confirmation__f0,EPYC_LINUX,VIDEO_SW,0,1,1.05,756,756,1.0,1,6,0,0
+epyc_linux__video_sw__v3_independent_confirmation__f1,EPYC_LINUX,VIDEO_SW,1,1,1.05,756,756,1.0,1,6,0,0
+m2_macos__browser__v3_independent_confirmation__f0,M2_MACOS,BROWSER,0,1,1.05,756,756,1.0,1,1,0,0
+m2_macos__browser__v3_independent_confirmation__f1,M2_MACOS,BROWSER,1,1,1.05,756,756,1.0,1,6,0,0
+m2_macos__py_ai__v3_independent_confirmation__f0,M2_MACOS,PY_AI,0,0,1.05,756,756,1.0,0,0,0,0
+m2_macos__py_ai__v3_independent_confirmation__f1,M2_MACOS,PY_AI,1,0,1.05,756,756,1.0,0,0,0,0
+m2_macos__py_stats__v3_independent_confirmation__f0,M2_MACOS,PY_STATS,0,0,1.05,756,756,1.0,0,0,0,0
+m2_macos__py_stats__v3_independent_confirmation__f1,M2_MACOS,PY_STATS,1,1,1.05,756,756,1.0,1,6,0,0
+m2_macos__video_sw__v3_independent_confirmation__f0,M2_MACOS,VIDEO_SW,0,0,1.05,756,756,1.0,0,0,0,0
+m2_macos__video_sw__v3_independent_confirmation__f1,M2_MACOS,VIDEO_SW,1,0,1.05,756,756,1.0,0,0,0,0
