@@ -1,194 +1,114 @@
-# Proposed Journal Outline
+# PRISM Manuscript Map
 
 Working title:
 
-**PRISM: Platform-Robust In-Field Sequential Monitoring for Silicon Lifecycle Management**
+**PRISM: Practical Reliability Investigation of Sequential Monitoring for Silicon Lifecycle Management**
 
-Target:
-
-**IEEE Transactions on Reliability**
-
-## Abstract
-
-State the field reliability problem, limits of the one-platform ITC study, PRISM's platform-semantic micro-twin and sequential evidence, the dual-platform repeated protocol, and four quantitative results:
-
-1. false alerts per monitored hour;
-2. detection rate and time-to-detect at a matched false-alert budget;
-3. cross-platform transfer or few-shot calibration effort;
-4. telemetry cost or adaptation-safety result, only if validated.
-
-For the current pre-lock manuscript, report the frozen v3 independent benign
-confirmation failure, the two nearest v4 operating points, the post-hoc
-temporal sensitivity analysis, and the final bounded redesign stopping result.
-State that G3 did not pass and that the 92 locked rows remain sealed for future
-confirmatory work.
-
-If the complete run ranker is mentioned, label its 0.997 AUC PR, 0.986 ROC AUC,
-and 0.971 F1 as post hoc development discrimination. Do not present those
-values as independent confirmation or as evidence that the online reliability
-gate passed.
+Target venue: **IEEE Transactions on Reliability**
 
 ## I. Introduction
 
-- Post-deployment operating conditions change.
-- Host telemetry differs across ISA/OS/platforms.
-- Fixed per-block thresholds do not characterize repeated long-horizon alert behavior.
-- State the journal extension and cite the ITC DICE paper explicitly.
-- List three P0 contributions; add a fourth only if a P1 gate passes.
+- Motivate repeated host telemetry decisions for silicon lifecycle management.
+- Define the heterogeneous interface and false alert reliability problems.
+- Introduce the hybrid monitor and reliability evaluation firewall.
+- State the relationship to DICE and summarize the evidence without claiming
+  deployment readiness.
 
 ## II. Background and Related Work
 
-- Silicon lifecycle management and in-field telemetry.
-- Behavioral digital twins and residual-based monitoring.
-- Sequential change/anomaly detection.
-- Conformal monitoring under repeated testing and temporal dependence.
-- Cross-platform observability and telemetry cost.
-- Position DICE, EXACT, X-OCTANE, and CITADEL without merging their claims.
+- Host telemetry and industrial silicon lifecycle monitoring.
+- Behavioral micro-twins and residual monitoring.
+- Sequential evidence under temporal dependence.
+- Platform transfer, drift, and telemetry failure.
+- Capability progression from DICE and related methods to PRISM.
 
-## III. Problem and Reliability Contract
+## III. Proposed Method
 
-- Platform and channel definitions.
-- Benign, anomaly, drift, crash, and telemetry-failure hypotheses.
-- Operational alert budget.
-- Assumptions and limitations for sequential validity.
-- Metrics and decision utility.
+- Reliability contract, evidence roles, and reserved partition.
+- Platform semantic adapter and explicit availability.
+- Behavioral micro-twin and normalized residual evidence.
+- Workload-specific contextual and residual classifiers.
+- Empirical sequential accumulation and residual corroboration.
+- Guarded monitoring state, telemetry replay, fault handling, and abstention.
+- Bidirectional transfer and benign destination calibration.
 
-## IV. PRISM Method
+## IV. Experimental Setup
 
-### A. Platform-semantic adapters
+- Apple M2 Pro/macOS and AMD EPYC 9354/Ubuntu hosts.
+- Four deterministic workload proxies and eleven scenarios.
+- Complete run roles, validation rules, and dataset fingerprints.
+- Development feasibility gate and independent benign confirmation contract.
+- Scope boundary: controlled operational proxies, not physical aging,
+  manufacturing defects, security attacks, or remaining lifetime.
+- Reproduction repository and immutable collection provenance.
 
-Native signals, units, semantic groups, missingness, and provenance.
+## V. Results and Analysis
 
-### B. Behavioral micro-twin
+### A. Admitted Evidence and Data Quality
 
-Ridge and VAR definitions, benign-only fitting, residual normalization, and block signature.
+Report the 208 validated runs, original matched inventory, documented analysis
+revisions, eligible benign hours, warnings, and sealed reserved partition.
 
-### C. Sequential evidence
+### B. Development Operating Points
 
-Block calibration, chosen martingale/e-process or change detector, alarm policy, and reset behavior. Make clear which method is established and what PRISM adds.
+Report the static, guarded, residual fusion, and selected v3 checkpoints. The
+selected monitor detected 71/120 controlled event runs at 0.164 FAH during
+development.
 
-### D. Optional guarded update
+### C. Guarded Adaptation and Update Safety
 
-Quarantine, contamination screen, held-out reliability check, versioning, rollback, and staleness alarm.
+Separate the earlier guarded VAR audit from the selected v3 residual offset
+policy. Audit update, rejection, freeze, promotion, and rollback paths without
+claiming that adaptation established final reliability.
 
-### E. Optional telemetry escalation
+### D. Transfer and Calibration
 
-Trigger, active channel policy, de-escalation, and safety fallback.
+Report the earlier robust residual fusion transfer checkpoint. State that no
+calibration budget satisfied both feasibility limits in either direction.
 
-## V. Experimental Protocol
+### E. Adaptive Telemetry, Fault Handling, and Cost
 
-- M2/macOS and EPYC/Linux hardware/software.
-- Workloads, scenarios, repetitions, durations, and benign hours.
-- Run-level data splits and the sealed future-confirmation protocol.
-- Baselines and ablations.
-- Confidence intervals and temporal-dependence treatment.
-- Reproducibility and exclusion rules.
+Report 16/16 telemetry interruptions identified as faults, valid monitoring,
+and the offline replay accounting of 185/60,480 rich telemetry seconds.
 
-## VI. Results
+### F. Operational Reliability and Independent Confirmation
 
-### A. Within-platform detection and long-horizon reliability
+Report scenario coverage, detection delay, development and confirmation FAH,
+session group outcomes, confidence intervals, and limitations. The unchanged
+monitor produced six false alert episodes over 16.8 independent benign hours,
+or 0.357 FAH, so the reserved partition remained sealed.
 
-Report sample counts, monitored hours, false alerts/hour, detection, and delay.
-Lead with the independent v3 benign-confirmation failure rather than a selected
-development operating point.
+## VI. Conclusion
 
-### B. Cross-platform transfer and calibration effort
+Conclude that PRISM provides an auditable hybrid host monitoring workflow and
+exposes the gap between development feasibility and independently confirmed
+reliability. Do not claim physical diagnosis, final held out performance, or
+deployment readiness.
 
-Compare raw intersection, platform-local, and semantic adapters.
+## Manuscript Figures
 
-### C. Sequential evidence ablation
+1. Cross platform telemetry and shared semantic evidence.
+2. PRISM reliability contract and evaluation firewall.
+3. Hybrid monitor, guarded state, and evidence separation.
+4. Behavioral micro-twin residual construction.
+5. Development operating point trajectory.
+6. Guarded update audit.
+7. Operational reliability profile.
 
-Compare DICE persistence, EWMA/CUSUM, and the chosen sequential conformal method at matched false-alert budgets.
+## Manuscript Tables
 
-### D. Operational evidence scorecard
+1. Operational capability progression.
+2. DICE to PRISM extension.
+3. Acquisition contract and evidence inventory.
+4. Analysis revision history.
+5. Development and confirmation integrity audit.
+6. Development checkpoint progression.
+7. Bidirectional transfer calibration.
 
-Lead with monitored hours, false-alert episodes per hour, complete-run event
-coverage, detection delay, telemetry-fault identification, valid monitoring,
-and adaptive telemetry duty cycle. Retain scenario and platform subgroups so
-pooled performance cannot conceal a weak condition.
+## Supporting Development Evidence
 
-### E. Conventional complete run metrics (supplement)
-
-Report AUC PR, ROC AUC, precision, recall, event F1, and macro F1 from one
-cross-fitted score per complete development run. Report the event prevalence
-beside AUC PR and retain FAH, delay, and telemetry-fault identification as the
-operational measures. Do not present these secondary metrics as independent
-confirmation.
-
-### F. Post hoc complete run diagnostic ranking
-
-Report the bounded One Class SVM, logistic regression, Random Forest,
-ExtraTrees, and gradient boosting comparison only as an offline development
-analysis. Use repetition held out complete run folds and report AUC PR, ROC AUC,
-MCC, balanced accuracy, F1, Brier score, worst platform F1, inference time,
-bootstrap intervals, platform and workload subgroups, and the excluded
-workload, platform, and scenario stress tests. State that the analysis
-uses controlled event labels and requires new independent event confirmation.
-It does not replace the online FAH gate or authorize locked data.
-
-### G. Nested run-grouped temporal sensitivity
-
-Keep complete runs intact, use earlier matched runs for inner selection and
-later runs for outer evaluation, disclose the complete candidate table, and
-label the result post hoc. It is not a locked-test substitute.
-
-### H. Final bounded redesign and stopping decision
-
-Report the semantic-corroboration mechanism, all 36 bounded candidates, and
-the no-pass decision. Emphasize that suppressing false alerts also suppressed
-true events, so the redesign did not earn another confirmation collection.
-
-### I. Crash, interruption, and drift robustness
-
-Separate system anomalies from unavailable/stale telemetry and collector failure.
-
-### J. Diagnosis stability
-
-Category/subsystem-path accuracy, selective coverage, and platform agreement.
-
-### K. Optional update or telemetry policy
-
-Include only passed, frozen results.
-
-## VII. Discussion
-
-- Why the findings matter to SLM reliability practice.
-- What transfers and what remains platform-local.
-- Negative and failure cases.
-- Why the predeclared reliability gate prevented an unsupported deployment
-  claim and why the locked set was reserved.
-- Relationship to DICE and boundary with CITADEL.
-- Limits: two hosts are not a fleet; degradation proxies are not physical aging.
-
-## VIII. Conclusion
-
-Summarize the portable monitoring workflow, the observed reliability boundary,
-and the path toward a separately confirmed fleet-scale CPU/GPU study. Do not
-claim that PRISM passed G3 or achieved final held-out reliability.
-
-## Required Tables
-
-1. Journal-versus-ITC contribution table.
-2. Platform and telemetry availability table.
-3. Dataset and independent-run inventory.
-4. Matched false-alert-budget comparison.
-5. Cross-platform/few-shot calibration result.
-6. Optional update-safety or telemetry-cost table.
-
-## Required Figures
-
-1. PRISM architecture and evidence flow.
-2. Cross-platform semantic mapping.
-3. False alerts versus monitored hours or survival curve.
-4. Detection-delay versus false-alert tradeoff.
-5. Calibration-minutes transfer curve.
-6. Crash/interruption/drift case study.
-
-## Supplement
-
-- Complete channel dictionary.
-- Full experiment matrix and exclusions.
-- Hyperparameters and sensitivity.
-- Per-workload/per-scenario results.
-- Reproducibility commands and manifests.
-- Prior-publication difference statement.
+Post hoc complete run ranking, conventional classification metrics, nested
+temporal sensitivity, and bounded redesign results remain available in the
+notebook and supporting artifacts. They do not replace independent
+confirmation, authorize access to the reserved partition, or establish
+deployment readiness.

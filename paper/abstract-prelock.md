@@ -1,43 +1,40 @@
-# Pre-lock Abstract Draft
+# Evidence Aligned Abstract
 
-Host telemetry offers a practical path to silicon lifecycle management, but
-its meaning and availability vary across processor architectures, operating
-systems, and sensor interfaces. A detector that appears accurate in a short
-evaluation may still produce excessive false alerts during prolonged benign
-operation. This paper presents Platform-Robust In-Field Sequential Monitoring
-(PRISM), a framework for operational monitoring across heterogeneous computing
-platforms. PRISM records each native channel with its unit, source, sampling
-cadence, provenance, and availability; maps compatible measurements into
-shared functional groups; learns expected behavior using a compact behavioral
-digital micro-twin; and converts temporally dependent residuals into sequential
-alert evidence. Complete-run experiments on an Apple M2 Pro/macOS host and an
-AMD EPYC 9354/Ubuntu host include matched workloads, long benign sessions,
-controlled resource pressure, crashes, telemetry interruptions, and
-destination-platform calibration. Sequential mechanisms are compared under a
-common requirement of no more than 0.25 false-alert episodes per benign hour
-and at least 50% event detection. The frozen v3 method detected 71 of 120
-controlled event runs (59.2%) during development, but produced six false alerts
-over 16.8 hours (0.357 per hour) on an independently collected benign
-confirmation set. A final bounded development-only search exposed a narrow
-trade-off: 0.244 false alerts per hour with 49.2% detection, or 0.281 with 50.8%
-detection. Because neither configuration satisfied both requirements, the 92
-locked-test runs remain sealed. A post-hoc complete-run temporal analysis
-detected 39 of 60 later-run events (65.0%) but yielded 0.327 false alerts per
-hour, confirming that useful detection did not meet the operational alert
-budget. A final bounded semantic-corroboration redesign reduced false alerts
-but detected at most 16 of 120 events (13.3%), activating the predeclared
-stopping rule. These findings demonstrate PRISM's portable cross-platform
-monitoring workflow while showing why long-horizon independent confirmation
-and explicit reliability gates are necessary before operational claims are
-made.
+Host telemetry can support silicon lifecycle management (SLM), but
+heterogeneous interfaces and repeated decisions complicate reliable monitoring.
+This paper presents the Practical Reliability Investigation of Sequential
+Monitoring (PRISM) framework for hybrid host monitoring and reliability
+evaluation across Apple M2 Pro/macOS and AMD EPYC 9354/Ubuntu hosts. PRISM
+preserves telemetry semantics and availability and predicts benign behavior
+using compact behavioral digital micro-twins. Workload-specific supervised
+classifiers produce contextual and residual evidence. Residual corroboration
+and an empirical sequential rule convert this evidence into persistent alert
+episodes. The study contained 208 validated runs outside the reserved
+partition: 192 formed the declared v3 development inventory, and 16 provided
+independent benign confirmation. Development analysis covered 120 runs with
+controlled events and 36.53 h of eligible benign monitoring. The selected
+monitor detected 71 of 120 event runs (59.2%) and produced 0.164 false alert
+episodes per benign monitoring hour (FAH). The median detection delay was
+337.5 s across detected events. It identified all 16 controlled telemetry
+interruptions as faults. On the independent 16.8 h benign set, the unchanged
+monitor produced six false alert episodes (0.357 per hour), exceeding the
+predeclared feasibility limit of 0.25 per hour. The reserved partition,
+therefore, remained sealed. This benign set did not independently confirm the
+detection of events. Offline replay retained rich telemetry for 0.31% of
+eligible confirmation time; it did not measure acquisition or energy savings.
+These results establish an auditable workflow for evaluating host monitoring
+across platforms and expose the gap between development feasibility and
+independently confirmed reliability.
 
 ## Claim boundary
 
-- Label the nested temporal result post hoc and the final redesign as a bounded
-  stopping experiment; neither is independent confirmation.
-- Do not state that G3 passed, that locked testing was completed, or that PRISM
-  is deployment-ready.
-- Retain complete candidate tables and both failed independent confirmations
-  in the supplemental evidence.
-- Describe the adaptive rich-tier result as offline retention/duty-cycle replay,
-  not measured power or energy savings.
+- PRISM is a hybrid monitor: the behavioral micro-twin is combined with
+  supervised contextual and residual classifiers and a sequential alert rule.
+- The 0.25 FAH and 50% detection limits are research feasibility criteria, not
+  an industrial deployment standard.
+- Independent confirmation evaluates benign false alert reliability; it does
+  not independently confirm controlled event detection or delay.
+- The rich telemetry result is an offline retention replay, not a measured
+  acquisition, energy, storage, or runtime saving.
+- The reserved partition remained sealed. Do not claim final held out
+  performance or deployment readiness.

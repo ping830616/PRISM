@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "prism-slm"
 version = "0.1.0"
-description = "Platform-robust in-field sequential monitoring research scaffold"
+description = "Practical reliability investigation of sequential host monitoring for silicon lifecycle management"
 requires-python = ">=3.10"
 dependencies = [
   "numpy>=1.26",
