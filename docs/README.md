@@ -11,6 +11,7 @@ partition remains sealed. Start with the [repository summary](../README.md).
 | [Results and evidence roles](paper-results.md) | Counts, denominators, confirmation, uncertainty, and transfer |
 | [Methods and terminology](methods.md) | What v3 means and how its monitoring decisions work |
 | [Paper artifact map](paper-artifacts.md) | Draft figures/tables mapped to notebook cells and Overleaf files |
+| [Scientific review edits](scientific-review-edits.md) | Exact Overleaf replacements, scope corrections, and remaining review decisions |
 | [Reproducibility](reproducibility.md) | Terminal setup, saved evidence, raw reanalysis, and figure editing |
 | [Analysis sequence](drift-aware-analysis.md) | Sections needed for each recorded analysis stage |
 | [Supporting analyses](supporting-analyses.md) | Preserved follow-ups and optional diagnostic metrics |

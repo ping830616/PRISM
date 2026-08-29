@@ -18,6 +18,14 @@ references. Their prediction residuals provide evidence about host behavior,
 not localization of a physical silicon defect. Five-second decision blocks
 retain the identity of their complete run.
 
+The selected v3 implementation compresses the semantic input to nine states:
+compute activity, scheduler pressure, memory pressure, storage activity,
+network activity, compute variability, memory variability, input/output
+variability, and availability loss. The broader telemetry registry is not the
+selected model's feature list. In particular, availability loss is an input
+state, while explicit validity checks also gate behavioral decisions. Do not
+claim that availability can never affect the score.
+
 ## Selected v3 monitor
 
 **v3 is the third declared analysis revision, not a data partition.** Its
@@ -26,6 +34,19 @@ two logistic classifiers per workload learn from eligible benign and
 controlled event observations and are shared across platforms. One combines
 contextual and residual features; the other uses residual features alone.
 Their probabilities are combined by the geometric mean.
+
+Each of the nine states and its prediction residual yields four features:
+signed level, absolute level, signed first difference, and absolute first
+difference. Scaling uses the run's first 120 s, followed by a benign empirical
+quantile map fitted without the evaluated runs. The joint classifier receives
+72 features and the residual classifier receives 36. Negative labels come
+from valid nominal blocks after startup, with at most 360 sampled per run.
+Positive labels come from at most 48 valid blocks within the first 240 s after
+a controlled event. Telemetry interruption runs do not supply positive labels.
+Sampling is deterministic from the run identifier. Both classifiers use
+`liblinear`, balanced class weights, `max_iter=2000`, `random_state=123`, and
+the selected `C=0.03`. Workload identity selects a model pair; it is not inferred
+by the monitor. Unseen workloads are not validated by this experiment.
 
 Development evaluation excludes complete runs in the evaluated fold from
 fitting. Before independent confirmation, the selected configuration is fitted
@@ -67,10 +88,22 @@ fold of complete runs. The selected v3 candidate satisfied these requirements
 
 Independent confirmation requires FAH at most 0.25 for the pooled set, each
 platform, and each fold, plus at least 95% valid monitoring in every run.
+The confirmation plan preassigns two session groups, called folds in the code.
+Each contains one run for every host/workload combination: eight runs total.
+These are reporting strata, not cross-validation folds; neither group trains
+a model for the other. The same candidate evaluates all 16 runs.
 It evaluates one unchanged candidate on fresh benign runs. Passing it would
 permit further review, not automatic reserved access. The recorded v3
 confirmation did not pass, so final approval and reserved evaluation remain
 closed.
+
+G3 is a research feasibility screen. A rate of 0.25 FAH corresponds to one
+episode per four benign monitoring hours in aggregate, and 50% detection
+requires sensitivity to at least half the controlled event runs. These are
+not industry service levels, safety requirements, or a claim of acceptable
+deployment behavior. The protocol records the limits, but does not provide a
+cost study establishing their suitability for an industrial application.
+Detection and delay were not independently confirmed on new controlled events.
 
 Each run has one evidence role within an analysis revision. Once a confirmation
 result is finalized and preserved, its runs may enter a separately declared

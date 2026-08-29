@@ -3,10 +3,11 @@
 **Platform-Robust In-Field Sequential Monitoring for Silicon Lifecycle Management**
 
 PRISM extends DICE to host monitoring on Apple M2 Pro/macOS and AMD EPYC
-9354/Ubuntu. It preserves telemetry meaning and availability, predicts benign
-behavior with a compact behavioral micro-twin, and accumulates evidence before
-raising an alert. The study asks whether promising development performance
-survives independent benign confirmation.
+9354/Ubuntu. Its hybrid monitor combines a benign behavioral micro-twin with
+supervised classifiers and sequential evidence. The study asks whether
+promising development performance survives independent benign confirmation.
+The project name expresses a design goal, not demonstrated detector robustness
+or reliable transfer to a new platform.
 
 ## Key results
 
@@ -23,6 +24,8 @@ sealed**. FAH means false alert episodes per benign monitoring hour.
 | Telemetry fault identification | **16/16** controlled interruptions |
 | Independent benign confirmation | 6 episodes / 16.80 h: **0.357 FAH** |
 | Rich telemetry during confirmation replay | **0.31%** of eligible time |
+
+The replay fraction is **37/12,096 valid blocks**, or **185/60,480 s**.
 
 The selected monitor satisfied Gate G3 **during development**, including its
 platform and fold checks. Independent confirmation exceeded the **0.25 FAH**
@@ -96,6 +99,8 @@ python -m jupyter nbconvert --to notebook --execute \
 - [Methods and terminology](docs/methods.md): v1–v3, evidence roles, and gates.
 - [Supporting analyses](docs/supporting-analyses.md): preserved searches,
   temporal validation, and diagnostic metrics outside the main paper narrative.
+- [Scientific review edits](docs/scientific-review-edits.md): exact Overleaf
+  replacements and the remaining decisions for advisor review.
 
 The [notebook](notebooks/PRISM_Complete_Experiment.ipynb) is the canonical
 Python source. `.prism_runtime/` is disposable; edit notebook cells, not that

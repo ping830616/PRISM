@@ -114,4 +114,5 @@ Source manifests identify the recorded reports, not a guarantee that every
 environment reproduces every raw experiment bit for bit.
 
 See [draft alignment verification](../reproduction/verification-draft-alignment.md)
-for the checks performed for this update.
+and [scientific review verification](../reproduction/verification-scientific-review.md)
+for the checks performed for these updates.

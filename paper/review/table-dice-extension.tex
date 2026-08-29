@@ -1,0 +1,22 @@
+\begin{table}[!t]
+\centering
+\caption{From DICE's host demonstration to PRISM's reliability evaluation.}
+\label{tab:dice_prism_extension}
+{\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\columnwidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Dimension} & \textbf{DICE~\cite{ni2026dice}} & \textbf{PRISM} \\
+\midrule
+Hosts & Apple M2 Pro & Apple M2 Pro; AMD EPYC \\
+Inventory & 24 cases: 4 benign, 20 stressor & 208 runs: 192 development, 16 confirmation \\
+Reference & Benign ridge micro-twin & Benign reference plus supervised fusion \\
+Evidence roles & Fit and calibration segments & Complete run roles; fresh confirmation \\
+Alert rule & Conformal threshold; persistence & Empirical sequential score; residual corroboration \\
+Telemetry faults & No separate interruption benchmark reported & 16 controlled interruption runs \\
+Host transfer & One evaluated host & Two directions; 1--12 min per workload \\
+Confirmation & No separately collected benign confirmation set reported & 16 fresh runs; 16.8~h \\
+\bottomrule
+\end{tabularx}}
+\end{table}

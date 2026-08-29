@@ -1,33 +1,34 @@
-# Abstract aligned with the current draft
+# Abstract for scientific review
 
-Silicon lifecycle management (SLM) requires dependable monitoring after
-deployment because workloads, software, environmental conditions, and device
-aging can alter system behavior. Heterogeneous platforms expose different
-operating system telemetry and hardware signals, while short evaluations can
-conceal excessive false alerts during continuous operation. This paper
-presents Platform-Robust In-Field Sequential Monitoring (PRISM), a framework
-for host monitoring across heterogeneous platforms. PRISM preserves signal
-meaning and availability, maps compatible measurements into shared functional
-groups, learns benign behavior with a compact behavioral micro-twin, and
-converts prediction residuals into sequential alert evidence. We evaluated
-PRISM on Apple M2 Pro/macOS and AMD EPYC 9354/Ubuntu hosts using 208 validated
-runs outside the reserved partition. Of these, 192 supported declared
-development revisions, including 120 runs with controlled events and 36.53 h
-of eligible benign monitoring; 16 independently collected benign runs
-evaluated the unchanged monitor. During development, the monitor detected
-71 of 120 runs with controlled events (59.2%), produced 0.164 false alert
-episodes per benign monitoring hour, and achieved a median detection delay
-of 337.5 s among detected events. It classified all 16 controlled telemetry
-interruptions as telemetry faults. On the independent 16.8 h benign set, the
+Host telemetry can support silicon lifecycle management, but heterogeneous
+interfaces and repeated decisions complicate reliable monitoring. This paper
+presents PRISM, a hybrid monitoring and reliability evaluation framework for
+Apple M2 Pro/macOS and AMD EPYC 9354/Ubuntu hosts. PRISM preserves telemetry
+meaning and availability, predicts benign behavior with a compact behavioral
+micro-twin, and combines contextual and residual evidence through supervised
+classifiers fitted for each workload. Empirical sequential evidence and
+residual corroboration govern alerts. The study contains 208 validated runs
+outside the reserved partition: 192 supported declared development revisions,
+and 16 provided independent benign confirmation. Development analysis covered
+120 runs with controlled events and 36.53 h of eligible benign monitoring.
+The selected monitor detected 71 of 120 event runs (59.2%) and produced 0.164 false
+alert episodes per benign monitoring hour. Its median detection delay was
+337.5 s among detected events. It identified all 16 controlled telemetry
+interruptions as faults. On the independent 16.8 h benign set, the unchanged
 monitor produced six false alert episodes (0.357 per hour), exceeding the
-predeclared limit of 0.25 per hour; the reserved partition therefore remained
-sealed. During offline replay, the adaptive controller requested rich
-diagnostic telemetry for only 0.31% of eligible monitoring time. These results
-establish a portable and auditable behavioral micro-twin workflow for SLM
-across platforms and demonstrate why independent benign confirmation must
-precede final evaluation and deployment.
+predeclared feasibility limit of 0.25 per hour. The reserved partition
+therefore remained sealed. This benign set did not independently confirm
+event detection. Offline replay retained rich telemetry for 0.31% of eligible
+confirmation time; it did not measure acquisition or energy savings. These
+results establish an auditable workflow for evaluating host monitoring across
+platforms and expose the gap between development feasibility and independently
+confirmed reliability.
 
-The filename is retained for existing links. This text follows the supplied
-2026-08-28 draft, with unnecessary prose hyphens removed. Detailed method and
-claim definitions are in [the methods guide](../docs/methods.md). The 0.31%
-value describes confirmation replay, not measured acquisition or energy savings.
+Index Terms: Silicon lifecycle management, host telemetry, anomaly detection,
+behavioral digital twins, sequential monitoring, reliability evaluation.
+
+The filename is retained for existing links. This proposed revision makes
+the supervised layer explicit and separates development sensitivity from
+independent benign confirmation. See the [exact Overleaf replacements](../docs/scientific-review-edits.md)
+for locations in the supplied draft. The PDF and Overleaf project are not
+modified by this repository update.

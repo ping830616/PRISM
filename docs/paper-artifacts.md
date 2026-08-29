@@ -36,6 +36,12 @@ Section 17E also exports `table-uncertainty.csv` and
 under `paper/results/manuscript/sources/`. It checks the reported v3 numbers
 without fitting a model or opening raw telemetry.
 
+It also exports `table-replay-accounting.csv`: confirmation blocks, seconds,
+and replay fractions for each host and the pooled set. Figure 8(d) now shows
+direct counts and rates, rather than placing different metrics on a common
+gap axis. See the [scientific review edits](scientific-review-edits.md) for
+the corresponding paragraph and the external Fig. 3 architecture changes.
+
 The transfer export preserves the earlier robust fusion/persistence result
 used in the draft. Running the current exploratory Section 18 can produce a
 different analysis revision; it must not silently replace this recorded curve.

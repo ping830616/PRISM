@@ -87,6 +87,25 @@ benign and event periods, not the 36.53 h benign FAH denominator. All telemetry
 was collected continuously. Replay estimates time when richer data would be
 retained, not measured energy, acquisition, storage, network, or runtime savings.
 
+The preserved confirmation run table supplies the exact replay counts:
+
+| Scope | Rich / valid blocks | Rich / valid seconds | Duty cycle |
+| --- | ---: | ---: | ---: |
+| Apple M2 Pro | 13/6,048 | 65/30,240 | 0.215% |
+| AMD EPYC 9354 | 24/6,048 | 120/30,240 | 0.397% |
+| Pooled | 37/12,096 | 185/60,480 | 0.306% |
+
+Each valid block contributes 5 s. Section 17E verifies these counts against the
+aggregate report and exports them as `table-replay-accounting.csv`.
+
+The recorded transfer implementation uses cumulative prefixes of the single
+nominal calibration run for each destination workload: the first 1, 2, 4, 8,
+or 12 minutes, not randomly drawn segments. The source classifier and its
+probability persistence settings remain fixed; a positive calibration budget
+refits the destination behavioral reference on the prefix. The budget is per
+workload, so four 12-minute prefixes use 48 minutes across the four workloads.
+The table does not estimate variability across alternative calibration segments.
+
 ## Statistical uncertainty
 
 | Quantity | Reported 95% interval |
