@@ -14,31 +14,125 @@ notebook, development artifacts, paper figures and tables, and the documentation
 needed to reproduce the reported workflow. Raw telemetry is stored separately
 and is not tracked in Git.
 
-## Reviewers start here
+## Reviewers start here: six simple steps
 
-To reproduce the **tables and figures in the current nine-table manuscript**,
-use the standalone [reviewer workflow](docs/reviewer-reproduction.md). It needs
-only the bundled numerical reports and plotting values. No hardware telemetry,
-private data root, Jupyter execution, data collection, or detector fitting is
-required.
+These steps reproduce the paper's tables and figures from the numerical
+evidence included in this repository. **No M2 Pro or EPYC machine, raw recordings,
+Jupyter notebook, data collection, or detector retraining is needed.**
+You need Python **3.12** and Internet access for the initial installation.
+Follow only the commands for your operating system.
+
+### 1. Download PRISM and open its folder
+
+On this GitHub page, click **Code → Download ZIP**, extract the ZIP, and open
+a terminal in the extracted `PRISM-main` folder. On Windows, use **PowerShell**.
+You should be in the folder containing `README.md` and `reproduction/`.
+
+Alternatively, if Git is installed, run:
+
+```bash
+git clone https://github.com/ping830616/PRISM.git
+cd PRISM
+```
+
+**Run every remaining command from this same folder.**
+
+### 2. Check that Python 3.12 is installed
+
+macOS / Linux:
+
+```bash
+python3.12 --version
+```
+
+Windows PowerShell:
+
+```powershell
+py -3.12 --version
+```
+
+The output should begin with `Python 3.12`. If the command is not found,
+install Python 3.12, reopen your terminal in the PRISM folder, and try again.
+
+### 3. Create a separate Python environment
+
+macOS / Linux:
 
 ```bash
 python3.12 -m venv .venv-reviewer
+```
+
+Windows PowerShell:
+
+```powershell
+py -3.12 -m venv .venv-reviewer
+```
+
+No environment activation is needed; the commands below use it directly.
+
+### 4. Install the required packages
+
+macOS / Linux:
+
+```bash
 .venv-reviewer/bin/python -m pip install -r reproduction/requirements-reviewer.txt
+```
+
+Windows PowerShell:
+
+```powershell
+.\.venv-reviewer\Scripts\python.exe -m pip install -r reproduction/requirements-reviewer.txt
+```
+
+Wait for installation to finish successfully before continuing.
+
+### 5. Reproduce the tables and figures
+
+The script creates `reviewer-output` for you; do not create that folder first.
+
+macOS / Linux:
+
+```bash
 .venv-reviewer/bin/python reproduction/reproduce.py --output reviewer-output
 ```
 
-Open `reviewer-output/index.html`. The package regenerates numerical result
-Tables VI–IX (including all Table VIII subgroup rows) and Figures 4–7. It also
-preserves exact images for all seven figures and editable LaTeX for all nine
-tables; authored diagrams/tables are labeled as preserved, not computationally
-regenerated. Input checksums and manuscript values must pass before a `PASS`
-report is produced. See the guide for Windows commands and verification scope.
+Windows PowerShell:
 
-To see **how we collected the original data**, read the
+```powershell
+.\.venv-reviewer\Scripts\python.exe reproduction/reproduce.py --output reviewer-output
+```
+
+The command checks the bundled input files, regenerates the results, and ends
+with:
+
+```text
+PASS: 46 verified inputs; result tables and four numerical figures regenerated.
+```
+
+If you see `ERROR` instead, stop and consult the
+[troubleshooting guide](docs/reviewer-reproduction.md#troubleshooting-and-validation).
+For a second run, replace `--output reviewer-output` with
+`--output reviewer-output-2`; existing output folders are never overwritten.
+
+### 6. Open the results
+
+In Finder or File Explorer, open the new **`reviewer-output`** folder and
+double-click **`index.html`** to view the tables and figures in your browser.
+The folder also contains:
+
+- `tables/`: numerical Tables VI–IX as CSV and LaTeX, including all Table VIII subgroup rows.
+- `figures/`: regenerated Figures 4–7 as PNG and PDF.
+- `manuscript/`: original figure images and editable LaTeX for all nine tables.
+- `reproduction-report.json`: verification results, versions, and file hashes.
+
+Figures 1–3 and Tables I–V are authored diagrams/descriptive tables; they are
+preserved rather than computationally regenerated. This workflow reproduces
+saved paper artifacts, **not independent detector reanalysis from raw recordings**.
+
+For further details, see the [reviewer guide](docs/reviewer-reproduction.md).
+For how the original measurements were acquired, see the
 [M2 Pro and EPYC collection methodology](docs/collection-methodology.md).
-Reviewers do not need to repeat collection. Full reanalysis from raw telemetry
-remains a separate workflow from reproducing these saved paper artifacts.
+**Reviewers can stop here; the historical notebook instructions below are optional.**
 
 ## Reported evidence
 
