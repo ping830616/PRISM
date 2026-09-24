@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "source_archive_name": "TR_PRISM.zip",
+  "source_archive_sha256": "2a61fe74ba3c79441dda68b0e2592bcb70d26b3ae34f796b1d41737645b25c94",
+  "source_main_tex_sha256": "51e84ccd80421d1b6053fe3c31065dc08f68b00081939c054294da88a89cdc44",
+  "scope": "Exact manuscript images and table source; preservation is not numerical regeneration",
+  "artifacts": [
+    {
+      "kind": "figure",
+      "number": 1,
+      "path": "figures/figure-1-prism.png",
+      "source_member": "figs/prism.png",
+      "sha256": "170c86e04ca19dcda851551a60f76b39514f9d2c2bfaa442f2151ad0a7c9535e",
+      "role": "authored_diagram"
+    },
+    {
+      "kind": "figure",
+      "number": 2,
+      "path": "figures/figure-2-contract.png",
+      "source_member": "figs/contract.png",
+      "sha256": "74f4569882844bc4f0ce61d522bda0fbec64245aebca32868ea22a8bd093c1b8",
+      "role": "authored_diagram"
+    },
+    {
+      "kind": "figure",
+      "number": 3,
+      "path": "figures/figure-3-method.png",
+      "source_member": "figs/method.png",
+      "sha256": "bdc1bf59dbbfdef5e13a10df9a85942a072186f8e2e52042dc8a0fbf51115771",
+      "role": "authored_diagram"
+    },
+    {
+      "kind": "figure",
+      "number": 4,
+      "path": "figures/figure-4-digital.png",
+      "source_member": "figs/digital.png",
+      "sha256": "a22e875085bced4c99f7b237eb93f29299e5eb7411911e8ceb8aebf95c775e3a",
+      "role": "exact_manuscript_plot_reference"
+    },
+    {
+      "kind": "figure",
+      "number": 5,
+      "path": "figures/figure-5-development.png",
+      "source_member": "figs/development.png",
+      "sha256": "7b35653756c8c11407cb7f03e8e0e4c961e8374da6475093275a00eef3c533fe",
+      "role": "exact_manuscript_plot_reference"
+    },
+    {
+      "kind": "figure",
+      "number": 6,
+      "path": "figures/figure-6-adaptation.png",
+      "source_member": "figs/adaptation.png",
+      "sha256": "0d3085f3d96b326cdc048d2317262486de284d711b50fec883b1ceb044d6126d",
+      "role": "exact_manuscript_plot_reference"
+    },
+    {
+      "kind": "figure",
+      "number": 7,
+      "path": "figures/figure-7-reliability.png",
+      "source_member": "figs/reliability.png",
+      "sha256": "10c5efb56d615c742c8e08b88f77551f9ab0842166e24153a1350bcecd41b57b",
+      "role": "exact_manuscript_plot_reference"
+    },
+    {
+      "kind": "table",
+      "number": "I",
+      "path": "tables/table-i-prism_scope.tex",
+      "label": "tab:prism_scope",
+      "sha256": "5741289d9456b925374c00538bc4ef6e82b355caefc51840c31001d3728f92f9",
+      "role": "authored_table_source"
+    },
+    {
+      "kind": "table",
+      "number": "II",
+      "path": "tables/table-ii-slm_capability_progression.tex",
+      "label": "tab:slm_capability_progression",
+      "sha256": "2286b3aab002902c138555a40a10967bd7f3daac3e72240d89bcd432e83aaa9d",
+      "role": "authored_table_source"
+    },
+    {
+      "kind": "table",
+      "number": "III",
+      "path": "tables/table-iii-dice_prism_extension.tex",
+      "label": "tab:dice_prism_extension",
+      "sha256": "f362bb43a86ca30b061e45768e297e291938562690686d3ea522c11b78de48f5",
+      "role": "authored_table_source"
+    },
+    {
+      "kind": "table",
+      "number": "IV",
+      "path": "tables/table-iv-parameter_provenance.tex",
+      "label": "tab:parameter_provenance",
+      "sha256": "08115437db838d3ac49340c48639ef8119177fc15b99484911346530e1c7c02f",
+      "role": "authored_table_source"
+    },
+    {
+      "kind": "table",
+      "number": "V",
+      "path": "tables/table-v-prism_experimental_setup.tex",
+      "label": "tab:prism_experimental_setup",
+      "sha256": "f72f3edf3ee3a39fbacc80e706c22d83755ff1e85ca622fcc5fecd6b4712b07a",
+      "role": "authored_table_source"
+    },
+    {
+      "kind": "table",
+      "number": "VI",
+      "path": "tables/table-vi-development_data_quality.tex",
+      "label": "tab:development_data_quality",
+      "sha256": "401d7609b4ce955c8802f1c1ef3fa0b7c5071f19d1a8c279600fea11b9c49308",
+      "role": "exact_manuscript_result_table_source"
+    },
+    {
+      "kind": "table",
+      "number": "VII",
+      "path": "tables/table-vii-prism_revision_history.tex",
+      "label": "tab:prism_revision_history",
+      "sha256": "bde0bedba8f366b7f973312ddc45aa48d06aef4bf56732ca0e6c2df9998276fa",
+      "role": "exact_manuscript_result_table_source"
+    },
+    {
+      "kind": "table",
+      "number": "VIII",
+      "path": "tables/table-viii-development_g3.tex",
+      "label": "tab:development_g3",
+      "sha256": "fa1e1e6d1853cb104b3fc23f1e3ce5df0c170ebbc8b4931e3fa1652df2bedba9",
+      "role": "exact_manuscript_result_table_source"
+    },
+    {
+      "kind": "table",
+      "number": "IX",
+      "path": "tables/table-ix-transfer_calibration.tex",
+      "label": "tab:transfer_calibration",
+      "sha256": "3ff0ac8b08a866f31f2d1e5a03165e6735943f297015fbf8221bdd1c0ac9ec7b",
+      "role": "exact_manuscript_result_table_source"
+    },
+    {
+      "kind": "support",
+      "path": "table-preamble.tex",
+      "sha256": "2b5851f07b7b128d164bd24f24cc8d9fb90576a137535c281bedaa4b174b453c"
+    },
+    {
+      "kind": "support",
+      "path": "references.bib",
+      "sha256": "a1f119628de5fbc721b2054e75c33f5f0277dd5cac010f5ee43f14ab311da6ab"
+    }
+  ]
+}

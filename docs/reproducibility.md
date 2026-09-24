@@ -1,5 +1,11 @@
 # Reproduce the paper evidence
 
+For reproducing the current paper's figures and tables without raw data or
+Jupyter, start with [the standalone reviewer workflow](reviewer-reproduction.md).
+The notebook workflow below remains available for historical analysis and raw
+reanalysis. Its old Tables III–VI correspond to current Tables VI–IX; the new
+reviewer path also includes Table VIII's expanded subgroup audit.
+
 ## Choose the right task
 
 | Task | Inputs | What it establishes |

@@ -1,0 +1,126 @@
+\begin{table*}[!t]
+\caption{Progression from telemetry analytics to operational SLM monitoring.}
+\label{tab:slm_capability_progression}
+\centering
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.16}
+\setlength{\tabcolsep}{2.0pt}
+
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}ll*{11}{c}@{}}
+\toprule
+
+&
+&
+\multicolumn{3}{c}{\textbf{Telemetry Intelligence}} &
+\multicolumn{3}{c}{\textbf{Platform Deployment}} &
+\multicolumn{3}{c}{\textbf{Runtime Reliability}} &
+\multicolumn{2}{c}{\textbf{Operational Assurance}} \\
+
+\cmidrule(lr){3-5}
+\cmidrule(lr){6-8}
+\cmidrule(lr){9-11}
+\cmidrule(l){12-13}
+
+\textbf{Method} &
+\textbf{System and mechanism} &
+\textbf{Score} &
+\textbf{Learn.} &
+\textbf{Local.} &
+\textbf{Host} &
+\textbf{Dual} &
+\textbf{Adapter} &
+\textbf{Seq.} &
+\textbf{Limits} &
+\textbf{Long} &
+\textbf{Fault} &
+\textbf{Calib.} \\
+
+\midrule
+
+E-SCOUT~\cite{Ortega2024ESCOUT}
+& Intel/Linux; entropy-based edge score
+& \capfull & \capfull & \capfull
+& \capoutside & \cappartial & \capoutside
+& \capoutside & \capoutside & \capoutside
+& \capoutside & \capoutside \\
+
+OCTANE~\cite{Ortega2025OCTANE}
+& Intel/Linux; fixed-point edge score
+& \capfull & \capfull & \capfull
+& \capoutside & \cappartial & \capoutside
+& \capoutside & \capoutside & \capoutside
+& \capoutside & \capoutside \\
+
+X-OCTANE~\cite{OrtegaEtAl2026XOCTANE}
+& Intel/Linux; causal MI and SHAP evidence
+& \capfull & \capfull & \capfull
+& \capoutside & \cappartial & \capoutside
+& \capoutside & \capoutside & \capoutside
+& \capoutside & \capoutside \\
+
+EXACT~\cite{ni2026exact}
+& Intel DDR4/DDR5; causal telemetry score
+& \capfull & \capfull & \capfull
+& \capoutside & \cappartial & \capoutside
+& \cappartial & \capoutside & \capoutside
+& \capoutside & \capoutside \\
+
+TRACK~\cite{OrtegaEtAl2026TRACK}
+& Intel/Linux; CKA and CKD fingerprints
+& \capfull & \capfull & \cappartial
+& \capoutside & \capfull & \capoutside
+& \capoutside & \capoutside & \capoutside
+& \capoutside & \capoutside \\
+
+DICE~\cite{ni2026dice}
+& M2/macOS; ridge behavioral micro-twin
+& \capfull & \capfull & \capfull
+& \capfull & \capoutside & \capoutside
+& \capfull & \capoutside & \capoutside
+& \capoutside & \capoutside \\
+
+\midrule
+
+\textbf{PRISM}
+& \textbf{M2/macOS and EPYC/Ubuntu; hybrid semantic sequential monitor}
+& \capfull & \capfull & \capfull
+& \capfull & \capfull & \capfull
+& \capfull & \capfull & \capfull
+& \capfull & \cappartial \\
+
+\bottomrule
+\end{tabular}%
+}
+}
+
+\vspace{2pt}
+\begin{minipage}{0.985\textwidth}
+\scriptsize
+\raggedright
+\emph{Score}, \emph{Learn.}, and \emph{Local.}: telemetry scoring,
+benign learning, and localized evidence;
+\emph{Host}, \emph{Dual}, and \emph{Adapter}: host monitoring,
+evaluation on two platforms, and semantic adaptation;
+\emph{Seq.}, \emph{Limits}, and \emph{Long}: sequential alerting,
+explicit false-alert and detection limits, and long benign monitoring;
+\emph{Fault} and \emph{Calib.}: telemetry fault handling and
+calibration for the destination host.
+
+\smallskip
+\emph{Abbreviations:}
+MI: mutual information;
+SHAP: Shapley additive explanations;
+CKA: centered kernel alignment;
+CKD: centered kernel distance.
+
+\smallskip
+\capfull: implemented and evaluated;
+\quad
+\cappartial: partially evaluated;
+\quad
+\capoutside: not reported in the cited evaluation.
+Symbols indicate capability coverage, not requirement passage.
+\end{minipage}
+\end{table*}

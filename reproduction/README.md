@@ -1,5 +1,16 @@
 # Reproduction records
 
+**Reviewers:** use [the standalone artifact reproduction guide](../docs/reviewer-reproduction.md)
+and `python reproduction/reproduce.py --output reviewer-output`. Install the
+fixed `requirements-reviewer.txt` environment first. This path regenerates
+Tables VI–IX and Figures 4–7, preserves the authored/reference assets separately,
+and needs neither raw recordings nor model fitting.
+
+Historical records below describe earlier saved-report notebook executions;
+they do not certify the current reviewer workflow. In particular, do not treat
+`requirements-source.txt` as the new reviewer's environment lock or as proof
+that every historical verification used those exact versions.
+
 The current instructions live in [docs/reproducibility.md](../docs/reproducibility.md).
 Use the [paper artifact map](../docs/paper-artifacts.md) to find the relevant
 notebook cell and Overleaf output.

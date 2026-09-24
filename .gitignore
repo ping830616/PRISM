@@ -40,3 +40,7 @@ paper/build/
 *.key
 *token*
 .secrets/
+
+# Reviewer environments and generated outputs are not paper evidence inputs.
+.venv-reviewer/
+reviewer-output*/

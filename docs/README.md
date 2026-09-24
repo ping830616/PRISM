@@ -8,6 +8,8 @@ partition remains sealed. Start with the [repository summary](../README.md).
 
 | Guide | Purpose |
 | --- | --- |
+| [Reviewer artifact reproduction](reviewer-reproduction.md) | One command, no raw data or fitting; all current manuscript assets and regenerated numerical results |
+| [Historical collection methodology](collection-methodology.md) | How M2 Pro and EPYC data were collected, validated and assigned evidence roles |
 | [Results and evidence roles](paper-results.md) | Counts, denominators, confirmation, uncertainty, and transfer |
 | [Methods and terminology](methods.md) | What v3 means and how its monitoring decisions work |
 | [Paper artifact map](paper-artifacts.md) | Draft figures/tables mapped to notebook cells and Overleaf files |

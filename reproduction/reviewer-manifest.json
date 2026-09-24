@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "base_commit": "6289c4dba7bc97ef685f9d6c5e5f8d959db321ca",
+  "scope": "Saved numerical paper artifact reproduction; not raw reanalysis or new validation",
+  "manuscript_archive_sha256": "2a61fe74ba3c79441dda68b0e2592bcb70d26b3ae34f796b1d41737645b25c94",
+  "required_sha256": {
+    "configs/v2-independent-confirmation.toml": "d87eebca25906bfe5f1145df301566c72ed59ad1c638c25610cf8c5e3346db84",
+    "configs/v3-independent-confirmation.toml": "dc80ff6c4fbc0166a9ee9b2cfe8ab786cf2912714e23d9de7c3ec02a685ccb9e",
+    "data/collection-plan.csv": "8c83e56adf8797168f77e8799af9bed666bced6ef1e269be5319d5b1b5ca7595",
+    "data/development-benign-supplement-plan.csv": "f80d67fd8c732a11eb00e18d7952aaf79974695fb1b330a6291b925692fad1ec",
+    "data/v2-independent-confirmation-plan.csv": "0013158a7b07843d68e614bfd48f0c30013c5cf853eb08caf48225d2d8f88dc1",
+    "data/v3-independent-confirmation-plan.csv": "3d7e9dae80b66abac1551d50425f09fad2f1bb75f1ab1d9abf9d06d84b9c2c14",
+    "paper/results/development/development-guarded-method-selection.csv": "d5883d6ec9cee514ad89f81480a29000eb95d8a17c40b2de1079ed5bd7a0ca97",
+    "paper/results/development/development-guarded-method-selection.json": "e13d3cb78935204e039acfc001ebb0ff495afabea63511a9e6c2149f4a63e498",
+    "paper/results/development/development-method-selection.csv": "582246b006dc3d609c6f893442937b373b8ed1c228278b45f81e42d7bc1dd789",
+    "paper/results/development/development-method-selection.json": "2e4b63a67950971012920f0f2800d0a323f61861097195721cf735a68022d44b",
+    "paper/results/development/development-robust-normalization-candidates.csv": "5f1f09581187df8e7903da8f09dd5dc98ac10cf7278e21f180c682cf88501cf9",
+    "paper/results/development/development-robust-normalization-selection.json": "9b69154570c1e973ad7865cfaf96e98f0f4cd900ee5a8c00eed83453cce2cb42",
+    "paper/results/development/supporting-dice-comparable-complete-run-scores.csv": "09d4b59ae9d2c45032804d74f4c183139eeea8b4c7b01574c99c903ac984b582",
+    "paper/results/development/table-10-scenario-detection-coverage.csv": "6077d82f8c02a032cf959f10c0f851c1328040b6fa09ad840178568ecba9999b",
+    "paper/results/development/table-5-guarded-update-audit.csv": "ea94740c80b8d8b72153d6f77cc6664e7dc20f5b79059e38a7b75b7c0c252b69",
+    "paper/results/development/table-9-operational-evidence-scorecard.csv": "64ba37617ab09b7082975db55a660f5362af4b3bcabeebb95d99dc75bdb6a4ac",
+    "paper/results/manuscript/sources/development-transfer-calibration.csv": "4dd9e6e41b68b400353eeb22e27d0d0529c833b5bcbfaea7184c31f97f32348f",
+    "paper/results/manuscript/sources/initial-checkpoints.csv": "71f41c699e4bf3692abf4b041c8ad352567c8387309d0e9daeb60624e3e6b554",
+    "paper/results/manuscript/sources/input-manifest.json": "c25152d368e55691c53673e9b108d8cbdd29166ca6c480a075aca0a521a0b50d",
+    "paper/results/manuscript/sources/original-inventory.csv": "d7ef66906273f7cb6625e4c15d5bd4de59e3cc573d29d7586267c180da29c31f",
+    "paper/results/manuscript/sources/original-quality.csv": "d69bca513922edd0271c6d85b658502e0e0d2adffb459e4bfa3e9c2afee3894a",
+    "paper/results/manuscript/sources/v2-independent-confirmation.json": "4321c2b83384bd962128e3f836b653930425be511e89a117160421b49247a911",
+    "paper/results/manuscript/sources/v3-confirmation-runs.csv": "0b4e5093ab08302b882adfab10be07abeaa2bcb7d90e3e506b6b14b3c056bad4",
+    "paper/results/manuscript/sources/v3-development-selection.json": "539b458f2f204ff3a10e813d7ac0eeac75a34031e8c0659375c54bd892171cd7",
+    "paper/results/manuscript/sources/v3-independent-confirmation.json": "a70a2f66a74a2b69c1a8184b076ab51ead3ce86e4f20f1d36948cb965abd80f1",
+    "reproduction/inputs/figure-4-micro-twin.csv": "087575036cc408f76b6756bc41bde01bf1f16e0ac3ec92699b8b3391b499423f",
+    "reproduction/inputs/figure-4-micro-twin.json": "653de3161f5c9e7afdddd4c29c68e68c3add90a2128885acbbb367d332a9cdb3",
+    "reproduction/manuscript/figures/figure-1-prism.png": "170c86e04ca19dcda851551a60f76b39514f9d2c2bfaa442f2151ad0a7c9535e",
+    "reproduction/manuscript/figures/figure-2-contract.png": "74f4569882844bc4f0ce61d522bda0fbec64245aebca32868ea22a8bd093c1b8",
+    "reproduction/manuscript/figures/figure-3-method.png": "bdc1bf59dbbfdef5e13a10df9a85942a072186f8e2e52042dc8a0fbf51115771",
+    "reproduction/manuscript/figures/figure-4-digital.png": "a22e875085bced4c99f7b237eb93f29299e5eb7411911e8ceb8aebf95c775e3a",
+    "reproduction/manuscript/figures/figure-5-development.png": "7b35653756c8c11407cb7f03e8e0e4c961e8374da6475093275a00eef3c533fe",
+    "reproduction/manuscript/figures/figure-6-adaptation.png": "0d3085f3d96b326cdc048d2317262486de284d711b50fec883b1ceb044d6126d",
+    "reproduction/manuscript/figures/figure-7-reliability.png": "10c5efb56d615c742c8e08b88f77551f9ab0842166e24153a1350bcecd41b57b",
+    "reproduction/manuscript/manifest.json": "2683613268a1994a071a06c1142eb42e3d56cb3be78115f03b3e4272766cb707",
+    "reproduction/manuscript/references.bib": "a1f119628de5fbc721b2054e75c33f5f0277dd5cac010f5ee43f14ab311da6ab",
+    "reproduction/manuscript/table-preamble.tex": "2b5851f07b7b128d164bd24f24cc8d9fb90576a137535c281bedaa4b174b453c",
+    "reproduction/manuscript/tables/table-i-prism_scope.tex": "5741289d9456b925374c00538bc4ef6e82b355caefc51840c31001d3728f92f9",
+    "reproduction/manuscript/tables/table-ii-slm_capability_progression.tex": "2286b3aab002902c138555a40a10967bd7f3daac3e72240d89bcd432e83aaa9d",
+    "reproduction/manuscript/tables/table-iii-dice_prism_extension.tex": "f362bb43a86ca30b061e45768e297e291938562690686d3ea522c11b78de48f5",
+    "reproduction/manuscript/tables/table-iv-parameter_provenance.tex": "08115437db838d3ac49340c48639ef8119177fc15b99484911346530e1c7c02f",
+    "reproduction/manuscript/tables/table-ix-transfer_calibration.tex": "3ff0ac8b08a866f31f2d1e5a03165e6735943f297015fbf8221bdd1c0ac9ec7b",
+    "reproduction/manuscript/tables/table-v-prism_experimental_setup.tex": "f72f3edf3ee3a39fbacc80e706c22d83755ff1e85ca622fcc5fecd6b4712b07a",
+    "reproduction/manuscript/tables/table-vi-development_data_quality.tex": "401d7609b4ce955c8802f1c1ef3fa0b7c5071f19d1a8c279600fea11b9c49308",
+    "reproduction/manuscript/tables/table-vii-prism_revision_history.tex": "bde0bedba8f366b7f973312ddc45aa48d06aef4bf56732ca0e6c2df9998276fa",
+    "reproduction/manuscript/tables/table-viii-development_g3.tex": "fa1e1e6d1853cb104b3fc23f1e3ce5df0c170ebbc8b4931e3fa1652df2bedba9"
+  },
+  "expected_results": {
+    "headline": {
+      "validated_runs": 208,
+      "development_runs_including_calibration": 192,
+      "confirmation_runs": 16,
+      "reserved_runs_planned": 92,
+      "reserved_runs_accessed_by_this_cell": 0,
+      "development_g3_passed": true,
+      "independent_confirmation_passed": false,
+      "detected_controlled_event_runs": 71,
+      "eligible_controlled_event_runs": 120,
+      "development_fah": 0.1642335766423358,
+      "confirmation_fah": 0.35714285714285715,
+      "median_delay_seconds_among_detected_events": 337.48666995798703,
+      "rich_tier_confirmation_replay_percent": 0.3058862433862434,
+      "confirmation_replay_rich_blocks": 37,
+      "confirmation_replay_valid_blocks": 12096
+    },
+    "table_viii_display_rows": [
+      [
+        "12.53",
+        "24.814",
+        "117/120",
+        "97.5",
+        "Outside G3"
+      ],
+      [
+        "10.00",
+        "0.900",
+        "53/120",
+        "44.2",
+        "Outside G3"
+      ],
+      [
+        "7.47",
+        "0.134",
+        "62/120",
+        "51.7",
+        "Pooled only"
+      ],
+      [
+        "36.53",
+        "0.164",
+        "71/120",
+        "59.2",
+        "Advance"
+      ],
+      [
+        "3.73",
+        "0.000",
+        "25/60",
+        "41.7",
+        "Fail"
+      ],
+      [
+        "3.73",
+        "0.268",
+        "37/60",
+        "61.7",
+        "Fail"
+      ],
+      [
+        "3.73",
+        "0.000",
+        "34/60",
+        "56.7",
+        "Pass"
+      ],
+      [
+        "3.73",
+        "0.268",
+        "28/60",
+        "46.7",
+        "Fail"
+      ],
+      [
+        "18.27",
+        "0.109",
+        "37/60",
+        "61.7",
+        "Pass"
+      ],
+      [
+        "18.27",
+        "0.219",
+        "34/60",
+        "56.7",
+        "Pass"
+      ],
+      [
+        "18.27",
+        "0.109",
+        "33/60",
+        "55.0",
+        "Pass"
+      ],
+      [
+        "18.27",
+        "0.219",
+        "38/60",
+        "63.3",
+        "Pass"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+\begin{table}[!t]
+\centering
+\caption{Provenance of principal v3 settings.}
+\label{tab:parameter_provenance}
+
+{\scriptsize
+\setlength{\tabcolsep}{2.0pt}
+\renewcommand{\arraystretch}{1.12}
+
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lcl@{}}
+\toprule
+
+\textbf{Setting} &
+\textbf{Frozen value} &
+\textbf{Source} \\
+
+\midrule
+
+G3 gate
+& \(\mathrm{FAH}\leq0.25;\ \mathrm{DR}\geq50\%\)
+& Predeclared \\
+
+Valid time
+& \(\geq95\%\) per run
+& Predeclared \\
+
+Ranks/scales
+& Empirical
+& Benign fit \\
+
+Classifier
+& \(C=0.03\)
+& Development \\
+
+Sequential
+& \(\eta=0.9;\ h_P=\log(600);\ s=2\)
+& Development \\
+
+Corroboration
+& \(\alpha=0.05;\ W=6\)
+& Development \\
+
+\bottomrule
+\end{tabular*}
+}
+
+\vspace{2pt}
+{\scriptsize\raggedright
+\emph{Benign fit}: estimated from eligible benign fitting observations;
+\emph{Development}: selected using development evidence.
+All settings were fixed before independent confirmation.
+\par}
+\end{table}

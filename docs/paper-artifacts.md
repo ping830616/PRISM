@@ -1,5 +1,12 @@
 # Current draft: figures, tables, and Overleaf
 
+**Current submission map:** the newer `TR_PRISM` draft has seven figures and
+nine tables. See [reviewer-reproduction.md](reviewer-reproduction.md) for that
+map and the standalone checked reproduction command. The map below is retained
+as a historical notebook cross-reference for the August 28 draft. Its result
+Tables III–VI map to current Tables VI–IX; current Table VIII additionally
+contains the robust and v3 platform/fold audit rows.
+
 This map follows the supplied `WIP_PRISM.pdf` dated 2026-08-28. **Paper numbers
 and notebook artifact numbers are different.** Existing filenames stay stable
 so earlier scripts and manuscripts do not break.
