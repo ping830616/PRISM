@@ -14,7 +14,7 @@ notebook, development artifacts, paper figures and tables, and the documentation
 needed to reproduce the reported workflow. Raw telemetry is stored separately
 and is not tracked in Git.
 
-## Reviewers start here: six simple steps
+## Six simple steps
 
 These steps reproduce the paper's tables and figures from the numerical
 evidence included in this repository. **No M2 Pro or EPYC machine, raw recordings,
