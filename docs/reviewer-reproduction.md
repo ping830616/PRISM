@@ -10,10 +10,11 @@ negative confirmation result as well as the development results.
 
 ## Install and run
 
-Use Python **3.12** for the tested environment. The pinned packages also support
-Python 3.10–3.13; the CI workflow tests selected versions on macOS, Ubuntu and
-Windows when this revision is pushed. Do not infer a CI pass before that job
-has actually completed. Installation needs Internet access; execution does not.
+Use Python **3.12** for the tested environment. GitHub Actions successfully ran
+this workflow on macOS, Ubuntu and Windows with Python 3.12, plus Ubuntu with
+Python 3.10 and 3.13. See the [recorded cross-platform run](https://github.com/ping830616/PRISM/actions/runs/36057529702)
+and the verification record below. Installation needs Internet access;
+execution does not.
 
 From the repository root on macOS or Linux:
 
@@ -131,10 +132,10 @@ The original [reproduction guide](reproducibility.md) retains that distinction.
 
 ## Troubleshooting and validation
 
-The [local verification record](../reproduction/verification-reviewer-package.md)
-documents a fresh macOS ARM64/Python 3.12 run and 19 passing tests in a clean
-source copy. It distinguishes those completed checks from configured but
-not-yet-run Linux/Windows CI jobs.
+The [verification record](../reproduction/verification-reviewer-package.md)
+documents a fresh macOS ARM64/Python 3.12 run, 19 passing tests in a clean
+source copy, and the subsequently completed five-configuration GitHub Actions
+run. Each CI job also executed the full table/figure reproduction command.
 
 - Missing/checksum-mismatched input: stop and obtain an intact checkout. Do not
   edit a hash or expected result to make the test pass.

@@ -61,12 +61,29 @@ The input-only check does not stand in for numerical execution.
 - Retention replay: 37/12,096 blocks, equivalent to 185/60,480 s (0.305886%).
 - Subgroup failures and the 92 unused reserved rows remain explicitly reported.
 
+## Subsequent GitHub Actions verification — 2026-09-24
+
+The published code at commit
+`8597a7985990e00703710002532d90674c189328` passed
+[reviewer reproduction run 36057529702](https://github.com/ping830616/PRISM/actions/runs/36057529702)
+on all five configured environments:
+
+- macOS with Python 3.12;
+- Windows with Python 3.12;
+- Ubuntu with Python 3.10, 3.12 and 3.13.
+
+Every job installed the pinned requirements, verified the packaged inputs,
+ran the unit tests, executed the complete numerical table/figure reproduction
+command, and uploaded its output artifact successfully. The optional full-render
+unit test is skipped in the default CI unit-test command; the following CLI
+step performs the complete rendering on every platform instead.
+
 ## Limits of this verification
 
-Linux and Windows CI jobs and additional Linux Python versions are configured
-but were **not executed in this local verification**. Their actual GitHub job
-results must be checked after publication. Cross-platform pixel/PDF byte
-identity is not promised; numerical content and source integrity are checked.
+The local test and remote CI runs above are distinct observations. They establish
+successful execution on those tested environments, not every possible machine
+or future dependency/platform version. Cross-platform pixel/PDF byte identity
+is not promised; numerical content and source integrity are checked.
 
 Figures 1–3 and Tables I–V are authored diagrams/descriptive tables, preserved
 as original assets rather than described as computationally regenerated.
