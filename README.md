@@ -14,6 +14,32 @@ notebook, development artifacts, paper figures and tables, and the documentation
 needed to reproduce the reported workflow. Raw telemetry is stored separately
 and is not tracked in Git.
 
+## Reviewers start here
+
+To reproduce the **tables and figures in the current nine-table manuscript**,
+use the standalone [reviewer workflow](docs/reviewer-reproduction.md). It needs
+only the bundled numerical reports and plotting values. No hardware telemetry,
+private data root, Jupyter execution, data collection, or detector fitting is
+required.
+
+```bash
+python3.12 -m venv .venv-reviewer
+.venv-reviewer/bin/python -m pip install -r reproduction/requirements-reviewer.txt
+.venv-reviewer/bin/python reproduction/reproduce.py --output reviewer-output
+```
+
+Open `reviewer-output/index.html`. The package regenerates numerical result
+Tables VI–IX (including all Table VIII subgroup rows) and Figures 4–7. It also
+preserves exact images for all seven figures and editable LaTeX for all nine
+tables; authored diagrams/tables are labeled as preserved, not computationally
+regenerated. Input checksums and manuscript values must pass before a `PASS`
+report is produced. See the guide for Windows commands and verification scope.
+
+To see **how we collected the original data**, read the
+[M2 Pro and EPYC collection methodology](docs/collection-methodology.md).
+Reviewers do not need to repeat collection. Full reanalysis from raw telemetry
+remains a separate workflow from reproducing these saved paper artifacts.
+
 ## Reported evidence
 
 | Evidence | Result |
@@ -89,7 +115,12 @@ Historical documents and configuration fields may use `locked_test` or
 “locked test.” The manuscript calls the same protected evidence the
 **reserved partition**.
 
-## Reproducible quick start
+## Optional historical notebook setup (not the reviewer workflow)
+
+The commands below are for inspecting the original research notebook or
+performing separately provisioned raw-data reanalysis. **They are not needed
+to reproduce the saved paper tables and figures.** Reviewers should use the
+standalone command at the top of this page instead.
 
 Clone the repository into any writable directory on macOS or Linux:
 
@@ -127,7 +158,7 @@ active kernel, discovers the repository root, rejects embedded machine specific
 paths, records the dataset fingerprint, and fixes random seeds and numerical
 thread counts where supported.
 
-## Running the notebook safely
+## Historical notebook and raw-data reanalysis
 
 1. Start from a clean clone and activate the virtual environment.
 2. Set `PRISM_DATA_ROOT` to the validated telemetry directory.
@@ -141,11 +172,15 @@ thread counts where supported.
 6. Use collection switches only on the intended host and only under the frozen
    protocol described in `docs/`.
 
-The repository bundles paper facing development artifacts for inspection. A
-full clean reproduction of numerical results requires the separately stored raw
-telemetry and its checksum manifests.
+The standalone reviewer workflow regenerates the paper artifacts from bundled
+numerical evidence without raw telemetry. Independently recomputing detector
+outputs from the original measurements is a different task: it requires the
+separately stored raw telemetry, checksum manifests, and matching analysis
+revision. The notebook instructions in this section apply to that historical
+research environment, not to the short reviewer workflow.
 
-For a terminal check without opening JupyterLab:
+For an optional historical notebook execution check in that provisioned
+environment (not a substitute for the reviewer command):
 
 ```bash
 mkdir -p .prism_runtime/reproduction

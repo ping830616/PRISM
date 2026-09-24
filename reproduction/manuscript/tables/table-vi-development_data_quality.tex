@@ -1,0 +1,54 @@
+\begin{table}[!t]
+\centering
+\caption{Original matched evidence and admission integrity audit.}
+\label{tab:development_data_quality}
+
+{\scriptsize
+\setlength{\tabcolsep}{2.3pt}
+\renewcommand{\arraystretch}{1.02}
+
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+&
+\multicolumn{3}{c}{\textbf{Admitted evidence}} &
+\multicolumn{2}{c}{\textbf{Integrity audit}} &
+\\
+\cmidrule(lr){2-4}
+\cmidrule(lr){5-6}
+
+\textbf{Platform} &
+\textbf{C/D} &
+\textbf{V/I} &
+\textbf{Benign h} &
+\textbf{Warnings} &
+$\boldsymbol{a}_{\min}$ &
+\textbf{Reserved} \\
+\midrule
+
+Apple M2 Pro
+    & 4/76 & 80/0 & 4.799 & 86 & 0.815 & 46 \\
+
+AMD EPYC 9354
+    & 4/76 & 80/0 & 4.799 & 0 & 1.000 & 46 \\
+
+\midrule
+\textbf{Combined}
+    & \textbf{8/152}
+    & \textbf{160/0}
+    & \textbf{9.599}
+    & \textbf{86}
+    & \textbf{0.815}
+    & \textbf{92} \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{2pt}
+\begin{minipage}{\columnwidth}
+\scriptsize
+\raggedright
+C/D: calibration/development runs;
+V/I: valid/invalid runs;
+$a_{\min}$: minimum availability among critical channels. Warnings are non-fatal. Totals were computed before rounding.
+\end{minipage}
+\end{table}

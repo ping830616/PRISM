@@ -1,0 +1,51 @@
+\begin{table}[!b]
+\centering
+\caption{PRISM operational assurance path and evidence boundary.}
+\label{tab:prism_scope}
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{2.0pt}
+
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lll@{}}
+\toprule
+
+\multicolumn{3}{c}{
+\textsc{Observe \(\rightarrow\) Protect \(\rightarrow\) Screen
+\(\rightarrow\) Bound}
+} \\
+
+\midrule
+
+\textbf{Layer} &
+\textbf{Evaluated evidence} &
+\textbf{Assurance output} \\
+
+\midrule
+
+\textbf{1 Observe}
+& Operating shifts; crashes
+& FAH; detection; delay \\
+
+\textbf{2 Protect}
+& Interruptions; coverage loss
+& Fault; abstention \\
+
+\textbf{3 Screen}
+& Thermal; power; degradation
+& Behavioral distinction \\
+
+\textbf{4 Bound}
+& Aging; defects; security
+& Claims excluded \\
+
+\bottomrule
+\end{tabular*}
+}
+
+\vspace{2pt}
+{\scriptsize\raggedright
+\emph{Bound} identifies mechanisms outside the evaluated scope; PRISM
+makes no physical diagnosis, lifetime, or security claim.
+\par}
+\end{table}

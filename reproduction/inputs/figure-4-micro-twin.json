@@ -1,0 +1,463 @@
+{
+  "config": {
+    "lags": 1,
+    "penalty": 100.0,
+    "platform_id": "M2_MACOS",
+    "run_id": "m2_macos__py_stats__membw__r01",
+    "scenario": "MEMBW",
+    "state": "compute_activity",
+    "workload": "PY_STATS"
+  },
+  "diagnostic_reference_quantile": 0.99,
+  "diagnostic_reference_role": "Descriptive benign reference; not the v3 alert threshold.",
+  "diagnostic_threshold": 3.9095277895694394,
+  "figure_number": 4,
+  "fitting_benign_blocks": [
+    576,
+    576,
+    576,
+    144,
+    144
+  ],
+  "fitting_run_ids_in_original_order": [
+    "m2_macos__py_stats__development_benign_supplement__f0",
+    "m2_macos__py_stats__development_benign_supplement__f1",
+    "m2_macos__py_stats__long_benign__s01",
+    "m2_macos__py_stats__nominal__r01",
+    "m2_macos__py_stats__nominal__r02"
+  ],
+  "fitting_runs": [
+    {
+      "planned_split": "development",
+      "platform_id": "M2_MACOS",
+      "run_id": "m2_macos__py_stats__development_benign_supplement__f0",
+      "scenario": "NOMINAL",
+      "workload": "PY_STATS"
+    },
+    {
+      "planned_split": "development",
+      "platform_id": "M2_MACOS",
+      "run_id": "m2_macos__py_stats__development_benign_supplement__f1",
+      "scenario": "NOMINAL",
+      "workload": "PY_STATS"
+    },
+    {
+      "planned_split": "development",
+      "platform_id": "M2_MACOS",
+      "run_id": "m2_macos__py_stats__long_benign__s01",
+      "scenario": "NOMINAL",
+      "workload": "PY_STATS"
+    },
+    {
+      "planned_split": "calibration",
+      "platform_id": "M2_MACOS",
+      "run_id": "m2_macos__py_stats__nominal__r01",
+      "scenario": "NOMINAL",
+      "workload": "PY_STATS"
+    },
+    {
+      "planned_split": "development",
+      "platform_id": "M2_MACOS",
+      "run_id": "m2_macos__py_stats__nominal__r02",
+      "scenario": "NOMINAL",
+      "workload": "PY_STATS"
+    }
+  ],
+  "localized_residual_transform": {
+    "aggregation": "median",
+    "center": true,
+    "input": "absolute standardized residual",
+    "min_periods": 1,
+    "rolling_window_blocks": 3
+  },
+  "missing_values": "Empty CSV fields preserve undefined leading-lag residual/expected values.",
+  "normalized_diagnostic_model": {
+    "coefficients": [
+      [
+        0.07869525059644848,
+        -0.005653041434232581,
+        -0.052461764486972415,
+        -0.06510495172150485,
+        -0.3546799024515829,
+        0.7830591509766952,
+        0.033227949097621695,
+        -0.5418451496405043,
+        0.0
+      ],
+      [
+        0.5581263504220114,
+        0.09560504355830356,
+        0.032586731377585984,
+        0.03220442456124978,
+        -0.08289519869649574,
+        0.3137855146200288,
+        0.015814824535265653,
+        -0.20592406059572702,
+        -0.0
+      ],
+      [
+        0.07571577348760755,
+        0.19501762580048385,
+        0.011984823794629337,
+        0.02763309682741132,
+        0.05415051180828512,
+        0.07926435954526173,
+        0.21485070003830156,
+        0.05660532168279073,
+        0.0
+      ],
+      [
+        0.1947215520512384,
+        0.028376955531509974,
+        0.9067536074897914,
+        -0.1849720158381023,
+        -0.3768684466322426,
+        0.04218780780691094,
+        0.03333939519660464,
+        -0.322499952397603,
+        0.0
+      ],
+      [
+        0.14407727327491548,
+        0.009646160782568395,
+        -0.02115968721729356,
+        0.6267493034002758,
+        0.1903508355057353,
+        0.1701533322483446,
+        0.07334535203199055,
+        0.13073462961777196,
+        0.0
+      ],
+      [
+        0.08945235208727775,
+        0.03918208368150493,
+        -0.044675981153673654,
+        0.12539149290651624,
+        0.18839980106385426,
+        0.3653300321048107,
+        0.09712970391106164,
+        -0.06470716686131273,
+        0.0
+      ],
+      [
+        -0.0031030581609789365,
+        0.015300760349738948,
+        0.01457104851819635,
+        0.03088473886145336,
+        0.10791421274338123,
+        0.12896692700106185,
+        0.11378877932769427,
+        0.13284993249377744,
+        -0.0
+      ],
+      [
+        -0.02303301434348448,
+        0.10255671716256844,
+        -0.021653516642175363,
+        0.024243999178525707,
+        -0.018294708115230908,
+        0.03834286367762243,
+        0.08608498240671685,
+        -0.03024014983164322,
+        0.0
+      ],
+      [
+        -0.13648568304539305,
+        -0.022832911951166733,
+        -0.005133720416870173,
+        -0.19004532832760165,
+        -0.2289731106853735,
+        -0.13613774961595773,
+        -0.20768360722428078,
+        -0.044289976814574014,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "family": "var",
+    "feature_scale": [
+      0.014780286499999991,
+      0.5401632582167544,
+      0.020185828620208682,
+      2.0357665973655448,
+      1.2614453790265503,
+      0.006815802145376383,
+      0.0007228010867281992,
+      0.5642406308894805,
+      1.0
+    ],
+    "lags": 1,
+    "location": [
+      0.1125525,
+      4.105552508790084,
+      0.8196743965148926,
+      4.912301700794961,
+      2.830626382083441,
+      0.024813253462147192,
+      0.0011875623974764477,
+      5.002604020177249,
+      0.0
+    ],
+    "monitoring_family": "compact_guarded_var",
+    "penalty": 100.0,
+    "residual_scale": [
+      0.6879703331277145,
+      0.9683135330855217,
+      0.10241423856200216,
+      0.7656423159869084,
+      0.7760107771948501,
+      1.1110332413164021,
+      1.0342828658699166,
+      0.8665599903335762,
+      0.001
+    ],
+    "residual_scale_floor": [
+      0.5642758617043638,
+      0.5463591676299157,
+      0.08459155417586495,
+      0.45243060307534777,
+      0.4204152934675045,
+      1.0443091310072186,
+      0.8060405125900015,
+      0.5340015975954989,
+      0.001
+    ],
+    "state_names": [
+      "compute_activity",
+      "scheduler_pressure",
+      "memory_pressure",
+      "storage_activity",
+      "network_activity",
+      "compute_variability",
+      "memory_variability",
+      "io_variability",
+      "availability_loss"
+    ],
+    "sync_gain": 0.0
+  },
+  "onset_seconds": 120.00260120804887,
+  "plotted_blocks": 144,
+  "plotted_columns": [
+    "time_seconds",
+    "observed_compute_activity",
+    "expected_compute_activity",
+    "residual_compute_activity",
+    "residual_memory_pressure",
+    "residual_io_variability",
+    "aggregate_evidence"
+  ],
+  "provenance": {
+    "analysis_revision": "prism-analysis-v1",
+    "block_seconds": 5.0,
+    "cache_metadata_sha256": "a1a91a6f1bed06ca76ee1bff5875f27f025442811e5ce57266dc488e0aa7b1ee",
+    "canonical_source_commit": "6289c4d",
+    "confirmation_arrays_read": 0,
+    "dataset_fingerprint": "e8cccd65a69310464d9de9bed4cfd48c0c221443632a40ecef3048881a372044",
+    "definition_cell_indices": [
+      66,
+      68,
+      74
+    ],
+    "exporter_sha256": "f9160f0e0c5a132271aba77687f65f45be733399fd124b7b67b48cb05700f6aa",
+    "illustration_cell_index": 132,
+    "opened_run_arrays": [
+      {
+        "array": "x",
+        "dtype": "<f8",
+        "run_id": "m2_macos__py_stats__development_benign_supplement__f0",
+        "sha256_c_order_bytes": "75e8fe7d25cdb5b4e7c1fc394a74ace157e0bd3cd3753791f82717cb84a4b3a9",
+        "shape": [
+          576,
+          42
+        ]
+      },
+      {
+        "array": "t",
+        "dtype": "<f8",
+        "run_id": "m2_macos__py_stats__development_benign_supplement__f0",
+        "sha256_c_order_bytes": "0d33b1b1381638349a0282b5f794ea77552c82a468355fd5fc0897b933c25ba2",
+        "shape": [
+          576
+        ]
+      },
+      {
+        "array": "fault",
+        "dtype": "|b1",
+        "run_id": "m2_macos__py_stats__development_benign_supplement__f0",
+        "sha256_c_order_bytes": "1a0295f4bf5986c5f74eca9153a6a4cb10b073a01a76ba4a457fd862c78966a4",
+        "shape": [
+          576
+        ]
+      },
+      {
+        "array": "x",
+        "dtype": "<f8",
+        "run_id": "m2_macos__py_stats__development_benign_supplement__f1",
+        "sha256_c_order_bytes": "2f8e0dedf74179ae3547ff9fe80692dfff5c8fc323908a5d7b7997e2a5208780",
+        "shape": [
+          576,
+          42
+        ]
+      },
+      {
+        "array": "t",
+        "dtype": "<f8",
+        "run_id": "m2_macos__py_stats__development_benign_supplement__f1",
+        "sha256_c_order_bytes": "0d33b1b1381638349a0282b5f794ea77552c82a468355fd5fc0897b933c25ba2",
+        "shape": [
+          576
+        ]
+      },
+      {
+        "array": "fault",
+        "dtype": "|b1",
+        "run_id": "m2_macos__py_stats__development_benign_supplement__f1",
+        "sha256_c_order_bytes": "1a0295f4bf5986c5f74eca9153a6a4cb10b073a01a76ba4a457fd862c78966a4",
+        "shape": [
+          576
+        ]
+      },
+      {
+        "array": "x",
+        "dtype": "<f8",
+        "run_id": "m2_macos__py_stats__long_benign__s01",
+        "sha256_c_order_bytes": "7a21ce9d5658b114a8a9fb29b3963977cde375fc0a5ca489e29d6ca949b99a62",
+        "shape": [
+          576,
+          42
+        ]
+      },
+      {
+        "array": "t",
+        "dtype": "<f8",
+        "run_id": "m2_macos__py_stats__long_benign__s01",
+        "sha256_c_order_bytes": "0d33b1b1381638349a0282b5f794ea77552c82a468355fd5fc0897b933c25ba2",
+        "shape": [
+          576
+        ]
+      },
+      {
+        "array": "fault",
+        "dtype": "|b1",
+        "run_id": "m2_macos__py_stats__long_benign__s01",
+        "sha256_c_order_bytes": "1a0295f4bf5986c5f74eca9153a6a4cb10b073a01a76ba4a457fd862c78966a4",
+        "shape": [
+          576
+        ]
+      },
+      {
+        "array": "x",
+        "dtype": "<f8",
+        "run_id": "m2_macos__py_stats__membw__r01",
+        "sha256_c_order_bytes": "405c9b86fdbaa192524a2c0729596b806e48e97bd6de23b7d4ce1e6891997c42",
+        "shape": [
+          144,
+          42
+        ]
+      },
+      {
+        "array": "t",
+        "dtype": "<f8",
+        "run_id": "m2_macos__py_stats__membw__r01",
+        "sha256_c_order_bytes": "fe36005d5a8babbe25ea2583fdd5b855f22a257160367f9abd5d3bb1537a6be5",
+        "shape": [
+          144
+        ]
+      },
+      {
+        "array": "fault",
+        "dtype": "|b1",
+        "run_id": "m2_macos__py_stats__membw__r01",
+        "sha256_c_order_bytes": "81c611f35bff79491538b2f7cf201c7597a661a5c549633541c62bdc8af1613f",
+        "shape": [
+          144
+        ]
+      },
+      {
+        "array": "x",
+        "dtype": "<f8",
+        "run_id": "m2_macos__py_stats__nominal__r01",
+        "sha256_c_order_bytes": "a9d2c85abe9ef9b5b50c1d48235455e8c353bc3893fecfdd7904772791daa262",
+        "shape": [
+          144,
+          42
+        ]
+      },
+      {
+        "array": "t",
+        "dtype": "<f8",
+        "run_id": "m2_macos__py_stats__nominal__r01",
+        "sha256_c_order_bytes": "fe36005d5a8babbe25ea2583fdd5b855f22a257160367f9abd5d3bb1537a6be5",
+        "shape": [
+          144
+        ]
+      },
+      {
+        "array": "fault",
+        "dtype": "|b1",
+        "run_id": "m2_macos__py_stats__nominal__r01",
+        "sha256_c_order_bytes": "81c611f35bff79491538b2f7cf201c7597a661a5c549633541c62bdc8af1613f",
+        "shape": [
+          144
+        ]
+      },
+      {
+        "array": "x",
+        "dtype": "<f8",
+        "run_id": "m2_macos__py_stats__nominal__r02",
+        "sha256_c_order_bytes": "7dc377f1511b38c2894bb04611d7a65679648d2e27ca0c66ff3bb875519358ea",
+        "shape": [
+          144,
+          42
+        ]
+      },
+      {
+        "array": "t",
+        "dtype": "<f8",
+        "run_id": "m2_macos__py_stats__nominal__r02",
+        "sha256_c_order_bytes": "fe36005d5a8babbe25ea2583fdd5b855f22a257160367f9abd5d3bb1537a6be5",
+        "shape": [
+          144
+        ]
+      },
+      {
+        "array": "fault",
+        "dtype": "|b1",
+        "run_id": "m2_macos__py_stats__nominal__r02",
+        "sha256_c_order_bytes": "81c611f35bff79491538b2f7cf201c7597a661a5c549633541c62bdc8af1613f",
+        "shape": [
+          144
+        ]
+      }
+    ],
+    "opened_run_count": 6,
+    "reserved_arrays_read": 0,
+    "semantic_cache_name": "semantic-blocks.npz",
+    "semantic_cache_sha256": "230725c240b2ebec0b4dcaa4ff199ff52585e4d4b8ed72030bc445896ba6777a",
+    "source_code_ast_selected_sha256": "e137217e6d390ea4a964c80d147086eb4390be25c0b4bda7b73e089879cc5257",
+    "source_code_hash_algorithm": "SHA-256 of canonical JSON containing exact AST-selected source segments.",
+    "source_execution": "Whitelisted numerical definitions and illustration prefix only.",
+    "source_notebook_name": "PRISM_Complete_Experiment.ipynb",
+    "source_notebook_sha256": "4e4b58335640d91bf96daf58d491b0c5759a02e27aa536e22badf8666546c9db",
+    "versions": {
+      "numpy": "2.5.2",
+      "pandas": "3.0.5",
+      "python": "3.13.5"
+    }
+  },
+  "run_id": "m2_macos__py_stats__membw__r01",
+  "schema_version": 1,
+  "scope": "Numerical reconstruction of the existing fixed development illustration. One benign diagnostic compact VAR fit, lags=1 and ridge penalty=100; not selected-v3 training, a candidate search, or a performance evaluation. This export does not assert byte identity with the manuscript PNG.",
+  "state": "compute_activity",
+  "trace_csv_sha256": "087575036cc408f76b6756bc41bde01bf1f16e0ac3ec92699b8b3391b499423f"
+}

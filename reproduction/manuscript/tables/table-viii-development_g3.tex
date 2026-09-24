@@ -1,0 +1,79 @@
+\begin{table}[!t]
+\centering
+\caption{Development progression and subgroup advancement audit.}
+\label{tab:development_g3}
+
+{\scriptsize
+\setlength{\tabcolsep}{1.7pt}
+\renewcommand{\arraystretch}{1.03}
+
+\begin{tabularx}{\columnwidth}{@{}
+>{\raggedright\arraybackslash}X
+ccccc
+@{}}
+\toprule
+\textbf{Checkpoint or scope} &
+\textbf{\(H\) (h)} &
+\textbf{FAH\(\downarrow\)} &
+\textbf{Detected} &
+\textbf{DR\(\uparrow\)} &
+\textbf{Outcome} \\
+\midrule
+
+\multicolumn{6}{@{}l}{\textit{A. Pooled development progression}} \\
+
+Static VAR
+& 12.53 & 24.81 & 117/120 & 97.5\% & Outside G3 \\
+
+Guarded adaptive VAR
+& 10.00 & 0.900 & 53/120 & 44.2\% & Outside G3 \\
+
+Robust residual fusion
+& 7.47 & 0.134 & 62/120 & 51.7\% & Pooled only \\
+
+\textbf{PRISM sequential}
+& \textbf{36.53}
+& \textbf{0.164}
+& \textbf{71/120}
+& \textbf{59.2\%}
+& \textbf{Advance} \\
+
+\midrule
+\multicolumn{6}{@{}l}{\textit{B. Robust residual fusion subgroup audit}} \\
+
+Apple M2
+& 3.73 & 0.000 & 25/60 & 41.7\% & Fail \\
+
+AMD EPYC
+& 3.73 & 0.268 & 37/60 & 61.7\% & Fail \\
+
+Development fold 0
+& 3.73 & 0.000 & 34/60 & 56.7\% & Pass \\
+
+Development fold 1
+& 3.73 & 0.268 & 28/60 & 46.7\% & Fail \\
+
+\midrule
+\multicolumn{6}{@{}l}{\textit{C. PRISM sequential subgroup audit}} \\
+
+Apple M2
+& 18.27 & 0.109 & 37/60 & 61.7\% & \textbf{Pass} \\
+
+AMD EPYC
+& 18.27 & 0.219 & 34/60 & 56.7\% & \textbf{Pass} \\
+
+Development fold 0
+& 18.27 & 0.109 & 33/60 & 55.0\% & \textbf{Pass} \\
+
+Development fold 1
+& 18.27 & 0.219 & 38/60 & 63.3\% & \textbf{Pass} \\
+
+\bottomrule
+\end{tabularx}
+}
+
+\vspace{2pt}
+{\scriptsize\raggedright
+\(H\): eligible benign monitoring hours; DR: detection rate for controlled events. The development limits are \(\mathrm{FAH}\leq0.25\) and \(\mathrm{DR}\geq50\%\). Boldface identifies the selected pooled checkpoint and its passing subgroup decisions; it does not indicate statistical superiority.
+\par}
+\end{table}

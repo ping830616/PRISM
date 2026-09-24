@@ -1,0 +1,29 @@
+\begin{table}[!t]
+\centering
+\caption{Technical extensions and evidence beyond DICE.}
+\label{tab:dice_prism_extension}
+{\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lll@{}}
+\toprule
+\textbf{Capability} &
+\textbf{DICE~\cite{ni2026dice}} &
+\textbf{PRISM extension} \\
+\midrule
+Evidence     & 24 M2 cases             & 208 M2/EPYC runs \\
+Model        & Benign ridge twin       & Twin + supervised fusion \\
+Alerting     & Conformal persistence   & Sequential + residual check \\
+Interruption & Not benchmarked         & 16/16 identified as faults \\
+Transfer     & Single host             & Bidirectional; 1--12 min/workload \\
+Validation & Fit/calibration segments & 16.8~h confirmation; 92 runs reserved \\
+\bottomrule
+\end{tabular*}
+}
+
+\vspace{2pt}
+{\scriptsize\raggedright
+PRISM retains DICE's reference-model lineage. Independent confirmation
+exceeded the FAH limit; the 92 planned reserved runs were not collected.
+\par}
+\end{table}

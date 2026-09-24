@@ -1,0 +1,62 @@
+\begin{table}[!t]
+\centering
+\caption{Development transfer calibration relative to the G3 limits.}
+\label{tab:transfer_calibration}
+
+{\scriptsize
+\setlength{\tabcolsep}{3.1pt}
+\renewcommand{\arraystretch}{1.03}
+
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+&
+\multicolumn{2}{c}{\(\mathbf{M2\rightarrow EPYC}\)} &
+\multicolumn{2}{c}{\(\mathbf{EPYC\rightarrow M2}\)} \\
+\cmidrule(lr){2-3}
+\cmidrule(l){4-5}
+
+\textbf{Destination data (min)} &
+\(\mathbf{FAH}\boldsymbol{\downarrow}\) &
+\(\mathbf{DR}\boldsymbol{\uparrow}\) &
+\(\mathbf{FAH}\boldsymbol{\downarrow}\) &
+\(\mathbf{DR}\boldsymbol{\uparrow}\) \\
+\midrule
+
+\emph{G3 limit}
+& \(\leq0.25\) & \(\geq50.0\%\)
+& \(\leq0.25\) & \(\geq50.0\%\) \\
+
+\midrule
+0
+& 0.268 & \textbf{58.3\%}
+& 1.071 & 6.7\% \\
+
+1
+& \textbf{0.000} & 45.0\%
+& \textbf{0.268} & 6.7\% \\
+
+2
+& \textbf{0.000} & 38.3\%
+& \textbf{0.268} & \textbf{10.0\%} \\
+
+4
+& 0.536 & 43.3\%
+& \textbf{0.268} & 6.7\% \\
+
+8
+& \textbf{0.000} & 38.3\%
+& \textbf{0.268} & 5.0\% \\
+
+12
+& \textbf{0.000} & 35.0\%
+& 1.339 & 5.0\% \\
+
+\bottomrule
+\end{tabular}
+}
+
+\vspace{2pt}
+{\scriptsize\raggedright
+Arrows indicate transfer from the source to the destination platform. Boldface identifies the lowest observed FAH and highest observed DR within each direction. These marginal optima do not occur jointly at a passing calibration point. No evaluated budget satisfies both G3 limits.
+\par}
+\end{table}

@@ -1,0 +1,70 @@
+\begin{table}[!t]
+\centering
+\caption{Acquisition contract for two hosts and evidence by analysis role.}
+\label{tab:prism_experimental_setup}
+
+{\footnotesize
+\setlength{\tabcolsep}{2.0pt}
+\renewcommand{\arraystretch}{1.00}
+
+\begin{tabular*}{\columnwidth}{
+    @{\extracolsep{\fill}}
+    lcc
+    @{}
+}
+\toprule
+
+\multicolumn{3}{c}{\textsc{Host Envelope}} \\
+\cmidrule(lr){1-3}
+\textbf{Resource} & \textbf{M2 Pro} & \textbf{EPYC 9354} \\
+\midrule
+ISA                    & ARM64                 & x86-64 \\
+Logical CPUs / memory           & 12 / 16~GB            & 64 / 755~GiB \\
+OS / Python            & Darwin 25.5 / 3.13.5 & Ubuntu 22.04 / 3.10.12 \\
+Native supplement          & \texttt{macmon}       & \texttt{/proc+vmstat+hwmon} \\
+
+\midrule
+\multicolumn{3}{c}{\textsc{Frozen Acquisition Contract}} \\
+\cmidrule(lr){1-3}
+\textbf{Design element} & \textbf{Per host} & \textbf{Both hosts} \\
+\midrule
+Host-loop target & 5~Hz & 5~Hz each \\
+Required matrix        & $4{\times}8{\times}3=96$ & 192 \\
+Targeted extension     & $2{\times}3{\times}3=18$ & 36 \\
+Long benign sessions            & $4{\times}3=12$          & 24 \\
+Event / long benign run     & $720/2880$~s             & Common \\
+Clean interval / interruption & $120/60$~s             & Common \\
+Planned benign time    & 12.0~h                   & 24.0~h \\
+Planned total          & 126 runs / 32.4~h        & 252 runs / 64.8~h \\
+C/D/R split            & $4/76/46$                & $8/152/92$ \\
+
+\midrule
+\multicolumn{3}{c}{\textsc{Reported Evidence by Analysis Role}} \\
+\cmidrule(lr){1-3}
+\textbf{Evidence state} & \textbf{Per host} & \textbf{Combined} \\
+\midrule
+Development valid      & 96           & 192 \\
+Independent confirmation & 8          & 16 \\
+Validated outside reserve & 104          & \textbf{208} \\
+Development benign     & 18.27~h      & \textbf{36.53~h} \\
+Confirmation benign    & 8.40~h       & \textbf{16.80~h} \\
+Reserved runs opened      & 0            & \textbf{0: sealed} \\
+
+\midrule
+\multicolumn{3}{c}{
+    \textbf{Development gate:}\quad
+    $\mathrm{FAH}_{\mathrm{dev}}\leq0.25
+    \;\land\;
+    \mathrm{DR}_{\mathrm{dev}}\geq50\%$
+} \\
+\bottomrule
+\end{tabular*}
+}
+
+\vspace{2pt}
+{\scriptsize\raggedright
+C/D/R: calibration/development/reserved;
+FAH: false alert episodes per benign monitoring hour;
+DR: detection rate for controlled events.
+\par}
+\end{table}

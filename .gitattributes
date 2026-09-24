@@ -1,0 +1,10 @@
+# SHA-256-pinned scientific inputs must retain their committed bytes on Windows.
+/paper/results/** -text
+/configs/** -text
+/data/*-plan.csv -text
+/reproduction/manuscript/** -text
+/reproduction/inputs/** -text
+/reproduction/reviewer-manifest.json -text
+# Python source is normalized separately and is not a scientific input hash.
+*.py text eol=lf
+*.yml text eol=lf
